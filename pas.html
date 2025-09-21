@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PAS | Profit Allocation System</title>
+  <style>
+    /* ====== Base / Theme ====== */
+    :root{
+      --jet-black:#000000;
+      --midnight-blue:#0D1B2A;
+      --electric-cyan:#00BFFF;
+      --white:#FFFFFF;
+      --muted:#e9ecef;
+      --ink:#0b1220;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --ring:0 0 0 3px rgba(0,191,255,.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Ubuntu,Cantarell,system-ui,sans-serif;
+      background:var(--midnight-blue);
+      color:var(--white);
+      line-height:1.6;
+    }
+    a{color:var(--electric-cyan);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ====== Top Nav (matches index.html) ====== */
+    .top-navigation{
+      position:sticky;top:0;z-index:30;
+      background:var(--white); box-shadow:0 2px 20px rgba(0,0,0,.12);
+    }
+    .nav-container{
+      max-width:1200px;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 1.25rem;
+    }
+    .logo{color:#0D1B2A;font-weight:800;padding:1rem 0;display:inline-block}
+    .logo .highlight{color:var(--electric-cyan)}
+    .main-nav-menu{list-style:none;display:flex;gap:.25rem}
+    .nav-link{
+      display:block;padding:1rem 1.25rem;border-radius:999px;
+      color:#0D1B2A;font-weight:600;transition:.2s ease;
+    }
+    .nav-link:hover{background:rgba(0,191,255,.12);color:var(--electric-cyan)}
+    .mobile-menu-toggle{display:none}
+
+    /* ====== Hero ====== */
+    .hero{
+      background:linear-gradient(135deg,var(--jet-black),var(--midnight-blue));
+      padding:72px 16px 56px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .hero-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .eyebrow{letter-spacing:.12em;text-transform:uppercase;color:#9adfff;font-weight:700;font-size:.82rem}
+    .hero h1{font-size:clamp(2rem,6vw,3.25rem);margin:.5rem 0 1rem}
+    .hero p{color:#cfefff;max-width:900px;margin:0 auto 1.75rem}
+    .cta-row{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
+    .btn{
+      display:inline-block;border:none;border-radius:999px;padding:.9rem 1.2rem;
+      font-weight:700;cursor:pointer;transition:.2s ease;background:var(--electric-cyan);color:#08121d;
+      box-shadow:var(--shadow)
+    }
+    .btn.secondary{background:transparent;color:#cfefff;border:1px solid rgba(255,255,255,.25)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn:focus{outline:none;box-shadow:var(--ring)}
+
+    /* ====== Pricing ====== */
+    .section{padding:56px 16px}
+    .container{max-width:1200px;margin:0 auto}
+    .section h2{font-size:2rem;margin-bottom:1rem}
+    .sub{color:#cfefff;margin-bottom:1.5rem}
+    .pricing-grid{
+      display:grid;gap:1.25rem;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+    }
+    .card{
+      grid-column:span 12;
+      background:#fff;color:#0D1B2A;border-radius:18px;padding:24px;
+      box-shadow:var(--shadow);position:relative;overflow:hidden
+    }
+    .card.pop{
+      outline:3px solid rgba(0,191,255,.35);
+    }
+    .badge{
+      position:absolute;top:16px;right:16px;background:#0D1B2A;color:#fff;
+      font-size:.75rem;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:.35rem .6rem
+    }
+    .price{
+      display:flex;align-items:flex-end;gap:.35rem;margin:.5rem 0 1rem
+    }
+    .price .big{font-size:2.4rem;font-weight:900;color:#0D1B2A}
+    .price .per{color:#495057}
+    .perfect{font-style:italic;color:#495057;margin-bottom:.5rem}
+    .features,.limits{list-style:none;margin:.75rem 0;padding:0}
+    .features li,.limits li{
+      padding:.35rem 0 .35rem 1.4rem;position:relative;font-size:.98rem;color:#223
+    }
+    .features li::before{
+      content:"✓";position:absolute;left:0;color:#0A8CCF;font-weight:900
+    }
+    .limits{border-top:1px dashed #d7dee6;margin-top:.8rem;padding-top:.8rem}
+    .limits li{color:#6b7a8a}
+    .card .cta{
+      margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap
+    }
+    .card .btn{box-shadow:none}
+    .tiny{font-size:.8rem;color:#6b7a8a;margin-top:.5rem}
+
+    /* ====== Comparison / FAQ ====== */
+    .comparison{
+      margin-top:28px;border:1px solid rgba(255,255,255,.15);border-radius:14px;overflow:hidden
+    }
+    .row{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:0}
+    .row .cell{padding:12px 14px;border-top:1px solid rgba(255,255,255,.12)}
+    .row.head{background:rgba(0,0,0,.25);font-weight:800}
+    .row .cell:nth-child(n+2){text-align:center}
+    .muted{color:#cfefff}
+
+    /* ====== Footer ====== */
+    footer{
+      background:var(--jet-black);padding:36px 16px;border-top:2px solid var(--electric-cyan);
+      text-align:center;margin-top:24px
+    }
+    footer a{color:var(--electric-cyan)}
+    footer .links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+
+    /* ====== Responsive ====== */
+    @media (min-width:720px){
+      .card{grid-column:span 6}
+      .card.pop{grid-column:span 6}
+    }
+    @media (min-width:1024px){
+      .card{grid-column:span 4}
+      .card.pop{grid-column:span 4;transform:translateY(-6px)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="top-navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="highlight">EAS</span> | Enhanced Digital Solutions</a>
+      <ul class="main-nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="edis.html">EDIS</a></li>
+        <li><a class="nav-link" href="pas.html">PAS</a></li>
+        <li><a class="nav-link" href="voiceworks.html">VoiceWorks</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Toggle menu" style="display:none">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">PAS • Profit Allocation System</div>
+      <h1>Subscription Plans That Scale With You</h1>
+      <p>Choose a plan tailored for your stage—whether you’re just starting or managing multiple ventures.
+        Upgrade anytime. No long-term contracts.</p>
+      <div class="cta-row">
+        <a href="#plans" class="btn">View Plans</a>
+        <a href="#contact" class="btn secondary">Talk to Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Pricing -->
+  <section id="plans" class="section">
+    <div class="container">
+      <h2>Plans & Pricing</h2>
+      <p class="sub">Transparent tiers with features that matter. Cancel or change plans anytime.</p>
+
+      <div class="pricing-grid">
+        <!-- STARTER -->
+        <article class="card" aria-labelledby="starter">
+          <div class="badge">Best for Solo</div>
+          <h3 id="starter">STARTER</h3>
+          <div class="price">
+            <div class="big">$19</div><div class="per">/ month</div>
+          </div>
+          <p class="perfect">Perfect for: Individual entrepreneurs and small startups</p>
+
+          <ul class="features">
+            <li>Simple Dashboard with basic metrics</li>
+            <li>Single Business Management</li>
+            <li>Basic Financial Allocation Framework (5 categories)</li>
+            <li>Simple Product/Service Catalog (up to 25 items)</li>
+            <li>Basic Expense Tracking</li>
+            <li>Simple Reports (PDF export)</li>
+            <li>Email Support</li>
+          </ul>
+
+          <ul class="limits">
+            <li>1 business entity only</li>
+            <li>1 user account</li>
+            <li>Basic calculations only</li>
+            <li>30-day data history</li>
+          </ul>
+
+          <div class="cta">
+            <a href="#contact" class="btn">Start Starter</a>
+            <a href="mailto:kbyb@eyeamstudios.com?subject=PAS%20Starter%20Plan" class="btn secondary">Email Sales</a>
+          </div>
+        </article>
+
+        <!-- PROFESSIONAL -->
+        <article class="card pop" aria-labelledby="pro">
+          <div class="badge">Most Popular</div>
+          <h3 id="pro">PROFESSIONAL</h3>
+          <div class="price">
+            <div class="big">$49</div><div class="per">/ month</div>
+          </div>
+          <p class="perfect">Perfect for: Small businesses and consultants</p>
+
+          <ul class="features">
+            <li>Advanced Dashboard with Business Intelligence</li>
+            <li>Multi-Project Manager</li>
+            <li>Scenario Planning</li>
+            <li>Cash Flow Forecasting</li>
+            <li>Business Analytics</li>
+            <li>Industry Benchmarking</li>
+            <li>Smart Automation</li>
+            <li>Enhanced Management Tools</li>
+            <li>Advanced Reports</li>
+          </ul>
+
+          <ul class="limits">
+            <li>Up to 2 business entities</li>
+            <li>Up to 3 team members</li>
+            <li>10 standard integrations</li>
+            <li>6-month data history</li>
+          </ul>
+
+          <div class="cta">
+            <a href="#contact" class="btn">Choose Professional</a>
+            <a href="mailto:kbyb@eyeamstudios.com?subject=PAS%20Professional%20Plan" class="btn secondary">Email Sales</a>
+          </div>
+        </article>
+
+        <!-- PROFESSIONAL PLUS -->
+        <article class="card" aria-labelledby="proplus">
+          <div class="badge">For Growth</div>
+          <h3 id="proplus">PROFESSIONAL&nbsp;PLUS</h3>
+          <div class="price">
+            <div class="big">$89</div><div class="per">/ month</div>
+          </div>
+          <p class="perfect">Perfect for: Growing businesses with multiple ventures</p>
+
+          <p class="muted" style="margin:.25rem 0 .5rem">Everything in Professional, plus:</p>
+          <ul class="features">
+            <li>Up to 3 business entities</li>
+            <li>Up to 5 team members</li>
+            <li>15 standard integrations</li>
+            <li>Team collaboration features</li>
+            <li>12-month data history</li>
+            <li>Basic audit trail (90-day retention)</li>
+            <li>Priority support</li>
+          </ul>
+
+          <div class="cta">
+            <a href="#contact" class="btn">Go Pro&nbsp;Plus</a>
+            <a href="mailto:kbyb@eyeamstudios.com?subject=PAS%20Professional%20Plus%20Plan" class="btn secondary">Email Sales</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Enterprise teaser -->
+      <p class="tiny">Need more? <strong>Enterprise</strong> plans with custom entities, SSO, extended audit trails, and dedicated onboarding are available on request. <a href="#contact">Contact us</a>.</p>
+    </div>
+  </section>
+
+  <!-- Quick comparison -->
+  <section class="section">
+    <div class="container">
+      <h2>Quick Comparison</h2>
+      <div class="comparison" role="table" aria-label="Plan comparison">
+        <div class="row head">
+          <div class="cell">Capability</div>
+          <div class="cell">Starter</div>
+          <div class="cell">Professional</div>
+          <div class="cell">Pro Plus</div>
+        </div>
+        <div class="row">
+          <div class="cell">Business entities</div>
+          <div class="cell">1</div>
+          <div class="cell">Up to 2</div>
+          <div class="cell">Up to 3</div>
+        </div>
+        <div class="row">
+          <div class="cell">Team members</div>
+          <div class="cell">1</div>
+          <div class="cell">Up to 3</div>
+          <div class="cell">Up to 5</div>
+        </div>
+        <div class="row">
+          <div class="cell">Data history</div>
+          <div class="cell">30 days</div>
+          <div class="cell">6 months</div>
+          <div class="cell">12 months</div>
+        </div>
+        <div class="row">
+          <div class="cell">Integrations</div>
+          <div class="cell">—</div>
+          <div class="cell">10 standard</div>
+          <div class="cell">15 standard</div>
+        </div>
+        <div class="row">
+          <div class="cell">Reports</div>
+          <div class="cell">Simple (PDF)</div>
+          <div class="cell">Advanced</div>
+          <div class="cell">Advanced + Audit Trail</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <footer id="contact">
+    <div class="container" style="text-align:center">
+      <h3>EYE AM STUDIOS, LLC • PAS</h3>
+      <p class="muted" style="margin:.25rem 0 1rem">“Your Future. Our Focus.”</p>
+      <p>📞 <a href="tel:813-420-6581">813-420-6581</a> &nbsp;|&nbsp;
+         ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
+      <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="edis.html">EDIS</a>
+        <a href="pas.html">PAS</a>
+        <a href="voiceworks.html">VoiceWorks</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
