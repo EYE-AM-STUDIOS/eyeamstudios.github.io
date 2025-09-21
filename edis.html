@@ -3,129 +3,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EDIS | Enhanced Digital Imaging Solutions</title>
+  <title>EAS | Enhanced Digital Imaging Solutions</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      margin: 0; padding: 0; line-height: 1.6;
-      background: #0D1B2A; color: #FFFFFF;
+    :root{
+      --jet-black:#000000;
+      --midnight-blue:#0D1B2A;
+      --electric-cyan:#00BFFF;
+      --white:#FFFFFF;
     }
-    header {
-      background: #000000; padding: 1.5rem; text-align: center;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Ubuntu,Cantarell,sans-serif;
+      background:var(--midnight-blue);
+      color:var(--white);
+      line-height:1.6;
     }
-    header h1 {
-      margin: 0; font-size: 2rem; color: #00BFFF;
+    a{color:var(--electric-cyan);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .top-navigation{
+      background:var(--white);
+      box-shadow:0 2px 20px rgba(0,0,0,.1);
+      position:sticky;top:0;z-index:20;
     }
-    header p { margin: 0.5rem 0 0; font-style: italic; color: #FFFFFF; }
-    nav {
-      background: #FFFFFF; display: flex; justify-content: center;
-      padding: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    .nav-container{
+      max-width:1200px;margin:0 auto;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:0 1.25rem;
     }
-    nav a {
-      color: #0D1B2A; text-decoration: none; margin: 0 1rem;
-      font-weight: 600; transition: 0.3s ease;
+    .logo{font-weight:800;color:var(--midnight-blue);padding:1rem 0}
+    .logo .highlight{color:var(--electric-cyan)}
+    .main-nav-menu{list-style:none;display:flex;gap:.5rem}
+    .nav-link{padding:1rem 1.25rem;border-radius:999px;color:var(--midnight-blue);font-weight:600}
+    .nav-link:hover{background:rgba(0,191,255,.12);color:var(--electric-cyan)}
+
+    .hero{
+      background:linear-gradient(135deg,var(--jet-black),var(--midnight-blue));
+      padding:80px 16px 60px;text-align:center;
     }
-    nav a:hover { color: #00BFFF; }
-    section {
-      padding: 3rem 2rem; max-width: 1000px; margin: 0 auto;
+    .hero h1{font-size:clamp(2rem,6vw,3rem);margin-bottom:1rem}
+    .hero p{color:#cfefff;max-width:850px;margin:0 auto 1.5rem}
+
+    .section{padding:56px 16px}
+    .container{max-width:1100px;margin:0 auto}
+    .section h2{font-size:2rem;margin-bottom:1.25rem;text-align:center}
+    .section p{margin-bottom:1rem;color:#e5f9ff;text-align:center}
+
+    .service-grid{
+      display:grid;gap:1.5rem;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      margin-top:2rem;
     }
-    h2 { color: #00BFFF; margin-bottom: 1rem; }
-    .service-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem; margin-top: 2rem;
+    .card{
+      background:#fff;color:#0D1B2A;padding:24px;border-radius:14px;
+      text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.2);
     }
-    .card {
-      background: #FFFFFF; color: #0D1B2A; border-radius: 10px;
-      padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: 0.3s ease;
+    .card .icon{font-size:2rem;margin-bottom:.5rem;color:var(--electric-cyan)}
+    .card h3{margin-bottom:.5rem}
+
+    .specs-grid{
+      display:grid;gap:1rem;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      margin-top:2rem;
     }
-    .card:hover { transform: translateY(-5px); }
-    .card h3 { margin-top: 0; color: #0D1B2A; }
-    .card p { font-size: 0.95rem; color: #333; }
-    footer {
-      background: #000000; padding: 2rem; text-align: center;
-      border-top: 2px solid #00BFFF;
+    .spec{
+      background:rgba(255,255,255,.05);padding:1.25rem;border-radius:10px;text-align:center
     }
-    footer p, footer a {
-      color: #FFFFFF; margin: 0.3rem 0; text-decoration: none;
+    .spec h3{margin-bottom:.25rem;color:var(--electric-cyan)}
+
+    .before-after{
+      display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;justify-content:center
     }
-    footer a { color: #00BFFF; }
+    .before-after img{
+      max-width:480px;width:100%;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.4)
+    }
+
+    .cta{
+      text-align:center;margin-top:2.5rem
+    }
+    .cta a{
+      display:inline-block;background:var(--electric-cyan);color:var(--jet-black);
+      padding:1rem 2rem;border-radius:999px;font-weight:700;margin:.5rem;
+      box-shadow:0 8px 20px rgba(0,191,255,.4);transition:.2s ease;
+    }
+    .cta a:hover{transform:translateY(-3px)}
+
+    footer{
+      background:var(--jet-black);padding:36px 16px;margin-top:40px;
+      border-top:2px solid var(--electric-cyan);text-align:center
+    }
+    footer a{color:var(--electric-cyan)}
+    footer .links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:.75rem}
   </style>
 </head>
 <body>
-  <header>
-    <h1>EDIS | Enhanced Digital Imaging Solutions</h1>
-    <p>Clarity. Compliance. Confidence.</p>
-  </header>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="edis.html">EDIS</a>
-    <a href="pas.html">PAS</a>
-    <a href="voiceworks.html">VoiceWorks</a>
-    <a href="#contact">Contact</a>
+  <!-- Nav -->
+  <nav class="top-navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><span class="highlight">EAS</span> | Enhanced Digital Solutions</a>
+      <ul class="main-nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="edis.html" class="nav-link">EDIS</a></li>
+        <li><a href="pas.html" class="nav-link">PAS</a></li>
+        <li><a href="voiceworks.html" class="nav-link">VoiceWorks</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <section>
-    <h2>About EDIS</h2>
-    <p>
-      EDIS is the Commercial Division of <strong>EYE AM STUDIOS</strong>, specializing in
-      B2B aerial and ground-based imaging services. We deliver high-resolution
-      digital documentation that supports compliance, operational efficiency, and
-      safety across industries including construction, insurance, and industrial sectors.
-    </p>
-  </section>
+  <!-- Hero -->
+  <header class="hero">
+    <h1>EAS | Enhanced Digital Imaging Solutions (EDIS)</h1>
+    <p>Clarity. Compliance. Confidence. Turning vision into actionable documentation.</p>
+    <div class="cta">
+      <a href="#services">Explore Services</a>
+      <a href="#contact">Request a Quote</a>
+    </div>
+  </header>
 
-  <section>
-    <h2>Our Core Solutions</h2>
-    <div class="service-grid">
-      <div class="card">
-        <h3>🛰️ Aerial Imaging</h3>
-        <p>High-resolution orthomosaics, mapping, and inspections to monitor assets, sites, and projects from above.</p>
-      </div>
-      <div class="card">
-        <h3>📸 Ground-Based Imaging</h3>
-        <p>Professional-grade photography and inspections for equipment, facilities, and technical documentation.</p>
-      </div>
-      <div class="card">
-        <h3>📐 3D LiDAR & Modeling</h3>
-        <p>Precise structural and spatial analysis using 3D LiDAR scanning and digital modeling.</p>
-      </div>
-      <div class="card">
-        <h3>🛡️ Compliance Documentation</h3>
-        <p>Audit-ready visual reports for OSHA, safety, and industry regulations with timestamp verification.</p>
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2>Our Core Services</h2>
+      <div class="service-grid">
+        <div class="card">
+          <div class="icon">🛰️</div>
+          <h3>Aerial Services</h3>
+          <p>Orthomosaic mapping, aerial inspections, DSM/DTM models for construction, industrial, and environmental projects.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📷</div>
+          <h3>Ground Services</h3>
+          <p>High-definition photography, 360° Imaging/Tours, and professional documentation for assets, facilities, and events.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Compliance & Safety</h3>
+          <p>OSHA compliance documentation, insurance imaging, forensic reporting, and pre-/post-construction inspections.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>Industries Served</h2>
-    <div class="service-grid">
-      <div class="card">
-        <h3>🏗️ Construction</h3>
-        <p>Progress monitoring, site analysis, and project inspections from planning to completion.</p>
-      </div>
-      <div class="card">
-        <h3>🏢 Insurance</h3>
-        <p>Pre-loss assessments, post-disaster documentation, and fraud prevention imaging.</p>
-      </div>
-      <div class="card">
-        <h3>⚙️ Industrial</h3>
-        <p>Asset condition monitoring, facility inspections, and predictive maintenance documentation.</p>
-      </div>
-      <div class="card">
-        <h3>🚧 Safety & Risk Management</h3>
-        <p>Hazard identification, compliance audits, and immersive emergency planning visuals.</p>
+  <!-- Technical Specs -->
+  <section class="section" style="background:rgba(255,255,255,.05)">
+    <div class="container">
+      <h2>Technical Specifications</h2>
+      <div class="specs-grid">
+        <div class="spec">
+          <h3>Resolution</h3>
+          <p>Up to 20MP RAW images with HDR options for enhanced clarity.</p>
+        </div>
+        <div class="spec">
+          <h3>Accuracy</h3>
+          <p>RTK-enabled flights achieving ±2–5 cm precision (with GCPs as required).</p>
+        </div>
+        <div class="spec">
+          <h3>Deliverables</h3>
+          <p>Orthomosaics (GeoTIFF/JPEG), DSM/DTM, PDF reports, 360° web viewers.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Before/After -->
+  <section class="section">
+    <div class="container">
+      <h2>Before & After</h2>
+      <p>See how raw site imagery transforms into actionable documentation with EDIS.</p>
+      <div class="before-after">
+        <img src="https://via.placeholder.com/480x300/222/fff?text=Raw+Site+Photo" alt="Before Example"/>
+        <img src="https://via.placeholder.com/480x300/00BFFF/000?text=Processed+Orthomosaic" alt="After Example"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center">
+    <h2>Ready to Document with Precision?</h2>
+    <div class="cta">
+      <a href="mailto:kbyb@eyeamstudios.com">📧 Email Us</a>
+      <a href="tel:8134206581">📞 Call 813-420-6581</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer id="contact">
-    <p><strong>EYE AM STUDIOS, LLC</strong></p>
-    <p>"Your Future. Our Focus."</p>
+    <h3>EYE AM STUDIOS, LLC • EDIS</h3>
+    <p>“Your Future. Our Focus.”</p>
     <p>📞 <a href="tel:813-420-6581">813-420-6581</a> | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
     <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
-    <p><a href="index.html">⬅ Back to Home</a></p>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="edis.html">EDIS</a>
+      <a href="pas.html">PAS</a>
+      <a href="voiceworks.html">VoiceWorks</a>
+    </div>
   </footer>
 </body>
 </html>
