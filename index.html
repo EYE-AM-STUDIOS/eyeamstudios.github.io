@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EAS | Enhanced Digital Solutions</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,10 +18,11 @@
       --light-gray: #f8f9fa;
       --dark-gray: #495057;
     }
+    /* Navigation */
     .top-navigation {
-      background: var(--white);
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 2000; box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      background: var(--white); position: fixed; top: 0; left: 0; right: 0;
+      z-index: 2000; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
     .nav-container {
       max-width: 1200px; margin: 0 auto;
@@ -29,28 +30,31 @@
       padding: 0 2rem;
     }
     .logo {
-      color: var(--midnight-blue); font-size: 1.5rem;
-      font-weight: 800; text-decoration: none; padding: 1rem 0;
+      color: var(--midnight-blue); font-size: 1.5rem; font-weight: 800;
+      text-decoration: none; padding: 1rem 0;
     }
     .logo .highlight { color: var(--electric-cyan); }
-    .main-nav-menu { display: flex; list-style: none; align-items: center; }
+    .main-nav-menu {
+      display: flex; list-style: none; align-items: center;
+    }
     .nav-item { margin: 0 0.5rem; }
     .nav-link {
       color: var(--midnight-blue); text-decoration: none;
       padding: 1rem 1.5rem; font-weight: 600; font-size: 0.95rem;
-      border-radius: 25px; transition: 0.3s ease;
+      transition: all 0.3s ease; border-radius: 25px; display: block;
     }
-    .nav-link:hover {
-      color: var(--electric-cyan); background: rgba(0,255,255,0.1);
-      transform: translateY(-2px);
+    .nav-link:hover { color: var(--electric-cyan); background: rgba(0, 255, 255, 0.1); }
+    .mobile-menu-toggle {
+      display: none; background: none; border: none; font-size: 1.5rem;
+      color: var(--midnight-blue); cursor: pointer;
     }
+    /* Hero */
     .hero {
       background: linear-gradient(135deg, var(--jet-black) 0%, var(--midnight-blue) 100%);
-      min-height: 100vh; display: flex; align-items: center;
-      justify-content: center; text-align: center; margin-top: 80px;
-      position: relative; overflow: hidden;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; margin-top: 80px; position: relative; overflow: hidden;
     }
-    .hero-content { max-width: 800px; padding: 2rem; z-index: 2; }
+    .hero-content { max-width: 800px; padding: 2rem; position: relative; z-index: 2; }
     .hero h1 {
       color: var(--white); font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: 800; margin-bottom: 1.5rem;
@@ -59,92 +63,66 @@
       color: var(--electric-cyan); font-size: clamp(1.1rem, 3vw, 1.5rem);
       margin-bottom: 3rem;
     }
-    .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .cta-buttons {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+    }
     .cta-button {
       background: linear-gradient(45deg, var(--electric-cyan), #00CCCC);
-      color: var(--jet-black); padding: 1rem 2rem;
-      border-radius: 50px; font-weight: bold; text-decoration: none;
-      transition: 0.3s ease;
+      color: var(--jet-black); padding: 1rem 2rem; border: none;
+      border-radius: 50px; font-weight: bold; font-size: 1.1rem;
+      cursor: pointer; text-decoration: none; transition: all 0.3s ease;
     }
-    .cta-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,255,255,0.3);
-    }
-    section { padding: 5rem 2rem; }
-    .industries-section { background: var(--white); text-align: center; }
-    .industries-section h2 {
-      color: var(--jet-black); font-size: 2.5rem; margin-bottom: 3rem;
-    }
-    .industries-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 3rem; margin-bottom: 3rem;
-    }
-    .industry-item { text-align: center; transition: transform 0.3s ease; }
-    .industry-item:hover { transform: scale(1.1); }
-    .industry-item .icon {
-      font-size: 4rem; color: var(--electric-cyan); margin-bottom: 1rem;
-    }
-    .industry-item h3 {
-      color: var(--midnight-blue); font-size: 1.2rem; font-weight: bold;
-    }
-    .tagline {
-      color: var(--midnight-blue); font-size: 1.3rem;
-      font-style: italic; font-weight: 600;
-    }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,255,255,0.3); }
+    /* Footer */
     .footer {
-      background: var(--jet-black); padding: 3rem 2rem 2rem;
-      text-align: center; border-top: 2px solid var(--electric-cyan);
+      background: var(--jet-black); padding: 3rem 2rem 2rem; text-align: center;
+      border-top: 2px solid var(--electric-cyan);
     }
-    .footer-content { max-width: 1200px; margin: 0 auto; }
     .footer h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 1rem; }
     .footer .footer-tagline { color: var(--electric-cyan); font-size: 1.1rem; margin-bottom: 2rem; }
     .footer-contact { color: var(--white); margin-bottom: 1.5rem; }
     .footer-contact a { color: var(--electric-cyan); text-decoration: none; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    }
     .footer-links a { color: var(--white); text-decoration: none; transition: 0.3s ease; }
     .footer-links a:hover { color: var(--electric-cyan); }
+    @media (max-width: 768px) {
+      .mobile-menu-toggle { display: block; }
+      .main-nav-menu { display: none; flex-direction: column; background: var(--white);
+        position: absolute; top: 100%; left: 0; right: 0; }
+      .main-nav-menu.active { display: flex; }
+      .nav-link { padding: 1rem 2rem; }
+    }
   </style>
 </head>
 <body>
-  <!-- Top Navigation -->
+  <!-- Navigation -->
   <nav class="top-navigation">
     <div class="nav-container">
-      <a href="#home" class="logo">
+      <a href="index.html" class="logo">
         <span class="highlight">EAS</span> | Enhanced Digital Solutions
       </a>
       <ul class="main-nav-menu" id="navMenu">
-        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#industries" class="nav-link">Industries</a></li>
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="edis.html" class="nav-link">EDIS</a></li>
+        <li class="nav-item"><a href="pas.html" class="nav-link">PAS</a></li>
+        <li class="nav-item"><a href="voiceworks.html" class="nav-link">VoiceWorks</a></li>
         <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
       <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section id="home" class="hero">
     <div class="hero-content">
       <h1>EAS | Enhanced Digital Solutions</h1>
-      <p class="subtext">High-Resolution Imaging & Compliance Solutions for Industry, Construction, and Asset Management</p>
+      <p class="subtext">Clarity. Compliance. Confidence.<br/>Turning vision into actionable results.</p>
       <div class="cta-buttons">
-        <a href="#contact" class="cta-button">Request a Quote</a>
-        <a href="#contact" class="cta-button">Schedule a Consultation</a>
+        <a href="edis.html" class="cta-button">Explore EDIS</a>
+        <a href="pas.html" class="cta-button">Discover PAS</a>
       </div>
-    </div>
-  </section>
-
-  <!-- Industries Section -->
-  <section id="industries" class="industries-section">
-    <div class="container">
-      <h2>Industries We Serve</h2>
-      <div class="industries-grid">
-        <div class="industry-item"><div class="icon">⚙️</div><h3>Oil & Gas</h3></div>
-        <div class="industry-item"><div class="icon">🧪</div><h3>Chemical Processing</h3></div>
-        <div class="industry-item"><div class="icon">⚡</div><h3>Power Generation</h3></div>
-        <div class="industry-item"><div class="icon">🌉</div><h3>Infrastructure</h3></div>
-        <div class="industry-item"><div class="icon">🏭</div><h3>Manufacturing</h3></div>
-      </div>
-      <p class="tagline">"Where precision and compliance matter most."</p>
     </div>
   </section>
 
@@ -158,11 +136,25 @@
         <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
       </div>
       <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#industries">Industries</a>
+        <a href="index.html">Home</a>
+        <a href="edis.html">EDIS</a>
+        <a href="pas.html">PAS</a>
+        <a href="voiceworks.html">VoiceWorks</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.addEventListener("DOMContentLoaded", function() {
+      const mobileToggle = document.getElementById("mobileToggle");
+      const navMenu = document.getElementById("navMenu");
+      mobileToggle.addEventListener("click", function() {
+        navMenu.classList.toggle("active");
+        this.textContent = navMenu.classList.contains("active") ? "✕" : "☰";
+      });
+    });
+  </script>
 </body>
 </html>
