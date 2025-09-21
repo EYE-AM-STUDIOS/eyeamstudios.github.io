@@ -5,156 +5,202 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EAS | Enhanced Digital Solutions</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6; color: #333; overflow-x: hidden;
-    }
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
       --white: #FFFFFF;
-      --light-gray: #f8f9fa;
-      --dark-gray: #495057;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--white);
+      color: var(--midnight-blue);
+      line-height: 1.6;
     }
     /* Navigation */
-    .top-navigation {
-      background: var(--white); position: fixed; top: 0; left: 0; right: 0;
-      z-index: 2000; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+    nav {
+      background: var(--jet-black);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .nav-container {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 2rem;
+    nav .logo {
+      font-weight: bold;
+      color: var(--electric-cyan);
+      text-decoration: none;
+      font-size: 1.2rem;
     }
-    .logo {
-      color: var(--midnight-blue); font-size: 1.5rem; font-weight: 800;
-      text-decoration: none; padding: 1rem 0;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
     }
-    .logo .highlight { color: var(--electric-cyan); }
-    .main-nav-menu {
-      display: flex; list-style: none; align-items: center;
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
     }
-    .nav-item { margin: 0 0.5rem; }
-    .nav-link {
-      color: var(--midnight-blue); text-decoration: none;
-      padding: 1rem 1.5rem; font-weight: 600; font-size: 0.95rem;
-      transition: all 0.3s ease; border-radius: 25px; display: block;
+    nav ul li a:hover {
+      color: var(--electric-cyan);
     }
-    .nav-link:hover { color: var(--electric-cyan); background: rgba(0, 255, 255, 0.1); }
-    .mobile-menu-toggle {
-      display: none; background: none; border: none; font-size: 1.5rem;
-      color: var(--midnight-blue); cursor: pointer;
-    }
+
     /* Hero */
     .hero {
-      background: linear-gradient(135deg, var(--jet-black) 0%, var(--midnight-blue) 100%);
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      text-align: center; margin-top: 80px; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--midnight-blue), var(--jet-black));
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 2rem;
     }
-    .hero-content { max-width: 800px; padding: 2rem; position: relative; z-index: 2; }
     .hero h1 {
-      color: var(--white); font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 800; margin-bottom: 1.5rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--electric-cyan);
     }
-    .hero .subtext {
-      color: var(--electric-cyan); font-size: clamp(1.1rem, 3vw, 1.5rem);
-      margin-bottom: 3rem;
-    }
-    .cta-buttons {
-      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
     .cta-button {
-      background: linear-gradient(45deg, var(--electric-cyan), #00CCCC);
-      color: var(--jet-black); padding: 1rem 2rem; border: none;
-      border-radius: 50px; font-weight: bold; font-size: 1.1rem;
-      cursor: pointer; text-decoration: none; transition: all 0.3s ease;
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
-    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,255,255,0.3); }
+    .cta-button:hover {
+      background: #00a6e6;
+      transform: translateY(-3px);
+    }
+
+    /* Services Section */
+    .services {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .services h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--midnight-blue);
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: var(--white);
+      border: 2px solid var(--midnight-blue);
+      padding: 2rem;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      color: var(--electric-cyan);
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      margin-bottom: 1rem;
+      color: var(--midnight-blue);
+    }
+    .card a {
+      color: var(--white);
+      background: var(--midnight-blue);
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .card a:hover {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+    }
+
+    /* Coming Soon Ribbon */
+    .ribbon {
+      position: absolute;
+      top: 15px;
+      right: -35px;
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 5px 40px;
+      transform: rotate(45deg);
+      font-size: 0.75rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
     /* Footer */
-    .footer {
-      background: var(--jet-black); padding: 3rem 2rem 2rem; text-align: center;
+    footer {
+      background: var(--jet-black);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
       border-top: 2px solid var(--electric-cyan);
-    }
-    .footer h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 1rem; }
-    .footer .footer-tagline { color: var(--electric-cyan); font-size: 1.1rem; margin-bottom: 2rem; }
-    .footer-contact { color: var(--white); margin-bottom: 1.5rem; }
-    .footer-contact a { color: var(--electric-cyan); text-decoration: none; }
-    .footer-links {
-      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
-    }
-    .footer-links a { color: var(--white); text-decoration: none; transition: 0.3s ease; }
-    .footer-links a:hover { color: var(--electric-cyan); }
-    @media (max-width: 768px) {
-      .mobile-menu-toggle { display: block; }
-      .main-nav-menu { display: none; flex-direction: column; background: var(--white);
-        position: absolute; top: 100%; left: 0; right: 0; }
-      .main-nav-menu.active { display: flex; }
-      .nav-link { padding: 1rem 2rem; }
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="top-navigation">
-    <div class="nav-container">
-      <a href="index.html" class="logo">
-        <span class="highlight">EAS</span> | Enhanced Digital Solutions
-      </a>
-      <ul class="main-nav-menu" id="navMenu">
-        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="edis.html" class="nav-link">EDIS</a></li>
-        <li class="nav-item"><a href="pas.html" class="nav-link">PAS</a></li>
-        <li class="nav-item"><a href="voiceworks.html" class="nav-link">VoiceWorks</a></li>
-        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
-    </div>
+  <nav>
+    <a href="index.html" class="logo">EAS | Enhanced Digital Solutions</a>
+    <ul>
+      <li><a href="edis.html">EDIS</a></li>
+      <li><a href="pas.html">PAS</a></li>
+      <li><a href="voiceworks.html">VoiceWorks</a></li>
+      <li><a href="portraits.html">Portraits</a></li>
+    </ul>
   </nav>
 
   <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h1>EAS | Enhanced Digital Solutions</h1>
-      <p class="subtext">Clarity. Compliance. Confidence.<br/>Turning vision into actionable results.</p>
-      <div class="cta-buttons">
-        <a href="edis.html" class="cta-button">Explore EDIS</a>
-        <a href="pas.html" class="cta-button">Discover PAS</a>
+  <section class="hero">
+    <h1>EAS | Enhanced Digital Solutions</h1>
+    <p>Transforming clarity into action with advanced imaging, financial tools, and empowerment products.</p>
+    <a href="edis.html" class="cta-button">Explore Our Solutions</a>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <h2>Our Divisions</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>EDIS</h3>
+        <p>Enhanced Digital Imaging Solutions for construction, insurance, and industry.</p>
+        <a href="edis.html">Learn More</a>
+      </div>
+      <div class="card">
+        <h3>PAS</h3>
+        <p>Profit Allocation System for smarter business management and growth.</p>
+        <a href="pas.html">Learn More</a>
+      </div>
+      <div class="card">
+        <div class="ribbon">Coming Soon</div>
+        <h3>VoiceWorks</h3>
+        <p>Empowerment audio and personalized affirmations voiced by Benayah Yashica.</p>
+        <a href="voiceworks.html">Learn More</a>
+      </div>
+      <div class="card">
+        <h3>Portraits</h3>
+        <p>Business portraits and headshots designed for individuals, teams, and executives.</p>
+        <a href="portraits.html">Learn More</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="footer-content">
-      <h3>EYE AM STUDIOS, LLC | Digital Solutions Company</h3>
-      <p class="footer-tagline">"Your Future. Our Focus."</p>
-      <div class="footer-contact">
-        <p>📞 <a href="tel:813-420-6581">813-420-6581</a> | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
-        <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
-      </div>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="edis.html">EDIS</a>
-        <a href="pas.html">PAS</a>
-        <a href="voiceworks.html">VoiceWorks</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
+  <footer>
+    <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
+    <p>📞 813-420-6581 | ✉️ kbyb@eyeamstudios.com | Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank" style="color:var(--electric-cyan);">@eyeamstudios</a></p>
   </footer>
-
-  <script>
-    // Mobile nav toggle
-    document.addEventListener("DOMContentLoaded", function() {
-      const mobileToggle = document.getElementById("mobileToggle");
-      const navMenu = document.getElementById("navMenu");
-      mobileToggle.addEventListener("click", function() {
-        navMenu.classList.toggle("active");
-        this.textContent = navMenu.classList.contains("active") ? "✕" : "☰";
-      });
-    });
-  </script>
 </body>
 </html>
