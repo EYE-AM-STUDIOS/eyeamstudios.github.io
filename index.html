@@ -1,433 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAS | Enhanced Digital Solutions </title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* Color Variables */
-        :root {
-            --jet-black: #000000;
-            --midnight-blue: #0D1B2A;
-            --electric-cyan: #00FFFF;
-            --white: #FFFFFF;
-            --light-gray: #f8f9fa;
-            --dark-gray: #495057;
-        }
-
-        /* Navigation Styles */
-        .top-navigation {
-            background: var(--white);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 2000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            color: var(--midnight-blue);
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-decoration: none;
-            padding: 1rem 0;
-        }
-
-        .logo .highlight {
-            color: var(--electric-cyan);
-        }
-
-        .main-nav-menu {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-item {
-            position: relative;
-            margin: 0 0.5rem;
-        }
-
-        .nav-link {
-            color: var(--midnight-blue);
-            text-decoration: none;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border-radius: 25px;
-            display: block;
-        }
-
-        .nav-link:hover {
-            color: var(--electric-cyan);
-            background: rgba(0, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-link.has-dropdown::after {
-            content: '▼';
-            font-size: 0.7rem;
-            margin-left: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-item:hover .nav-link.has-dropdown::after {
-            transform: rotate(180deg);
-        }
-
-        /* Dropdown Menus */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 300px;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(-50%) translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 2100;
-            border: 2px solid var(--electric-cyan);
-            margin-top: 0.5rem;
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .dropdown-header {
-            background: var(--midnight-blue);
-            color: var(--white);
-            padding: 0.8rem 1rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-align: center;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .dropdown-content {
-            padding: 1rem;
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.7rem 1rem;
-            color: var(--midnight-blue);
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .dropdown-item:hover {
-            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 204, 204, 0.1));
-            border-left-color: var(--electric-cyan);
-            transform: translateX(5px);
-        }
-
-        .dropdown-item .service-title {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.2rem;
-            font-size: 0.9rem;
-        }
-
-        .dropdown-item .service-desc {
-            font-size: 0.8rem;
-            color: var(--dark-gray);
-            line-height: 1.4;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--midnight-blue);
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--jet-black) 0%, var(--midnight-blue) 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            color: var(--white);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            animation: slideUp 1s ease-out;
-        }
-
-        .hero .subtext {
-            color: var(--electric-cyan);
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            margin-bottom: 3rem;
-            animation: slideUp 1s ease-out 0.3s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideUp 1s ease-out 0.6s both;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, var(--electric-cyan), #00CCCC);
-            color: var(--jet-black);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-            background: linear-gradient(45deg, #00CCCC, var(--electric-cyan));
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Industries Section */
-        .industries-section {
-            background: var(--white);
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .industries-section h2 {
-            color: var(--jet-black);
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .industries-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .industry-item {
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .industry-item:hover {
-            transform: scale(1.1);
-        }
-
-        .industry-item .icon {
-            font-size: 4rem;
-            color: var(--electric-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .industry-item h3 {
-            color: var(--midnight-blue);
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .tagline {
-            color: var(--midnight-blue);
-            font-size: 1.3rem;
-            font-style: italic;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--jet-black);
-            padding: 3rem 2rem 2rem;
-            text-align: center;
-            border-top: 2px solid var(--electric-cyan);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer h3 {
-            color: var(--white);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer .footer-tagline {
-            color: var(--electric-cyan);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-contact {
-            color: var(--white);
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-contact a {
-            color: var(--electric-cyan);
-            text-decoration: none;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--electric-cyan);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EAS | Enhanced Digital Solutions</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6; color: #333; overflow-x: hidden;
+    }
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+      --light-gray: #f8f9fa;
+      --dark-gray: #495057;
+    }
+    .top-navigation {
+      background: var(--white);
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 2000; box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    .nav-container {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .logo {
+      color: var(--midnight-blue); font-size: 1.5rem;
+      font-weight: 800; text-decoration: none; padding: 1rem 0;
+    }
+    .logo .highlight { color: var(--electric-cyan); }
+    .main-nav-menu { display: flex; list-style: none; align-items: center; }
+    .nav-item { margin: 0 0.5rem; }
+    .nav-link {
+      color: var(--midnight-blue); text-decoration: none;
+      padding: 1rem 1.5rem; font-weight: 600; font-size: 0.95rem;
+      border-radius: 25px; transition: 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--electric-cyan); background: rgba(0,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    .hero {
+      background: linear-gradient(135deg, var(--jet-black) 0%, var(--midnight-blue) 100%);
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; text-align: center; margin-top: 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-content { max-width: 800px; padding: 2rem; z-index: 2; }
+    .hero h1 {
+      color: var(--white); font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800; margin-bottom: 1.5rem;
+    }
+    .hero .subtext {
+      color: var(--electric-cyan); font-size: clamp(1.1rem, 3vw, 1.5rem);
+      margin-bottom: 3rem;
+    }
+    .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .cta-button {
+      background: linear-gradient(45deg, var(--electric-cyan), #00CCCC);
+      color: var(--jet-black); padding: 1rem 2rem;
+      border-radius: 50px; font-weight: bold; text-decoration: none;
+      transition: 0.3s ease;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,255,255,0.3);
+    }
+    section { padding: 5rem 2rem; }
+    .industries-section { background: var(--white); text-align: center; }
+    .industries-section h2 {
+      color: var(--jet-black); font-size: 2.5rem; margin-bottom: 3rem;
+    }
+    .industries-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .industry-item { text-align: center; transition: transform 0.3s ease; }
+    .industry-item:hover { transform: scale(1.1); }
+    .industry-item .icon {
+      font-size: 4rem; color: var(--electric-cyan); margin-bottom: 1rem;
+    }
+    .industry-item h3 {
+      color: var(--midnight-blue); font-size: 1.2rem; font-weight: bold;
+    }
+    .tagline {
+      color: var(--midnight-blue); font-size: 1.3rem;
+      font-style: italic; font-weight: 600;
+    }
+    .footer {
+      background: var(--jet-black); padding: 3rem 2rem 2rem;
+      text-align: center; border-top: 2px solid var(--electric-cyan);
+    }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer h3 { color: var(--white); font-size: 1.5rem; margin-bottom: 1rem; }
+    .footer .footer-tagline { color: var(--electric-cyan); font-size: 1.1rem; margin-bottom: 2rem; }
+    .footer-contact { color: var(--white); margin-bottom: 1.5rem; }
+    .footer-contact a { color: var(--electric-cyan); text-decoration: none; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--white); text-decoration: none; transition: 0.3s ease; }
+    .footer-links a:hover { color: var(--electric-cyan); }
+  </style>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav class="top-navigation">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <span class="highlight">EAS</span> | Precision Documentation Suite
-            </a>
-            <ul class="main-nav-menu" id="navMenu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#industries" class="nav-link">Industries</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
-        </div>
-    </nav>
+  <!-- Top Navigation -->
+  <nav class="top-navigation">
+    <div class="nav-container">
+      <a href="#home" class="logo">
+        <span class="highlight">EAS</span> | Enhanced Digital Solutions
+      </a>
+      <ul class="main-nav-menu" id="navMenu">
+        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="#industries" class="nav-link">Industries</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>EAS | Precision Documentation Suite</h1>
-            <p class="subtext">Audit-Ready Imaging & Compliance Solutions for Industry, Construction, and Asset Management</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="cta-button">Request a Quote</a>
-                <a href="#contact" class="cta-button">Schedule a Consultation</a>
-            </div>
-        </div>
-    </section>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>EAS | Enhanced Digital Solutions</h1>
+      <p class="subtext">High-Resolution Imaging & Compliance Solutions for Industry, Construction, and Asset Management</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="cta-button">Request a Quote</a>
+        <a href="#contact" class="cta-button">Schedule a Consultation</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Industries Section -->
-    <section id="industries" class="industries-section">
-        <div class="container">
-            <h2>Industries We Serve</h2>
-            <div class="industries-grid">
-                <div class="industry-item"><div class="icon">⚙️</div><h3>Oil & Gas</h3></div>
-                <div class="industry-item"><div class="icon">🧪</div><h3>Chemical Processing</h3></div>
-                <div class="industry-item"><div class="icon">⚡</div><h3>Power Generation</h3></div>
-                <div class="industry-item"><div class="icon">🌉</div><h3>Infrastructure</h3></div>
-                <div class="industry-item"><div class="icon">🏭</div><h3>Manufacturing</h3></div>
-            </div>
-            <p class="tagline">"Where precision and compliance matter most."</p>
-        </div>
-    </section>
+  <!-- Industries Section -->
+  <section id="industries" class="industries-section">
+    <div class="container">
+      <h2>Industries We Serve</h2>
+      <div class="industries-grid">
+        <div class="industry-item"><div class="icon">⚙️</div><h3>Oil & Gas</h3></div>
+        <div class="industry-item"><div class="icon">🧪</div><h3>Chemical Processing</h3></div>
+        <div class="industry-item"><div class="icon">⚡</div><h3>Power Generation</h3></div>
+        <div class="industry-item"><div class="icon">🌉</div><h3>Infrastructure</h3></div>
+        <div class="industry-item"><div class="icon">🏭</div><h3>Manufacturing</h3></div>
+      </div>
+      <p class="tagline">"Where precision and compliance matter most."</p>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>EYE AM STUDIOS, LLC | Digital Solutions Company</h3>
-            <p class="footer-tagline">"Your Future. Our Focus."</p>
-            <div class="footer-contact">
-                <p>📞 <a href="tel:813-420-6581">813-420-6581</a> | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
-                <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
-            </div>
-            <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#industries">Industries</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-content">
+      <h3>EYE AM STUDIOS, LLC | Digital Solutions Company</h3>
+      <p class="footer-tagline">"Your Future. Our Focus."</p>
+      <div class="footer-contact">
+        <p>📞 <a href="tel:813-420-6581">813-420-6581</a> | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
+        <p>Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#industries">Industries</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
