@@ -3,232 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAS | Business Portraits</title>
+  <title>EYE AM STUDIOS | Business Portraits</title>
   <style>
-    :root {
-      --jet-black: #000000;
-      --midnight-blue: #0D1B2A;
-      --electric-cyan: #00BFFF;
-      --white: #FFFFFF;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--jet-black);
-      color: var(--white);
-      line-height: 1.6;
+      background-color: #000000;
+      color: #FFFFFF;
     }
-
-    /* Hero */
     .hero {
-      background: linear-gradient(135deg, var(--midnight-blue), var(--jet-black));
-      text-align: center;
-      padding: 5rem 2rem;
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('Terri_Silar_Phots_8.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      padding-left: 60px;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.45);
+    }
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      padding: 20px;
+      z-index: 2;
     }
     .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--electric-cyan);
+      font-size: 3rem;
+      color: #00BFFF; /* Electric Cyan */
+      margin-bottom: 20px;
     }
     .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 30px;
     }
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .cta-button {
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      font-weight: bold;
+    .btn {
+      background-color: #0D1B2A; /* Midnight Blue */
+      color: #FFFFFF;
+      padding: 12px 24px;
       text-decoration: none;
-      transition: all 0.3s ease;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
-    .cta-button:hover {
-      background: #00a6e6;
-      transform: translateY(-3px);
+    .btn:hover {
+      background-color: #00BFFF;
+      color: #000000;
     }
-
-    /* Services */
-    .services {
-      padding: 4rem 2rem;
+    .section {
+      padding: 80px 20px;
       text-align: center;
     }
-    .services h2 {
+    .section h2 {
       font-size: 2rem;
-      margin-bottom: 2rem;
+      color: #00BFFF;
+      margin-bottom: 20px;
     }
-    .card-grid {
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: 30px;
+      margin-top: 40px;
     }
     .card {
-      background: var(--midnight-blue);
-      padding: 2rem;
-      border-radius: 15px;
-      transition: transform 0.3s ease;
+      background-color: #0D1B2A;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
-    .card:hover { transform: translateY(-5px); }
     .card img {
-      width: 80px;
-      margin-bottom: 1rem;
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
     .card h3 {
-      color: var(--electric-cyan);
-      margin-bottom: 0.5rem;
+      margin-bottom: 10px;
+      color: #FFFFFF;
     }
-    .price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
+    .card p {
+      font-size: 0.95rem;
+      color: #CCCCCC;
     }
-    .features {
-      text-align: left;
-      margin-top: 1rem;
-    }
-    .features li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Add-On Card */
     .addon-card {
-      background: var(--midnight-blue);
-      padding: 1.5rem;
-      margin: 0 auto 3rem;
+      background-color: #1a1a1a;
+      border: 1px solid #00BFFF;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      margin: 20px auto;
       max-width: 400px;
-      border-left: 5px solid var(--electric-cyan);
-      border-radius: 12px;
-      text-align: center;
     }
-    .addon-card h3 {
-      color: var(--electric-cyan);
-      margin-bottom: 0.5rem;
-    }
-
-    /* Add-Ons Section */
-    .addons {
-      padding: 2rem;
-      text-align: center;
-    }
-    .addons h2 {
-      margin-bottom: 1rem;
-    }
-    .addons ul {
-      list-style: none;
-      padding: 0;
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: left;
-    }
-    .addons li {
-      margin: 0.5rem 0;
-    }
-
-    /* Final CTA */
-    .final-cta {
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-    .final-cta h2 {
-      margin-bottom: 1rem;
-    }
-    .final-cta .cta-button {
-      background: var(--jet-black);
-      color: var(--white);
-    }
-    .final-cta .cta-button:hover {
-      background: #222;
+    .addon-card h4 {
+      margin-bottom: 10px;
+      color: #00BFFF;
     }
   </style>
 </head>
 <body>
-  <!-- Hero -->
   <section class="hero">
-    <h1>EAS | Business Portraits</h1>
-    <p>Professional headshots & portraits designed for individuals, teams, and executives.</p>
-    <div class="cta-buttons">
-      <a href="#" class="cta-button">Book a Session</a>
-      <a href="#" class="cta-button">Request Info</a>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>Professional Business Portraits</h1>
+      <p>Capture your presence with confidence, clarity, and professionalism. EYE AM STUDIOS delivers portraits that define your brand.</p>
+      <a href="#packages" class="btn">View Packages</a>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="services">
+  <section id="packages" class="section">
     <h2>Our Portrait Packages</h2>
-    <div class="card-grid">
+    <div class="cards">
       <div class="card">
-        <img src="https://via.placeholder.com/80?text=👤" alt="Headshot Icon">
-        <h3>Essential Headshot Session</h3>
-        <p class="price">$350</p>
-        <ul class="features">
-          <li>1 person, 2 retouched images</li>
-          <li>Online proofing gallery</li>
-          <li>Travel included up to 25mi</li>
-        </ul>
+        <img src="PSX_20200813_235624-1.jpg" alt="Standard Portrait">
+        <h3>Standard Portrait</h3>
+        <p>Classic headshots for individuals. Includes 2 fully edited images.</p>
       </div>
-
       <div class="card">
-        <img src="https://via.placeholder.com/80?text=👥" alt="Team Icon">
-        <h3>Team Package</h3>
-        <p class="price">$850</p>
-        <ul class="features">
-          <li>Up to 6 people + group photo</li>
-          <li>2 retouched images/person</li>
-          <li>Proofing gallery included</li>
-        </ul>
+        <img src="LA-Diva5.jpg" alt="Team Portraits">
+        <h3>Team Portraits</h3>
+        <p>Perfect for businesses and teams. Group and individual portraits included.</p>
       </div>
-
       <div class="card">
-        <img src="https://via.placeholder.com/80?text=🏢" alt="Corporate Icon">
-        <h3>Corporate Portrait Suite</h3>
-        <p class="price">$1,250</p>
-        <ul class="features">
-          <li>Up to 15 people, group + exec portraits</li>
-          <li>Editorial-style for 2 leaders</li>
-          <li>Branding delivery folder included</li>
-        </ul>
+        <img src="AVAH_02.jpg" alt="Premium Session">
+        <h3>Premium Session</h3>
+        <p>Extended creative session with multiple outfit changes and locations.</p>
       </div>
     </div>
 
-    <!-- Executive Add-On -->
     <div class="addon-card">
-      <h3>Executive Add-On</h3>
-      <p class="price">$150/person</p>
-      <ul class="features">
-        <li>Editorial-style portrait</li>
-        <li>Premium lighting setup</li>
-        <li>3–5 varied shots</li>
-      </ul>
-      <p><em>Ideal for LinkedIn, speaker bios, PR kits</em></p>
+      <h4>Executive Add-On (+$150/person)</h4>
+      <p>Extra polish with additional retouching and premium backgrounds.</p>
     </div>
-  </section>
-
-  <!-- Add-Ons Section -->
-  <section class="addons">
-    <h2>Additional Options</h2>
-    <ul>
-      <li>Extra image: $50 each (Essential) | $35 each (Team)</li>
-      <li>Extra person (Team): $100/person</li>
-      <li>Contact us for larger team rates</li>
-    </ul>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="final-cta">
-    <h2>Ready to elevate your professional image?</h2>
-    <a href="#" class="cta-button">Get Started</a>
-    <a href="#" class="cta-button">Contact Us</a>
   </section>
 </body>
 </html>
