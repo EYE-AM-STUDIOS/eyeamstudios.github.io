@@ -8,143 +8,169 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #000000;
-      color: #FFFFFF;
+      background-color: #000;
+      color: #fff;
+    }
+    header {
+      background: #0D1B2A;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h2 {
+      color: #00BFFF;
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00BFFF;
     }
     .hero {
       position: relative;
       width: 100%;
       height: 100vh;
-      background: url('Terri_Silar_Phots_8.jpg') right center/cover no-repeat;
+      background: url('images/Terri_Silar_Phots_8.jpg') right center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       text-align: left;
       padding-left: 60px;
     }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.45);
-    }
-    .hero-content {
-      position: relative;
-      max-width: 700px;
-      padding: 20px;
-      z-index: 2;
-    }
     .hero h1 {
       font-size: 3rem;
-      color: #00BFFF; /* Electric Cyan */
-      margin-bottom: 20px;
+      color: #00BFFF;
     }
     .hero p {
-      font-size: 1.25rem;
-      color: #FFFFFF;
-      margin-bottom: 30px;
+      font-size: 1.2rem;
+      max-width: 600px;
     }
-    .btn {
-      background-color: #0D1B2A; /* Midnight Blue */
-      color: #FFFFFF;
-      padding: 12px 24px;
-      text-decoration: none;
+    .hero button {
+      margin-top: 20px;
+      background-color: #0D1B2A;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
       border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
     }
-    .btn:hover {
+    .hero button:hover {
       background-color: #00BFFF;
-      color: #000000;
     }
-    .section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .section h2 {
-      font-size: 2rem;
-      color: #00BFFF;
-      margin-bottom: 20px;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
+    .packages {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px;
+      gap: 20px;
     }
     .card {
-      background-color: #0D1B2A;
+      background: #111;
       border-radius: 12px;
-      padding: 20px;
+      overflow: hidden;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
     .card img {
       width: 100%;
-      height: 240px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 20px;
     }
     .card h3 {
-      margin-bottom: 10px;
-      color: #FFFFFF;
+      color: #00BFFF;
+      margin: 15px 0;
     }
     .card p {
+      padding: 0 15px 20px;
       font-size: 0.95rem;
-      color: #CCCCCC;
+      color: #ddd;
     }
-    .addon-card {
-      background-color: #1a1a1a;
-      border: 1px solid #00BFFF;
+    .addon {
+      background: #0D1B2A;
       border-radius: 10px;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      margin: 20px auto;
-      max-width: 400px;
+      margin: 40px auto;
+      width: 280px;
     }
-    .addon-card h4 {
-      margin-bottom: 10px;
+    .addon h4 {
       color: #00BFFF;
+      margin-bottom: 10px;
+    }
+    .addon p {
+      font-size: 0.9rem;
+    }
+    footer {
+      background: #0D1B2A;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    footer p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h2>EYE AM STUDIOS</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="edis.html">EDIS</a>
+      <a href="pas.html">PAS</a>
+      <a href="portraits.html">Portraits</a>
+      <a href="voiceworks.html">VoiceWorks</a>
+    </nav>
+  </header>
+
   <section class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
+    <div>
       <h1>Professional Business Portraits</h1>
       <p>Capture your presence with confidence, clarity, and professionalism. EYE AM STUDIOS delivers portraits that define your brand.</p>
-      <a href="#packages" class="btn">View Packages</a>
+      <button>View Packages</button>
     </div>
   </section>
 
-  <section id="packages" class="section">
-    <h2>Our Portrait Packages</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="PSX_20200813_235624-1.jpg" alt="Standard Portrait">
-        <h3>Standard Portrait</h3>
-        <p>Classic headshots for individuals. Includes 2 fully edited images.</p>
-      </div>
-      <div class="card">
-        <img src="LA-Diva5.jpg" alt="Team Portraits">
-        <h3>Team Portraits</h3>
-        <p>Perfect for businesses and teams. Group and individual portraits included.</p>
-      </div>
-      <div class="card">
-        <img src="AVAH_02.jpg" alt="Premium Session">
-        <h3>Premium Session</h3>
-        <p>Extended creative session with multiple outfit changes and locations.</p>
-      </div>
+  <section class="packages">
+    <div class="card">
+      <img src="images/PSX_20200813_235624-1.jpg" alt="Standard Portrait Package">
+      <h3>Standard Portrait</h3>
+      <p>Perfect for professionals needing one strong, polished headshot. Includes 1 final retouched image.</p>
     </div>
-
-    <div class="addon-card">
-      <h4>Executive Add-On (+$150/person)</h4>
-      <p>Extra polish with additional retouching and premium backgrounds.</p>
+    <div class="card">
+      <img src="images/LA-Diva5.jpg" alt="Team Portrait Package">
+      <h3>Team Package</h3>
+      <p>Ideal for small businesses or teams. Consistent style and branding across 5–10 portraits.</p>
+    </div>
+    <div class="card">
+      <img src="images/AVAH_02.jpg" alt="Premium Package">
+      <h3>Premium Package</h3>
+      <p>A full branding experience with multiple looks and settings. Includes 5 final retouched images.</p>
     </div>
   </section>
+
+  <section class="addon">
+    <h4>Executive Add-On ($150/person)</h4>
+    <p>Upgrade any package with executive-level enhancements, extra retouching, and priority delivery.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EYE AM STUDIOS. All Rights Reserved.</p>
+    <p>Contact: kbyb@eyeamstudios.com | 813-420-6581</p>
+  </footer>
 </body>
 </html>
