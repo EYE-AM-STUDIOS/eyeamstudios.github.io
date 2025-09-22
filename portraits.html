@@ -64,6 +64,7 @@
       font-size: 1rem;
       cursor: pointer;
       border-radius: 8px;
+      transition: background-color 0.3s;
     }
     .hero button:hover {
       background-color: #00BFFF;
@@ -83,23 +84,27 @@
     .card {
       background: #111;
       border-radius: 12px;
-      overflow: hidden;
       width: 300px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.6);
       text-align: center;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
-    .card img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      object-position: top;
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 191, 255, 0.6);
     }
     .card h3 {
       color: #00BFFF;
-      margin: 15px 0;
+      margin: 10px 0;
     }
     .card p {
-      padding: 0 15px 20px;
       font-size: 0.95rem;
       color: #ddd;
     }
@@ -110,6 +115,12 @@
       text-align: center;
       margin: 40px auto;
       width: 280px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .addon:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 191, 255, 0.6);
     }
     .addon h4 {
       color: #00BFFF;
@@ -154,17 +165,14 @@
 
   <section class="packages">
     <div class="card">
-      <img src="images/PSX_20200813_235624-1.jpg" alt="Standard Portrait Package">
       <h3>Standard Portrait</h3>
       <p>Perfect for professionals needing one strong, polished headshot. Includes 1 final retouched image.</p>
     </div>
     <div class="card">
-      <img src="images/LA-Diva5.jpg" alt="Team Portrait Package">
       <h3>Team Package</h3>
       <p>Ideal for small businesses or teams. Consistent style and branding across 5–10 portraits.</p>
     </div>
     <div class="card">
-      <img src="images/AVAH_02.jpg" alt="Premium Package">
       <h3>Premium Package</h3>
       <p>A full branding experience with multiple looks and settings. Includes 5 final retouched images.</p>
     </div>
