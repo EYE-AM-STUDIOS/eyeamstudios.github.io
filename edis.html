@@ -6,96 +6,157 @@
   <title>EDIS | Enhanced Digital Imaging Solutions</title>
   <style>
     body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      color: #000;
-      background: #fff;
+      padding: 0;
+      color: #000000;
+      background: #ffffff;
     }
 
+    /* Color Variables */
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+      --light-gray: #f8f9fa;
+    }
+
+    /* Navigation */
+    nav {
+      background: var(--jet-black);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      font-size: 1.4rem;
+      color: var(--electric-cyan);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--electric-cyan);
+    }
+
+    /* Hero */
     header {
-      background: linear-gradient(180deg, #0D1B2A, #000);
-      color: #fff;
+      background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
+      color: var(--white);
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 4rem 2rem;
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    header h2 {
+      font-size: 2.2rem;
+      font-weight: bold;
       margin-bottom: 1rem;
-      color: #00BFFF;
+      color: var(--electric-cyan);
     }
 
     header p {
-      font-size: 1.2rem;
       max-width: 800px;
       margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
+    /* Sections */
     section {
       padding: 4rem 2rem;
-      max-width: 1100px;
+      max-width: 1000px;
       margin: auto;
+      text-align: center;
     }
 
-    .service {
-      margin-bottom: 4rem;
-    }
-
-    .service img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1.5rem;
-      max-height: 300px;
-      object-fit: cover;
-    }
-
-    .service h2 {
-      color: #0D1B2A;
-      font-size: 2rem;
+    section h3 {
+      font-size: 1.6rem;
       margin-bottom: 1rem;
-      text-align: center;
+      color: var(--midnight-blue);
     }
 
-    .service p {
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto 1.5rem auto;
+    section p {
+      margin-bottom: 1.5rem;
+      color: #333;
     }
 
     ul {
-      max-width: 900px;
-      margin: auto;
-      padding-left: 1.5rem;
+      text-align: left;
+      display: inline-block;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      padding-left: 1.2rem;
+      color: #333;
     }
 
     ul li {
       margin-bottom: 0.5rem;
     }
 
+    /* Section Images */
+    .section-image {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Footer */
     footer {
-      background: #000;
-      color: #fff;
+      background: var(--jet-black);
+      color: var(--white);
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
     }
 
     footer a {
-      color: #00BFFF;
+      color: var(--electric-cyan);
       text-decoration: none;
     }
   </style>
 </head>
 <body>
 
+  <!-- Navigation -->
+  <nav>
+    <h1>EYE AM STUDIOS</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="edis.html">EDIS</a></li>
+      <li><a href="pas.html">PAS</a></li>
+      <li><a href="voiceworks.html">VoiceWorks</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
   <header>
-    <h1>Enhanced Digital Imaging Solutions (EDIS)</h1>
+    <h2>Enhanced Digital Imaging Solutions (EDIS)</h2>
     <p>Delivering advanced aerial and ground-based imaging solutions for construction, insurance, manufacturing, and commercial industries.</p>
   </header>
 
-  <section class="service" id="aerial">
-    <img src="images/edis-aerial.jpg" alt="Aerial Services">
-    <h2>Aerial Services</h2>
+  <!-- Aerial Services -->
+  <section>
+    <img src="images/edis-aerial.jpg" alt="Aerial Services" class="section-image">
+    <h3>Aerial Services</h3>
     <p>High-resolution aerial imaging for construction, industrial, and environmental projects.</p>
     <ul>
       <li>Orthomosaic mapping</li>
@@ -105,9 +166,10 @@
     </ul>
   </section>
 
-  <section class="service" id="ground">
-    <img src="images/edis-ground.jpg" alt="Ground Services">
-    <h2>Ground Services</h2>
+  <!-- Ground Services -->
+  <section>
+    <img src="images/edis-ground.jpg" alt="Ground Services" class="section-image">
+    <h3>Ground Services</h3>
     <p>High-definition ground-based imaging for facilities, assets, and events.</p>
     <ul>
       <li>High-resolution photography</li>
@@ -117,21 +179,23 @@
     </ul>
   </section>
 
-  <section class="service" id="safety">
-    <img src="images/edis-safety.jpeg" alt="Compliance & Safety">
-    <h2>Compliance & Safety</h2>
+  <!-- Compliance & Safety -->
+  <section>
+    <img src="images/edis-safety.jpeg" alt="Compliance and Safety" class="section-image">
+    <h3>Compliance & Safety</h3>
     <p>Supporting organizations with verifiable compliance and risk management imaging.</p>
     <ul>
       <li>OSHA compliance documentation</li>
       <li>Insurance imaging</li>
       <li>Forensic reporting</li>
-      <li>Pre-/post-construction inspections</li>
+      <li>Pre/post-construction inspections</li>
     </ul>
   </section>
 
-  <section class="service" id="portraits">
-    <img src="images/edis-portraits.jpg" alt="Commercial & Executive Portraits">
-    <h2>Commercial/Executive Portraits</h2>
+  <!-- Commercial/Executive Portraits -->
+  <section>
+    <img src="images/edis-portraits.jpg" alt="Commercial and Executive Portraits" class="section-image">
+    <h3>Commercial/Executive Portraits</h3>
     <p>Professional portraits for industry professionals in construction, industrial, and manufacturing fields.</p>
     <ul>
       <li>On-site executive portraits</li>
@@ -141,10 +205,11 @@
     </ul>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
     <p>
-      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
+      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> |
       Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
     </p>
   </footer>
