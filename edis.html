@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EDIS | Enhanced Digital Imaging Solutions</title>
   <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
       color: #000000;
-      background: #ffffff;
+      background-color: #ffffff;
     }
 
-    /* Color Variables */
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
@@ -30,28 +31,12 @@
       justify-content: space-between;
       align-items: center;
     }
-
-    nav h1 {
-      font-size: 1.4rem;
-      color: var(--electric-cyan);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
+    nav h1 { font-size: 1.3rem; color: var(--electric-cyan); }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
     nav ul li a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
+      color: var(--white); text-decoration: none; font-weight: 500; transition: 0.3s;
     }
-
-    nav ul li a:hover {
-      color: var(--electric-cyan);
-    }
+    nav ul li a:hover { color: var(--electric-cyan); }
 
     /* Hero */
     header {
@@ -60,60 +45,42 @@
       text-align: center;
       padding: 4rem 2rem;
     }
-
     header h2 {
-      font-size: 2.2rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: var(--electric-cyan);
+      font-size: 2.2rem; color: var(--electric-cyan); margin-bottom: 1rem;
     }
-
-    header p {
-      max-width: 800px;
-      margin: auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
+    header p { font-size: 1.1rem; max-width: 800px; margin: 0 auto; }
 
     /* Sections */
     section {
       padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
       text-align: center;
     }
-
     section h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      margin: 1rem 0;
       color: var(--midnight-blue);
     }
+    section ul { list-style: none; margin-top: 1rem; }
+    section ul li { margin: 0.5rem 0; }
 
-    section p {
-      margin-bottom: 1.5rem;
-      color: #333;
-    }
-
-    ul {
-      text-align: left;
-      display: inline-block;
-      margin-top: 1rem;
-      margin-bottom: 2rem;
-      padding-left: 1.2rem;
-      color: #333;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Section Images */
+    /* Section Image */
     .section-image {
       width: 100%;
       height: 380px;
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 1.5rem;
+    }
+    .section-image.portrait {
+      object-position: top center; /* shift crop down to show face */
+    }
+
+    /* Gradient Backgrounds */
+    .bg-light {
+      background: linear-gradient(180deg, var(--white), var(--light-gray));
+    }
+    .bg-dark {
+      background: linear-gradient(180deg, var(--light-gray), var(--white));
     }
 
     /* Footer */
@@ -124,11 +91,7 @@
       padding: 2rem 1rem;
       font-size: 0.9rem;
     }
-
-    footer a {
-      color: var(--electric-cyan);
-      text-decoration: none;
-    }
+    footer a { color: var(--electric-cyan); text-decoration: none; }
   </style>
 </head>
 <body>
@@ -139,11 +102,7 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="edis.html">EDIS</a></li>
-      <li><a href="pas.html">PAS</a></li>
-      <li><a href="voiceworks.html">VoiceWorks</a></li>
-      <li><a href="index.html#events">Events</a></li>
-      <li><a href="index.html#tools">Tools</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -154,7 +113,7 @@
   </header>
 
   <!-- Aerial Services -->
-  <section>
+  <section class="bg-light">
     <img src="images/edis-aerial.jpg" alt="Aerial Services" class="section-image">
     <h3>Aerial Services</h3>
     <p>High-resolution aerial imaging for construction, industrial, and environmental projects.</p>
@@ -167,7 +126,7 @@
   </section>
 
   <!-- Ground Services -->
-  <section>
+  <section class="bg-dark">
     <img src="images/edis-ground.jpg" alt="Ground Services" class="section-image">
     <h3>Ground Services</h3>
     <p>High-definition ground-based imaging for facilities, assets, and events.</p>
@@ -180,7 +139,7 @@
   </section>
 
   <!-- Compliance & Safety -->
-  <section>
+  <section class="bg-light">
     <img src="images/edis-safety.jpeg" alt="Compliance and Safety" class="section-image">
     <h3>Compliance & Safety</h3>
     <p>Supporting organizations with verifiable compliance and risk management imaging.</p>
@@ -192,9 +151,9 @@
     </ul>
   </section>
 
-  <!-- Commercial/Executive Portraits -->
-  <section>
-    <img src="images/edis-portraits.jpg" alt="Commercial and Executive Portraits" class="section-image">
+  <!-- Portraits -->
+  <section class="bg-dark">
+    <img src="images/edis-portraits.jpg" alt="Commercial and Executive Portraits" class="section-image portrait">
     <h3>Commercial/Executive Portraits</h3>
     <p>Professional portraits for industry professionals in construction, industrial, and manufacturing fields.</p>
     <ul>
@@ -206,7 +165,7 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer id="contact">
     <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
     <p>
       📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> |
