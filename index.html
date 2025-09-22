@@ -3,205 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAS | Enhanced Digital Solutions</title>
+  <title>EYE AM STUDIOS | Core Divisions</title>
   <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #000000;
+      background-color: #ffffff;
+    }
+
+    /* Color Variables */
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
       --white: #FFFFFF;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--white);
-      color: var(--midnight-blue);
-      line-height: 1.6;
-    }
-    /* Navigation */
-    nav {
-      background: var(--jet-black);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav .logo {
-      font-weight: bold;
-      color: var(--electric-cyan);
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav ul li a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav ul li a:hover {
-      color: var(--electric-cyan);
+      --light-gray: #f8f9fa;
     }
 
-    /* Hero */
-    .hero {
-      background: linear-gradient(135deg, var(--midnight-blue), var(--jet-black));
+    header {
+      background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
       color: var(--white);
       text-align: center;
-      padding: 6rem 2rem;
+      padding: 4rem 2rem;
     }
-    .hero h1 {
+
+    header h1 {
       font-size: 2.5rem;
+      font-weight: bold;
       margin-bottom: 1rem;
       color: var(--electric-cyan);
     }
-    .hero p {
-      font-size: 1.2rem;
+
+    header p {
+      font-size: 1.1rem;
       margin-bottom: 2rem;
-    }
-    .cta-button {
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      padding: 0.8rem 1.5rem;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .cta-button:hover {
-      background: #00a6e6;
-      transform: translateY(-3px);
     }
 
-    /* Services Section */
-    .services {
-      padding: 4rem 2rem;
-      text-align: center;
+    .btn-primary {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: 0.3s;
     }
-    .services h2 {
-      font-size: 2rem;
+
+    .btn-primary:hover {
+      background: #0099cc;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
       margin-bottom: 2rem;
+      font-size: 2rem;
       color: var(--midnight-blue);
     }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background: var(--white);
-      border: 2px solid var(--midnight-blue);
-      padding: 2rem;
+
+    .division {
+      margin-bottom: 3rem;
+      border: 1px solid #ddd;
       border-radius: 12px;
-      transition: transform 0.3s ease;
-      position: relative;
+      padding: 2rem;
+      background: var(--light-gray);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card h3 {
+
+    .division h3 {
+      font-size: 1.5rem;
       color: var(--electric-cyan);
+      margin-bottom: 1rem;
+    }
+
+    .division ul {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+    }
+
+    .division ul li {
       margin-bottom: 0.5rem;
     }
-    .card p {
-      margin-bottom: 1rem;
-      color: var(--midnight-blue);
-    }
-    .card a {
-      color: var(--white);
-      background: var(--midnight-blue);
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-    }
-    .card a:hover {
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-    }
 
-    /* Coming Soon Ribbon */
-    .ribbon {
-      position: absolute;
-      top: 15px;
-      right: -35px;
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      padding: 5px 40px;
-      transform: rotate(45deg);
-      font-size: 0.75rem;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    /* Footer */
     footer {
       background: var(--jet-black);
       color: var(--white);
       text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      border-top: 2px solid var(--electric-cyan);
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <a href="index.html" class="logo">EAS | Enhanced Digital Solutions</a>
-    <ul>
-      <li><a href="edis.html">EDIS</a></li>
-      <li><a href="portraits.html">Portraits</a></li>
-      <li><a href="pas.html">PAS</a></li>
-      <li><a href="voiceworks.html">VoiceWorks</a></li>
-      
-    </ul>
-  </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>EAS | Enhanced Digital Solutions</h1>
-    <p>Transforming clarity into action with advanced imaging, financial tools, and empowerment products.</p>
-    <a href="edis.html" class="cta-button">Explore Our Solutions</a>
+  <header>
+    <h1>EYE AM STUDIOS | Core Divisions</h1>
+    <p>Transforming clarity into action with advanced imaging, creative production, live experiences, and professional education.</p>
+    <a href="#divisions" class="btn-primary">Explore Our Divisions</a>
+  </header>
+
+  <section id="about">
+    <h2>About EYE AM STUDIOS</h2>
+    <p style="text-align:center; max-width:900px; margin:1rem auto;">
+      EYE AM STUDIOS, LLC is a vision-driven digital solutions company built on the principle that perception shapes identity. 
+      We combine technology, creativity, and strategy to deliver clarity, precision, and impact across multiple industries. 
+      Our work is organized into four core divisions:
+    </p>
   </section>
 
-  <!-- Services -->
-  <section class="services">
+  <section id="divisions">
     <h2>Our Divisions</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>EDIS</h3>
-        <p>Enhanced Digital Imaging Solutions for construction, insurance, and industry.</p>
-        <a href="edis.html">Learn More</a>
-      </div>
-      <div class="card">
-        <h3>Portraits</h3>
-        <p>Business portraits and headshots designed for individuals, teams, and executives.</p>
-        <a href="portraits.html">Learn More</a>
-      </div>
-      <div class="card">
-        <h3>PAS</h3>
-        <p>Profit Allocation System for smarter business management and growth.</p>
-        <a href="pas.html">Learn More</a>
-      </div>
-      <div class="card">
-        <div class="ribbon">Coming Soon</div>
-        <h3>VoiceWorks</h3>
-        <p>Empowerment audio and personalized affirmations voiced by Benayah Yashica.</p>
-        <a href="voiceworks.html">Learn More</a>
-      </div>
-             </div>
+
+    <div class="division">
+      <h3>1. Commercial Division — Enhanced Digital Imaging Solutions (EDIS)</h3>
+      <p>Specialized in advanced aerial and ground-based imaging for industries such as construction, insurance, and manufacturing.</p>
+      <ul>
+        <li>Aerial Mapping & Geospatial Solutions</li>
+        <li>Industrial & Commercial Inspections</li>
+        <li>360° Imaging & Virtual Tours</li>
+        <li>Commercial/Executive Portraits for Industry Professionals</li>
+      </ul>
+    </div>
+
+    <div class="division">
+      <h3>2. Entertainment Division — Music & Video Production</h3>
+      <p>A creative hub for music, film, and visual storytelling.</p>
+      <ul>
+        <li>Music Recording & Production</li>
+        <li>Music Video Direction & Editing</li>
+        <li>Creative Video Projects & Short Films</li>
+        <li>Artist Development Support</li>
+      </ul>
+    </div>
+
+    <div class="division">
+      <h3>3. Event Services Division — Live Experiences & Digital Media</h3>
+      <p>Capturing, documenting, and amplifying live experiences with immersive media solutions.</p>
+      <ul>
+        <li>Event Photography & Videography</li>
+        <li>Conferences & Corporate Coverage</li>
+        <li>Virtual Event Experiences</li>
+      </ul>
+    </div>
+
+    <div class="division">
+      <h3>4. Education Division — Training & Development</h3>
+      <p>Empowering businesses and individuals with knowledge, digital tools, and hands-on training.</p>
+      <ul>
+        <li>Digital Products (starting with Profit Allocation System — PAS)</li>
+        <li>Drone Training & Certification Prep</li>
+        <li>Business Empowerment Resources</li>
+        <li>Workshops & Online Courses</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
-    <p>📞 813-420-6581 | ✉️ kbyb@eyeamstudios.com | Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank" style="color:var(--electric-cyan);">@eyeamstudios</a></p>
+    <p>
+      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
+      Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
+    </p>
   </footer>
+
 </body>
 </html>
