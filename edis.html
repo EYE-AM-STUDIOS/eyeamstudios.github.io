@@ -3,254 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAS | Enhanced Digital Imaging Solutions</title>
+  <title>EDIS | Enhanced Digital Imaging Solutions</title>
   <style>
-    :root {
-      --jet-black: #000000;
-      --midnight-blue: #0D1B2A;
-      --electric-cyan: #00BFFF;
-      --white: #FFFFFF;
-      --light-gray: #f8f9fa;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: var(--jet-black);
-      background-color: var(--white);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #000;
+      background: #fff;
     }
 
-    /* Navigation */
-    nav {
-      background: var(--jet-black);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav h1 {
-      font-size: 1.4rem;
-      color: var(--electric-cyan);
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-    nav ul li a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    nav ul li a:hover {
-      color: var(--electric-cyan);
-    }
-
-    /* Hero */
     header {
-      background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
-      color: var(--white);
+      background: linear-gradient(180deg, #0D1B2A, #000);
+      color: #fff;
       text-align: center;
-      padding: 4rem 2rem;
-    }
-    header h2 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: var(--electric-cyan);
-    }
-    header p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      padding: 3rem 1rem;
     }
 
-    /* Section */
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #00BFFF;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
     section {
       padding: 4rem 2rem;
       max-width: 1100px;
       margin: auto;
     }
-    section h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: var(--midnight-blue);
+
+    .service {
+      margin-bottom: 4rem;
     }
 
-    .category {
-      margin-bottom: 3rem;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      background: var(--light-gray);
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-      overflow: hidden;
-    }
-    .category img {
+    .service img {
       width: 100%;
-      height: 250px;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      max-height: 300px;
       object-fit: cover;
-      display: block;
     }
-    .category-content {
-      padding: 2rem;
-    }
-    .category-content h3 {
-      font-size: 1.6rem;
-      color: var(--electric-cyan);
+
+    .service h2 {
+      color: #0D1B2A;
+      font-size: 2rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
-    .category-content p {
-      margin-bottom: 1rem;
-      color: var(--midnight-blue);
+
+    .service p {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 1.5rem auto;
     }
-    .category-content ul {
-      margin-top: 0.5rem;
-      padding-left: 1.2rem;
+
+    ul {
+      max-width: 900px;
+      margin: auto;
+      padding-left: 1.5rem;
     }
-    .category-content ul li {
+
+    ul li {
       margin-bottom: 0.5rem;
     }
 
-    /* Final CTA */
-    .final-cta {
-      text-align: center;
-      background: var(--midnight-blue);
-      color: var(--white);
-      padding: 3rem 2rem;
-      border-radius: 12px;
-      margin: 3rem auto;
-      max-width: 900px;
-    }
-    .final-cta h2 {
-      margin-bottom: 1rem;
-      color: var(--electric-cyan);
-    }
-    .final-cta .btn {
-      display: inline-block;
-      margin: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 25px;
-      transition: 0.3s;
-    }
-    .final-cta .btn:hover {
-      background: #0099cc;
-    }
-
-    /* Footer */
     footer {
-      background: var(--jet-black);
-      color: var(--white);
+      background: #000;
+      color: #fff;
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
     }
+
     footer a {
-      color: var(--electric-cyan);
+      color: #00BFFF;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <h1>EYE AM STUDIOS</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="edis.html">EDIS</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="tools.html">Tools</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero -->
   <header>
-    <h2>EAS | Enhanced Digital Imaging Solutions</h2>
-    <p>High-resolution imaging, precision documentation, and professional solutions for construction, industrial, insurance, and manufacturing sectors.</p>
+    <h1>Enhanced Digital Imaging Solutions (EDIS)</h1>
+    <p>Delivering advanced aerial and ground-based imaging solutions for construction, insurance, manufacturing, and commercial industries.</p>
   </header>
 
-  <!-- Intro -->
-  <section>
-    <h2>Our Core Imaging Services</h2>
-
-    <!-- Aerial Services -->
-    <div class="category">
-      <img src="https://via.placeholder.com/1100x250.png?text=Aerial+Mapping+%26+Geospatial+Solutions" alt="Aerial Services">
-      <div class="category-content">
-        <h3>Aerial Services</h3>
-        <p>Leverage cutting-edge drone imaging for precision mapping and geospatial solutions.</p>
-        <ul>
-          <li>Aerial Mapping & Orthomosaics</li>
-          <li>Geospatial Solutions & 3D Modeling</li>
-          <li>Progress Monitoring</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Ground Services -->
-    <div class="category">
-      <img src="https://via.placeholder.com/1100x250.png?text=Industrial+%26+Ground-Based+Inspections" alt="Ground Services">
-      <div class="category-content">
-        <h3>Ground Services</h3>
-        <p>Industrial and commercial inspections with immersive 360° imaging and virtual tours.</p>
-        <ul>
-          <li>Industrial & Commercial Inspections</li>
-          <li>360° Imaging/Tours</li>
-          <li>High-Resolution Documentation</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Compliance & Safety -->
-    <div class="category">
-      <img src="https://via.placeholder.com/1100x250.png?text=Compliance+%26+Safety+Documentation" alt="Compliance and Safety">
-      <div class="category-content">
-        <h3>Compliance & Safety</h3>
-        <p>Ensure adherence to regulations and safety standards with verified documentation.</p>
-        <ul>
-          <li>OSHA Compliance Imaging</li>
-          <li>Insurance Documentation Support</li>
-          <li>Site Risk Monitoring</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Commercial/Executive Portraits -->
-    <div class="category">
-      <img src="https://via.placeholder.com/1100x250.png?text=Commercial+%26+Executive+Portraits" alt="Commercial and Executive Portraits">
-      <div class="category-content">
-        <h3>Commercial/Executive Portraits</h3>
-        <p>Professional on-site business portraits for industry leaders and professionals.</p>
-        <ul>
-          <li>On-Site Headshots for Professionals</li>
-          <li>Team & Executive Portrait Sessions</li>
-          <li>Branded Professional Image Packages</li>
-        </ul>
-      </div>
-    </div>
-
+  <section class="service" id="aerial">
+    <img src="images/edis-aerial.jpg" alt="Aerial Services">
+    <h2>Aerial Services</h2>
+    <p>High-resolution aerial imaging for construction, industrial, and environmental projects.</p>
+    <ul>
+      <li>Orthomosaic mapping</li>
+      <li>Aerial inspections</li>
+      <li>DSM/DTM models</li>
+      <li>Progress monitoring</li>
+    </ul>
   </section>
 
-  <!-- Final CTA -->
-  <div class="final-cta">
-    <h2>Ready to See Clearly and Act with Precision?</h2>
-    <a href="contact.html" class="btn">Request a Quote</a>
-    <a href="contact.html" class="btn">Schedule a Consultation</a>
-  </div>
+  <section class="service" id="ground">
+    <img src="images/edis-ground.jpg" alt="Ground Services">
+    <h2>Ground Services</h2>
+    <p>High-definition ground-based imaging for facilities, assets, and events.</p>
+    <ul>
+      <li>High-resolution photography</li>
+      <li>360° Imaging/Tours</li>
+      <li>Architectural documentation</li>
+      <li>Product and asset imaging</li>
+    </ul>
+  </section>
 
-  <!-- Footer -->
+  <section class="service" id="safety">
+    <img src="images/edis-safety.jpeg" alt="Compliance & Safety">
+    <h2>Compliance & Safety</h2>
+    <p>Supporting organizations with verifiable compliance and risk management imaging.</p>
+    <ul>
+      <li>OSHA compliance documentation</li>
+      <li>Insurance imaging</li>
+      <li>Forensic reporting</li>
+      <li>Pre-/post-construction inspections</li>
+    </ul>
+  </section>
+
+  <section class="service" id="portraits">
+    <img src="images/edis-portraits.jpg" alt="Commercial & Executive Portraits">
+    <h2>Commercial/Executive Portraits</h2>
+    <p>Professional portraits for industry professionals in construction, industrial, and manufacturing fields.</p>
+    <ul>
+      <li>On-site executive portraits</li>
+      <li>Skilled craftsmen photography</li>
+      <li>Editorial-style imagery</li>
+      <li>Team & branding visuals</li>
+    </ul>
+  </section>
+
   <footer>
     <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
     <p>
-      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> |
+      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
       Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
     </p>
   </footer>
