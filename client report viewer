@@ -1,0 +1,743 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { Eye, Download, MapPin, Calendar, User, FileText, Camera, ZoomIn, ZoomOut, RotateCw, X, ChevronLeft, ChevronRight, Maximize, Brain, AlertTriangle, CheckCircle, XCircle, Check, Grid, List } from 'lucide-react';
+
+// Interactive Image Modal Component
+const InteractiveImageModal = ({ image, isOpen, onClose, onNext, onPrev, hasNext, hasPrev, finding }) => {
+  const [zoom, setZoom] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setZoom(1);
+      setPosition({ x: 0, y: 0 });
+    }
+  }, [isOpen, image]);
+
+  if (!isOpen || !image) return null;
+
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 0.25, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => Math.max(prev - 0.25, 0.5));
+  };
+
+  const handleMouseDown = (e) => {
+    if (zoom > 1) {
+      setIsDragging(true);
+      setDragStart({
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      });
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging && zoom > 1) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const getSeverityColor = (severity) => {
+    switch(severity?.toLowerCase()) {
+      case 'high': return 'text-red-600 bg-red-50 border-red-200';
+      case 'moderate': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
+      case 'low': return 'text-green-600 bg-green-50 border-green-200';
+      default: return 'text-gray-600 bg-gray-50 border-gray-200';
+    }
+  };
+
+  const getSeverityIcon = (severity) => {
+    switch(severity?.toLowerCase()) {
+      case 'high': return <XCircle className="w-4 h-4" />;
+      case 'moderate': return <AlertTriangle className="w-4 h-4" />;
+      case 'low': return <CheckCircle className="w-4 h-4" />;
+      default: return <Check className="w-4 h-4" />;
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
+      {/* Header Controls */}
+      <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-50 p-4 z-10">
+        <div className="flex items-center justify-between text-white">
+          <div className="flex items-center space-x-4">
+            <h3 className="text-lg font-medium">{image.name}</h3>
+            <span className="text-sm opacity-75">
+              {new Date(image.timestamp).toLocaleString()}
+            </span>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={handleZoomOut}
+              disabled={zoom <= 0.5}
+              className="p-2 bg-white bg-opacity-20 rounded-md hover:bg-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            >
+              <ZoomOut className="w-5 h-5" />
+            </button>
+            
+            <span className="bg-white bg-opacity-20 px-3 py-2 rounded-md text-sm min-w-[80px] text-center">
+              {Math.round(zoom * 100)}%
+            </span>
+            
+            <button
+              onClick={handleZoomIn}
+              disabled={zoom >= 3}
+              className="p-2 bg-white bg-opacity-20 rounded-md hover:bg-opacity-30 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            >
+              <ZoomIn className="w-5 h-5" />
+            </button>
+            
+            <button
+              onClick={onClose}
+              className="p-2 bg-white bg-opacity-20 rounded-md hover:bg-opacity-30 transition-all ml-4"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      {hasPrev && (
+        <button
+          onClick={onPrev}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all text-white z-10"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+      )}
+
+      {hasNext && (
+        <button
+          onClick={onNext}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all text-white z-10"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      )}
+
+      {/* Main Image Container */}
+      <div 
+        className="flex-1 flex items-center justify-center p-20 cursor-move"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        style={{ cursor: zoom > 1 ? 'move' : 'default' }}
+      >
+        <img
+          ref={imageRef}
+          src={image.url}
+          alt={image.name}
+          className="max-w-full max-h-full object-contain select-none transition-transform duration-200"
+          style={{
+            transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+            transformOrigin: 'center center'
+          }}
+          draggable={false}
+        />
+      </div>
+
+      {/* AI Finding Panel */}
+      {finding && !finding.error && (
+        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 p-6 text-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-start space-x-4">
+              <div className={`p-2 rounded-lg ${getSeverityColor(finding.severity).replace('text-', 'text-white bg-').replace('bg-', 'bg-opacity-20 bg-')}`}>
+                {getSeverityIcon(finding.severity)}
+              </div>
+              
+              <div className="flex-1">
+                <div className="flex items-center space-x-3 mb-2">
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getSeverityColor(finding.severity).replace('text-', 'text-white bg-').replace('bg-', 'bg-opacity-20 bg-')}`}>
+                    {finding.severity} Priority
+                  </span>
+                  <span className="text-xs bg-purple-500 bg-opacity-20 text-purple-200 px-2 py-1 rounded">
+                    AI Analysis • {Math.round(finding.confidence * 100)}% confidence
+                  </span>
+                </div>
+                
+                <h4 className="font-semibold text-lg mb-1">{finding.category}</h4>
+                <p className="text-gray-200 mb-2">{finding.finding}</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="font-medium text-blue-200">Recommendation: </span>
+                    <span className="text-gray-200">{finding.recommendation}</span>
+                  </div>
+                  {finding.location && (
+                    <div>
+                      <span className="font-medium text-blue-200">Location: </span>
+                      <span className="text-gray-200">{finding.location}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Keyboard Shortcuts Help */}
+      <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white text-xs p-2 rounded">
+        <div>Scroll: Zoom • Drag: Pan • Arrows: Navigate</div>
+      </div>
+    </div>
+  );
+};
+
+// Image Gallery Component
+const ImageGallery = ({ images, findings, viewMode, onViewModeChange }) => {
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const openImageModal = (index) => {
+    setSelectedImageIndex(index);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImageIndex(null);
+  };
+
+  const goToPrevImage = () => {
+    if (selectedImageIndex > 0) {
+      setSelectedImageIndex(selectedImageIndex - 1);
+    }
+  };
+
+  const goToNextImage = () => {
+    if (selectedImageIndex < images.length - 1) {
+      setSelectedImageIndex(selectedImageIndex + 1);
+    }
+  };
+
+  const selectedImage = selectedImageIndex !== null ? images[selectedImageIndex] : null;
+  const selectedFinding = selectedImage ? findings.find(f => f.id === selectedImage.id) : null;
+
+  return (
+    <div>
+      {/* Gallery Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center space-x-3">
+          <Camera className="w-6 h-6 text-blue-600" />
+          <h3 className="text-xl font-semibold text-gray-900">
+            Visual Documentation ({images.length} images)
+          </h3>
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => onViewModeChange('grid')}
+            className={`p-2 rounded-md transition-colors ${
+              viewMode === 'grid' 
+                ? 'bg-blue-100 text-blue-600' 
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            <Grid className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => onViewModeChange('list')}
+            className={`p-2 rounded-md transition-colors ${
+              viewMode === 'list' 
+                ? 'bg-blue-100 text-blue-600' 
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            <List className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Grid View */}
+      {viewMode === 'grid' && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {images.map((image, index) => {
+            const finding = findings.find(f => f.id === image.id);
+            return (
+              <div
+                key={image.id}
+                onClick={() => openImageModal(index)}
+                className="group relative bg-white rounded-lg border hover:border-blue-300 overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-lg transform hover:-translate-y-1"
+              >
+                <div className="aspect-w-4 aspect-h-3 relative">
+                  <img 
+                    src={image.url} 
+                    alt={image.name}
+                    className="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay with zoom icon */}
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <Maximize className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                  
+                  {/* Image number badge */}
+                  <div className="absolute top-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                    #{index + 1}
+                  </div>
+                  
+                  {/* AI Finding indicator */}
+                  {finding && !finding.error && (
+                    <div className={`absolute top-2 right-2 p-1 rounded ${finding.severity === 'High' ? 'bg-red-500' : finding.severity === 'Moderate' ? 'bg-yellow-500' : 'bg-green-500'}`}>
+                      <Brain className="w-3 h-3 text-white" />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="p-4">
+                  <p className="text-sm font-medium text-gray-900 truncate mb-1">
+                    {image.name}
+                  </p>
+                  <p className="text-xs text-gray-500 mb-2">
+                    {new Date(image.timestamp).toLocaleString()}
+                  </p>
+                  
+                  {finding && !finding.error && (
+                    <div className={`text-xs px-2 py-1 rounded-full ${finding.severity === 'High' ? 'bg-red-100 text-red-700' : finding.severity === 'Moderate' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}`}>
+                      {finding.severity} - {finding.category}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* List View */}
+      {viewMode === 'list' && (
+        <div className="space-y-4">
+          {images.map((image, index) => {
+            const finding = findings.find(f => f.id === image.id);
+            return (
+              <div
+                key={image.id}
+                className="bg-white rounded-lg border hover:border-blue-300 overflow-hidden transition-all duration-200 hover:shadow-md"
+              >
+                <div className="flex">
+                  <div 
+                    onClick={() => openImageModal(index)}
+                    className="flex-shrink-0 w-32 h-24 bg-gray-200 cursor-pointer relative group"
+                  >
+                    <img 
+                      src={image.url} 
+                      alt={image.name}
+                      className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 flex items-center justify-center">
+                      <Maximize className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    </div>
+                    <div className="absolute top-1 left-1 bg-black bg-opacity-70 text-white text-xs px-1 py-0.5 rounded">
+                      #{index + 1}
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 mb-1">{image.name}</h4>
+                        <p className="text-sm text-gray-600 mb-2">
+                          Captured: {new Date(image.timestamp).toLocaleString()}
+                        </p>
+                        
+                        {finding && !finding.error && (
+                          <div className="space-y-2">
+                            <div className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full text-sm ${finding.severity === 'High' ? 'bg-red-100 text-red-700' : finding.severity === 'Moderate' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}`}>
+                              {finding.severity === 'High' ? <XCircle className="w-4 h-4" /> : finding.severity === 'Moderate' ? <AlertTriangle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+                              <span>{finding.severity} - {finding.category}</span>
+                            </div>
+                            <p className="text-sm text-gray-700">{finding.finding}</p>
+                            <p className="text-xs text-gray-500">{finding.recommendation}</p>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <button
+                        onClick={() => openImageModal(index)}
+                        className="ml-4 px-3 py-1 text-sm text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors"
+                      >
+                        View Full Size
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Interactive Image Modal */}
+      <InteractiveImageModal
+        image={selectedImage}
+        finding={selectedFinding}
+        isOpen={selectedImageIndex !== null}
+        onClose={closeImageModal}
+        onNext={goToNextImage}
+        onPrev={goToPrevImage}
+        hasNext={selectedImageIndex !== null && selectedImageIndex < images.length - 1}
+        hasPrev={selectedImageIndex !== null && selectedImageIndex > 0}
+      />
+    </div>
+  );
+};
+
+// Main Client Report Viewer Component
+const ClientReportViewer = () => {
+  const [viewMode, setViewMode] = useState('grid');
+  
+  // Sample report data - in real application, this would be fetched based on report ID
+  const reportData = {
+    reportId: 'EAS-UCF-1737271234567',
+    projectTitle: 'Downtown Office Complex Inspection',
+    clientName: 'Metropolitan Development Corp',
+    siteLocation: '123 Business District, Downtown City',
+    date: '2024-01-15',
+    jobType: 'construction',
+    operatorName: 'John Smith',
+    faaCertification: 'Part107-123456789',
+    scopeOfWork: 'Progress Documentation',
+    methodology: 'DJI Mavic 3 Enterprise (48MP)',
+    images: [
+      {
+        id: 1,
+        name: 'Building_A_South_Elevation_001.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzMzNzNkYyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+QnVpbGRpbmcgQSAtIFNvdXRoIEVsZXZhdGlvbjwvdGV4dD48L3N2Zz4=',
+        timestamp: '2024-01-15T10:30:00Z'
+      },
+      {
+        id: 2,
+        name: 'Foundation_Detail_Northwest_002.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzE2YTM0YSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+Rm91bmRhdGlvbiBEZXRhaWw8L3RleHQ+PC9zdmc+',
+        timestamp: '2024-01-15T10:35:00Z'
+      },
+      {
+        id: 3,
+        name: 'Safety_Compliance_Area_003.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2VmNDQ0NCIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+U2FmZXR5IENvbXBsaWFuY2UgQXJlYTwvdGV4dD48L3N2Zz4=',
+        timestamp: '2024-01-15T10:40:00Z'
+      },
+      {
+        id: 4,
+        name: 'Structural_Framework_004.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzk5NTVmZiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+U3RydWN0dXJhbCBGcmFtZXdvcms8L3RleHQ+PC9zdmc+',
+        timestamp: '2024-01-15T10:45:00Z'
+      },
+      {
+        id: 5,
+        name: 'Materials_Delivery_005.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y1OWUwYiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+TWF0ZXJpYWxzIERlbGl2ZXJ5PC90ZXh0Pjwvc3ZnPg==',
+        timestamp: '2024-01-15T10:50:00Z'
+      },
+      {
+        id: 6,
+        name: 'Progress_Overview_006.jpg',
+        url: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzA4OTFiMiIvPjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSI+UHJvZ3Jlc3MgT3ZlcnZpZXc8L3RleHQ+PC9zdmc+',
+        timestamp: '2024-01-15T10:55:00Z'
+      }
+    ],
+    aiFindings: [
+      {
+        id: 1,
+        finding: 'Progress ahead of schedule - structural framework 85% complete',
+        severity: 'Low',
+        confidence: 0.92,
+        recommendation: 'Continue current timeline. Document positive progress.',
+        category: 'Progress Tracking',
+        location: 'Building A, Level 1-3'
+      },
+      {
+        id: 2,
+        finding: 'Foundation work completed within specifications',
+        severity: 'Low',
+        confidence: 0.89,
+        recommendation: 'Proceed with next construction phase.',
+        category: 'Quality Control',
+        location: 'Northwest foundation area'
+      },
+      {
+        id: 3,
+        finding: 'Safety violation: Worker observed without required hard hat',
+        severity: 'High',
+        confidence: 0.87,
+        recommendation: 'Immediate safety meeting required. Document for compliance.',
+        category: 'Safety Compliance',
+        location: 'Southwest construction area'
+      },
+      {
+        id: 4,
+        finding: 'Structural alignment verified against design specifications',
+        severity: 'Low',
+        confidence: 0.94,
+        recommendation: 'No action required. Continue as planned.',
+        category: 'Quality Control',
+        location: 'Structural framework, all levels'
+      },
+      {
+        id: 5,
+        finding: 'Material delivery on schedule - rebar placement complete',
+        severity: 'Low',
+        confidence: 0.91,
+        recommendation: 'Materials management proceeding efficiently.',
+        category: 'Material Verification',
+        location: 'Delivery staging area'
+      }
+    ],
+    findings: 'Construction progress is proceeding on schedule with structural work advancing efficiently. Foundation work has been completed to specifications. Safety protocols are generally being followed with one compliance issue noted for immediate attention.',
+    complianceStandards: ['OSHA 29 CFR 1926', 'FAA Part 107', 'Project-specific QA/QC']
+  };
+
+  const downloadReport = () => {
+    // In a real application, this would generate and download the actual PDF
+    alert('PDF download would begin here. This would include the full report with all images and findings.');
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <Eye className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">EYE AM STUDIOS</h1>
+                <p className="text-sm text-gray-600">Inspection Report Portal</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={downloadReport}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center space-x-2"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Report</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Report Content */}
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        {/* Report Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 mb-8">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <h1 className="text-3xl font-bold mb-2">{reportData.projectTitle}</h1>
+              <p className="text-blue-100 text-lg mb-3">Report ID: {reportData.reportId}</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-blue-100 text-sm">
+                <div className="flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>{reportData.clientName}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>{reportData.siteLocation}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>{new Date(reportData.date).toLocaleDateString()}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="ml-6 text-right">
+              <p className="text-blue-100 text-sm mb-1">Generated</p>
+              <p className="text-white font-medium">{new Date().toLocaleDateString()}</p>
+              <div className="mt-3 space-y-1 text-xs">
+                <div className="bg-blue-500 bg-opacity-50 px-2 py-1 rounded">
+                  📷 {reportData.images.length} Images
+                </div>
+                <div className="bg-purple-500 bg-opacity-50 px-2 py-1 rounded">
+                  🤖 AI Analysis
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Summary */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white rounded-lg border p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Specialist</p>
+                <p className="text-lg font-semibold text-gray-900">{reportData.operatorName}</p>
+                <p className="text-xs text-gray-500">FAA Part 107: {reportData.faaCertification}</p>
+              </div>
+              <User className="w-8 h-8 text-blue-600" />
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg border p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Scope</p>
+                <p className="text-lg font-semibold text-gray-900">{reportData.scopeOfWork}</p>
+                <p className="text-xs text-gray-500">Equipment: {reportData.methodology}</p>
+              </div>
+              <Camera className="w-8 h-8 text-green-600" />
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg border p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Findings</p>
+                <p className="text-lg font-semibold text-gray-900">
+                  {reportData.aiFindings.filter(f => f.severity === 'High').length} High Priority
+                </p>
+                <p className="text-xs text-gray-500">
+                  {reportData.aiFindings.filter(f => f.severity === 'Moderate').length} Moderate, {reportData.aiFindings.filter(f => f.severity === 'Low').length} Low
+                </p>
+              </div>
+              <Brain className="w-8 h-8 text-purple-600" />
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Image Gallery */}
+        <div className="bg-white rounded-lg border p-8 mb-8">
+          <ImageGallery 
+            images={reportData.images}
+            findings={reportData.aiFindings}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
+          />
+        </div>
+
+        {/* AI Analysis Summary */}
+        <div className="bg-white rounded-lg border p-8 mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+            <Brain className="w-6 h-6 mr-2 text-purple-600" />
+            AI Analysis Summary
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-red-600">High Priority</p>
+                  <p className="text-2xl font-bold text-red-700">
+                    {reportData.aiFindings.filter(f => f.severity === 'High').length}
+                  </p>
+                </div>
+                <XCircle className="w-8 h-8 text-red-600" />
+              </div>
+            </div>
+
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-yellow-600">Moderate</p>
+                  <p className="text-2xl font-bold text-yellow-700">
+                    {reportData.aiFindings.filter(f => f.severity === 'Moderate').length}
+                  </p>
+                </div>
+                <AlertTriangle className="w-8 h-8 text-yellow-600" />
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-green-600">Low/Positive</p>
+                  <p className="text-2xl font-bold text-green-700">
+                    {reportData.aiFindings.filter(f => f.severity === 'Low').length}
+                  </p>
+                </div>
+                <CheckCircle className="w-8 h-8 text-green-600" />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            {reportData.aiFindings.map((finding, index) => (
+              <div key={finding.id} className={`border-l-4 pl-4 py-3 ${
+                finding.severity === 'High' ? 'border-red-500 bg-red-50' :
+                finding.severity === 'Moderate' ? 'border-yellow-500 bg-yellow-50' :
+                'border-green-500 bg-green-50'
+              }`}>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        finding.severity === 'High' ? 'bg-red-100 text-red-700' :
+                        finding.severity === 'Moderate' ? 'bg-yellow-100 text-yellow-700' :
+                        'bg-green-100 text-green-700'
+                      }`}>
+                        {finding.severity} Priority
+                      </span>
+                      <span className="text-xs text-gray-500">{finding.category}</span>
+                      <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">
+                        {Math.round(finding.confidence * 100)}% confidence
+                      </span>
+                    </div>
+                    
+                    <p className="font-medium text-gray-900 mb-1">{finding.finding}</p>
+                    <p className="text-sm text-gray-700 mb-2">{finding.recommendation}</p>
+                    
+                    {finding.location && (
+                      <p className="text-xs text-gray-500">
+                        <span className="font-medium">Location:</span> {finding.location}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Inspector Notes */}
+        <div className="bg-white rounded-lg border p-8 mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <FileText className="w-6 h-6 mr-2 text-blue-600" />
+            Inspector Observations
+          </h3>
+          <div className="bg-gray-50 rounded-lg p-6">
+            <p className="text-gray-800 leading-relaxed">{reportData.findings}</p>
+          </div>
+        </div>
+
+        {/* Compliance Standards */}
+        <div className="bg-white rounded-lg border p-8">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <Check className="w-6 h-6 mr-2 text-green-600" />
+            Compliance Standards Applied
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {reportData.complianceStandards.map(standard => (
+              <div key={standard} className="flex items-center space-x-2 bg-green-50 border border-green-200 rounded-lg p-3">
+                <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                <span className="text-sm font-medium text-green-800">{standard}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ClientReportViewer;
