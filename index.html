@@ -13,12 +13,10 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       line-height: 1.6;
-      color: #ffffff;
-      background: linear-gradient(135deg, #000000 0%, #0D1B2A 50%, #1a365d 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
+      color: #000000;
+      background-color: #ffffff;
     }
 
     /* Color Variables */
@@ -26,384 +24,140 @@
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
-      --neon-cyan: #00ffff;
       --white: #FFFFFF;
-      --light-gray: rgba(248, 249, 250, 0.1);
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Animated Background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(13, 27, 42, 0.2) 0%, transparent 50%);
-      animation: backgroundShift 20s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes backgroundShift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-10px, -10px) scale(1.05); }
-      66% { transform: translate(10px, -5px) scale(0.95); }
+      --light-gray: #f8f9fa;
     }
 
     /* Navigation */
     nav {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
+      background: var(--jet-black);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      transition: all 0.3s ease;
-    }
-
-    nav:hover {
-      background: rgba(0, 0, 0, 0.9);
     }
 
     nav h1 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
-      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
+      font-size: 1.4rem;
+      color: var(--electric-cyan);
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     nav ul li a {
       color: var(--white);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      transition: all 0.3s ease;
-    }
-
-    nav ul li a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      border-radius: 25px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
+      font-weight: 500;
+      transition: 0.3s;
     }
 
     nav ul li a:hover {
-      color: var(--jet-black);
-      transform: translateY(-2px);
+      color: var(--electric-cyan);
     }
 
-    nav ul li a:hover::before {
-      opacity: 1;
-    }
-
-    /* Hero Section */
     header {
-      background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(0, 0, 0, 0.8));
+      background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
       color: var(--white);
       text-align: center;
-      padding: 6rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(0, 191, 255, 0.1), transparent);
-      animation: sweep 8s linear infinite;
-    }
-
-    @keyframes sweep {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+      padding: 4rem 2rem;
     }
 
     header h2 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--white), var(--electric-cyan), var(--neon-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 50px rgba(0, 191, 255, 0.3);
-      animation: titlePulse 3s ease-in-out infinite;
-      position: relative;
-      z-index: 1;
-    }
-
-    @keyframes titlePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: var(--electric-cyan);
     }
 
     header p {
-      font-size: 1.3rem;
-      margin-bottom: 3rem;
-      opacity: 0.9;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      z-index: 1;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
 
     .btn-primary {
       display: inline-block;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      padding: 0.75rem 1.5rem;
+      background: var(--electric-cyan);
       color: var(--jet-black);
-      font-weight: 700;
-      font-size: 1.1rem;
+      font-weight: bold;
       text-decoration: none;
-      border-radius: 50px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3);
-      z-index: 1;
-    }
-
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
+      border-radius: 25px;
+      transition: 0.3s;
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.4);
+      background: #0099cc;
     }
 
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-
-    /* Sections */
     section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
+      padding: 4rem 2rem;
+      max-width: 1100px;
       margin: auto;
-      position: relative;
     }
 
     section h2 {
       text-align: center;
-      margin-bottom: 3rem;
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--white), var(--electric-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: var(--midnight-blue);
     }
 
-    /* About Section */
-    #about p {
-      text-align: center;
-      max-width: 900px;
-      margin: 1rem auto;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      opacity: 0.9;
-    }
-
-    /* Division Cards */
     .division {
       margin-bottom: 3rem;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    }
-
-    .division::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--electric-cyan), var(--neon-cyan));
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-      transform-origin: left;
-    }
-
-    .division:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 60px rgba(0, 191, 255, 0.2);
-      border-color: rgba(0, 191, 255, 0.3);
-    }
-
-    .division:hover::before {
-      transform: scaleX(1);
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 2rem;
+      background: var(--light-gray);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .division h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.5rem;
       color: var(--electric-cyan);
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-    }
-
-    .division p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
-      line-height: 1.7;
+      margin-bottom: 1rem;
     }
 
     .division ul {
-      margin: 1.5rem 0;
-      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
     }
 
     .division ul li {
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-      opacity: 0.8;
-      transition: all 0.3s ease;
-      position: relative;
+      margin-bottom: 0.5rem;
     }
 
-    .division ul li:hover {
-      opacity: 1;
-      transform: translateX(5px);
+    .btn-learn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--midnight-blue);
+      color: var(--white);
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: 0.3s;
     }
 
-    .division ul li::marker {
-      color: var(--electric-cyan);
+    .btn-learn:hover {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
     }
 
-    /* Footer */
     footer {
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--glass-border);
+      background: var(--jet-black);
       color: var(--white);
       text-align: center;
-      padding: 3rem 2rem;
-      font-size: 1rem;
-      margin-top: 4rem;
-    }
-
-    footer p {
-      margin-bottom: 1rem;
-      opacity: 0.9;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
     }
 
     footer a {
       color: var(--electric-cyan);
       text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    footer a:hover {
-      color: var(--neon-cyan);
-      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
-      }
-
-      nav ul {
-        gap: 1rem;
-      }
-
-      header h2 {
-        font-size: 2.5rem;
-      }
-
-      header p {
-        font-size: 1.1rem;
-      }
-
-      section {
-        padding: 3rem 1rem;
-      }
-
-      .division {
-        padding: 2rem;
-      }
-    }
-
-    /* Scroll animations */
-    @media (prefers-reduced-motion: no-preference) {
-      .division {
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.6s ease forwards;
-      }
-
-      .division:nth-child(1) { animation-delay: 0.1s; }
-      .division:nth-child(2) { animation-delay: 0.2s; }
-      .division:nth-child(3) { animation-delay: 0.3s; }
-      .division:nth-child(4) { animation-delay: 0.4s; }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
     }
   </style>
 </head>
@@ -416,7 +170,7 @@
       <li><a href="edis.html">EDIS</a></li>
       <li><a href="events.html">Events</a></li>
       <li><a href="tools.html">Tools</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
   </nav>
 
@@ -427,21 +181,11 @@
     <a href="#divisions" class="btn-primary">Explore Our Divisions</a>
   </header>
 
-  <!-- About -->
-  <section id="about">
-    <h2>About EYE AM STUDIOS</h2>
-    <p>
-      EYE AM STUDIOS, LLC is a vision-driven digital solutions company built on the principle that perception shapes identity. 
-      We combine technology, creativity, and strategy to deliver clarity, precision, and impact across multiple industries. 
-      Our work is organized into four core divisions:
-    </p>
-  </section>
-
   <!-- Divisions -->
   <section id="divisions">
     <h2>Our Divisions</h2>
 
-    <div id="edis" class="division">
+    <div class="division">
       <h3>1. Commercial Division — Enhanced Digital Imaging Solutions (EDIS)</h3>
       <p>Specialized in advanced aerial and ground-based imaging for industries such as construction, insurance, and manufacturing.</p>
       <ul>
@@ -450,9 +194,10 @@
         <li>360° Imaging & Virtual Tours</li>
         <li>Commercial/Executive Portraits for Industry Professionals</li>
       </ul>
+      <a href="edis.html" class="btn-learn">Learn More</a>
     </div>
 
-    <div id="entertainment" class="division">
+    <div class="division">
       <h3>2. Entertainment Division — Music & Video Production</h3>
       <p>A creative hub for music, film, and visual storytelling.</p>
       <ul>
@@ -461,9 +206,10 @@
         <li>Creative Video Projects & Short Films</li>
         <li>Artist Development Support</li>
       </ul>
+      <a href="entertainment.html" class="btn-learn">Learn More</a>
     </div>
 
-    <div id="events" class="division">
+    <div class="division">
       <h3>3. Event Services Division — Live Experiences & Digital Media</h3>
       <p>Capturing, documenting, and amplifying live experiences with immersive media solutions.</p>
       <ul>
@@ -471,9 +217,10 @@
         <li>Conferences & Corporate Coverage</li>
         <li>Virtual Event Experiences</li>
       </ul>
+      <a href="events.html" class="btn-learn">Learn More</a>
     </div>
 
-    <div id="tools" class="division">
+    <div class="division">
       <h3>4. Education Division — Tools, Training & Development</h3>
       <p>Empowering businesses and individuals with knowledge, digital tools, and hands-on training.</p>
       <ul>
@@ -482,12 +229,13 @@
         <li>Business Empowerment Resources</li>
         <li>Workshops & Online Courses</li>
       </ul>
+      <a href="tools.html" class="btn-learn">Learn More</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p><strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
+    <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
     <p>
       📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
       Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
