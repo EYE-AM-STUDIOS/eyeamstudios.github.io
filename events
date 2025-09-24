@@ -264,20 +264,25 @@
       transform: scaleX(1);
     }
 
-    /* Section Images */
+    /* Section Images - Updated to handle missing images gracefully */
     .section-image {
       width: 100%;
       max-width: 800px;
       height: 400px;
-      object-fit: cover;
       border-radius: 20px;
       margin-bottom: 2rem;
       transition: all 0.4s ease;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       border: 2px solid var(--glass-border);
-      background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+      background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(0, 255, 255, 0.1), rgba(13, 27, 42, 0.3));
       background-size: 200% 100%;
       animation: shimmer 2s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
     }
 
     @keyframes shimmer {
@@ -289,6 +294,24 @@
       transform: scale(1.02);
       box-shadow: 0 15px 50px rgba(0, 191, 255, 0.2);
       border-color: rgba(0, 191, 255, 0.4);
+    }
+
+    /* Hide broken image icon */
+    .section-image {
+      object-fit: cover;
+    }
+
+    .section-image::before {
+      content: "📸 Professional Event Coverage";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     section h3 {
@@ -537,6 +560,11 @@
         }
       }
     }
+
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body>
@@ -545,11 +573,11 @@
   <nav>
     <h1>EYE AM STUDIOS</h1>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="edis.html">EDIS</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="index.html#tools">Tools</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#edis">EDIS</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#about">About</a></li>
     </ul>
   </nav>
 
@@ -622,7 +650,9 @@
   <!-- Photography Services -->
   <section>
     <div class="service-container">
-      <img src="images/events-photography.jpg" alt="Event Photography" class="section-image">
+      <div class="section-image">
+        📸 Professional Event Photography
+      </div>
       <h3>Event Photography</h3>
       <p>Professional photography that captures the energy, emotion, and essence of your event with artistic vision and technical precision.</p>
       
@@ -650,7 +680,9 @@
   <!-- Videography Services -->
   <section>
     <div class="service-container">
-      <img src="images/events-videography.jpg" alt="Event Videography" class="section-image">
+      <div class="section-image">
+        🎥 Cinematic Event Videography
+      </div>
       <h3>Event Videography</h3>
       <p>Cinematic video production that tells your event's story through dynamic footage, professional editing, and immersive storytelling techniques.</p>
       
@@ -675,33 +707,7 @@
     </div>
   </section>
 
-  <!-- Virtual & Hybrid Events -->
-  <section>
-    <div class="service-container">
-      <img src="images/events-virtual.jpg" alt="Virtual Events" class="section-image">
-      <h3>Virtual & Hybrid Events</h3>
-      <p>Cutting-edge virtual event solutions that bridge physical and digital experiences, ensuring engagement and connection regardless of location.</p>
-      
-      <div class="features">
-        <div class="feature">
-          <h4>Multi-Platform Streaming</h4>
-          <p>Professional broadcasting across multiple platforms with seamless integration</p>
-        </div>
-        <div class="feature">
-          <h4>Interactive Features</h4>
-          <p>Engaging virtual elements including Q&A, polls, breakout rooms, and networking</p>
-        </div>
-        <div class="feature">
-          <h4>Hybrid Integration</h4>
-          <p>Seamless blend of in-person and remote experiences for maximum participation</p>
-        </div>
-        <div class="feature">
-          <h4>Technical Support</h4>
-          <p>Full technical management and support throughout your virtual event experience</p>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Footer -->
   <footer>
