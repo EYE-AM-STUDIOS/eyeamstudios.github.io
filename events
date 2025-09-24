@@ -3,109 +3,539 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EYE AM STUDIOS | Events Division</title>
+  <title>Event Services | Live Experiences & Digital Media</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    /* Global Reset */
+    * {
       margin: 0;
       padding: 0;
-      background: #ffffff;
-      color: #000000;
+      box-sizing: border-box;
     }
 
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #ffffff;
+      background: linear-gradient(135deg, #000000 0%, #0D1B2A 50%, #1a365d 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Color Variables */
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
+      --neon-cyan: #00ffff;
       --white: #FFFFFF;
-      --light-gray: #f8f9fa;
+      --light-gray: rgba(248, 249, 250, 0.1);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Animated Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(13, 27, 42, 0.2) 0%, transparent 50%);
+      animation: backgroundShift 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-10px, -10px) scale(1.05); }
+      66% { transform: translate(10px, -5px) scale(0.95); }
     }
 
     /* Navigation */
     nav {
-      background: var(--jet-black);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
     }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
     nav h1 {
-      font-size: 1.4rem;
-      color: var(--electric-cyan);
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
     }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
+    }
+
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
     }
+
     nav ul li a {
       color: var(--white);
       text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
     }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      border-radius: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
     nav ul li a:hover {
-      color: var(--electric-cyan);
+      color: var(--jet-black);
+      transform: translateY(-2px);
     }
 
-    /* Hero */
+    nav ul li a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero Section */
     header {
-      background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
+      background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(0, 0, 0, 0.8));
       color: var(--white);
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
     }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 191, 255, 0.1), transparent);
+      animation: sweep 8s linear infinite;
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
     header h2 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: var(--electric-cyan);
+      font-size: 3.2rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--white), var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 50px rgba(0, 191, 255, 0.3);
+      position: relative;
+      z-index: 1;
     }
+
     header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      line-height: 1.7;
+    }
+
+    /* CTA Button */
+    .btn-primary {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      color: var(--jet-black);
+      font-weight: 700;
       font-size: 1.1rem;
-      margin-bottom: 2rem;
+      text-decoration: none;
+      border-radius: 50px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3);
+      z-index: 1;
     }
 
-    /* Sections */
-    section {
-      padding: 4rem 2rem;
-      max-width: 1100px;
-      margin: auto;
-    }
-    section h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: var(--midnight-blue);
-    }
-
-    .service {
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-    .service img {
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
       width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 1rem;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
-    .service h3 {
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.4);
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    /* Service Sections */
+    section {
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      padding: 3rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--electric-cyan), var(--neon-cyan));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+      transform-origin: left;
+    }
+
+    .service-container:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0, 191, 255, 0.2);
+      border-color: rgba(0, 191, 255, 0.3);
+    }
+
+    .service-container:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Section Images */
+    .section-image {
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--glass-border);
+      background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .section-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 50px rgba(0, 191, 255, 0.2);
+      border-color: rgba(0, 191, 255, 0.4);
+    }
+
+    section h3 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 2rem 0 1.5rem 0;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    }
+
+    section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.7;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Service Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature {
+      background: rgba(0, 191, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      border-radius: 15px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--electric-cyan), var(--neon-cyan));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      background: rgba(0, 191, 255, 0.2);
+      transform: translateY(-5px);
+      border-color: var(--electric-cyan);
+      box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+    }
+
+    .feature:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
       color: var(--electric-cyan);
-      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature p {
+      font-size: 1rem;
+      margin-bottom: 0;
+      opacity: 0.9;
+    }
+
+    /* Event Types Grid */
+    .event-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .event-type {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: left;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-type::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--electric-cyan), var(--neon-cyan));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .event-type:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
+      border-color: rgba(0, 191, 255, 0.3);
+    }
+
+    .event-type:hover::before {
+      transform: scaleX(1);
+    }
+
+    .event-type h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--electric-cyan);
       margin-bottom: 1rem;
     }
 
+    .event-type ul {
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    .event-type ul li {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .event-type ul li::before {
+      content: '▸';
+      color: var(--electric-cyan);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Footer */
     footer {
-      background: var(--jet-black);
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
       color: var(--white);
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
+      padding: 3rem 2rem;
+      font-size: 1rem;
+      margin-top: 4rem;
     }
+
+    footer p {
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
     footer a {
       color: var(--electric-cyan);
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+      }
+
+      header h2 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+      }
+
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .service-container {
+        padding: 2rem;
+      }
+
+      .section-image {
+        height: 300px;
+      }
+
+      section h3 {
+        font-size: 1.8rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .event-types {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    /* Scroll animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .service-container, .event-type {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      .service-container:nth-child(1) { animation-delay: 0.1s; }
+      .service-container:nth-child(2) { animation-delay: 0.3s; }
+      .service-container:nth-child(3) { animation-delay: 0.5s; }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     }
   </style>
 </head>
@@ -117,46 +547,167 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="edis.html">EDIS</a></li>
-      <li><a href="pas.html">PAS</a></li>
-      <li><a href="voiceworks.html">VoiceWorks</a></li>
       <li><a href="events.html">Events</a></li>
+      <li><a href="index.html#tools">Tools</a></li>
+      <li><a href="index.html#about">About</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <header>
-    <h2>Events Division</h2>
-    <p>Capturing, documenting, and amplifying live experiences with immersive media solutions.</p>
+    <h2>Event Services | Live Experiences & Digital Media</h2>
+    <p>Capturing, documenting, and amplifying your most important moments with cinematic storytelling, immersive coverage, and professional excellence that preserves memories and elevates experiences.</p>
+    <a href="#services" class="btn-primary">Explore Our Services</a>
   </header>
 
-  <!-- Services -->
+  <!-- Event Types Overview -->
+  <section id="services">
+    <h2 style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--white), var(--electric-cyan)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 3rem;">Events We Cover</h2>
+    
+    <div class="event-types">
+      <div class="event-type">
+        <h4>Corporate Events</h4>
+        <p>Professional coverage for business gatherings, conferences, and corporate milestones.</p>
+        <ul>
+          <li>Annual conferences & summits</li>
+          <li>Product launches & presentations</li>
+          <li>Awards ceremonies & galas</li>
+          <li>Team building events</li>
+          <li>Executive retreats</li>
+          <li>Networking events</li>
+        </ul>
+      </div>
+
+      <div class="event-type">
+        <h4>Private Celebrations</h4>
+        <p>Intimate and personalized coverage for life's special moments and milestones.</p>
+        <ul>
+          <li>Engagement parties</li>
+          <li>Birthday celebrations</li>
+          <li>Anniversary celebrations</li>
+          <li>Graduation ceremonies</li>
+          <li>Retirement parties</li>
+          <li>Holiday gatherings</li>
+        </ul>
+      </div>
+
+      <div class="event-type">
+        <h4>Family Reunions</h4>
+        <p>Heartfelt documentation of family connections, traditions, and generational stories.</p>
+        <ul>
+          <li>Multi-generational portraits</li>
+          <li>Family tradition documentation</li>
+          <li>Reunion activities coverage</li>
+          <li>Individual family unit photos</li>
+          <li>Memory preservation projects</li>
+          <li>Digital family archives</li>
+        </ul>
+      </div>
+
+      <div class="event-type">
+        <h4>Community Events</h4>
+        <p>Vibrant coverage of community gatherings, festivals, and local celebrations.</p>
+        <ul>
+          <li>Festivals & fairs</li>
+          <li>Charity fundraisers</li>
+          <li>Community meetings</li>
+          <li>Cultural celebrations</li>
+          <li>Sports tournaments</li>
+          <li>Arts & entertainment shows</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photography Services -->
   <section>
-    <h2>Our Event Services</h2>
-
-    <div class="service">
-      <img src="images/event-photo.jpg" alt="Event Photography">
-      <h3>Event Photography & Videography</h3>
-      <p>Professional coverage for conferences, meetings, and live experiences.</p>
+    <div class="service-container">
+      <img src="images/events-photography.jpg" alt="Event Photography" class="section-image">
+      <h3>Event Photography</h3>
+      <p>Professional photography that captures the energy, emotion, and essence of your event with artistic vision and technical precision.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h4>Candid Moments</h4>
+          <p>Authentic, unposed shots that capture genuine emotions and spontaneous interactions</p>
+        </div>
+        <div class="feature">
+          <h4>Formal Portraits</h4>
+          <p>Professional group shots, executive headshots, and formal ceremony documentation</p>
+        </div>
+        <div class="feature">
+          <h4>Detail Photography</h4>
+          <p>Beautiful capture of decorations, setups, presentations, and environmental details</p>
+        </div>
+        <div class="feature">
+          <h4>Fast Turnaround</h4>
+          <p>Quick delivery of edited highlights and professional galleries for immediate sharing</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="service">
-      <img src="images/event-conference.jpg" alt="Conference Coverage">
-      <h3>Conferences & Corporate Coverage</h3>
-      <p>Multi-camera setups, livestream support, and branded media deliverables.</p>
+  <!-- Videography Services -->
+  <section>
+    <div class="service-container">
+      <img src="images/events-videography.jpg" alt="Event Videography" class="section-image">
+      <h3>Event Videography</h3>
+      <p>Cinematic video production that tells your event's story through dynamic footage, professional editing, and immersive storytelling techniques.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h4>Cinematic Coverage</h4>
+          <p>Multi-camera setups with professional lighting and audio for movie-quality results</p>
+        </div>
+        <div class="feature">
+          <h4>Highlight Reels</h4>
+          <p>Professionally edited short films showcasing the best moments and key highlights</p>
+        </div>
+        <div class="feature">
+          <h4>Live Streaming</h4>
+          <p>Professional live streaming services for remote attendees and broader reach</p>
+        </div>
+        <div class="feature">
+          <h4>Documentary Style</h4>
+          <p>Full-length event documentation with natural storytelling and comprehensive coverage</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="service">
-      <img src="images/event-virtual.jpg" alt="Virtual Events">
-      <h3>Virtual Event Experiences</h3>
-      <p>Interactive, hybrid, and fully virtual events with immersive 360° experiences.</p>
+  <!-- Virtual & Hybrid Events -->
+  <section>
+    <div class="service-container">
+      <img src="images/events-virtual.jpg" alt="Virtual Events" class="section-image">
+      <h3>Virtual & Hybrid Events</h3>
+      <p>Cutting-edge virtual event solutions that bridge physical and digital experiences, ensuring engagement and connection regardless of location.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <h4>Multi-Platform Streaming</h4>
+          <p>Professional broadcasting across multiple platforms with seamless integration</p>
+        </div>
+        <div class="feature">
+          <h4>Interactive Features</h4>
+          <p>Engaging virtual elements including Q&A, polls, breakout rooms, and networking</p>
+        </div>
+        <div class="feature">
+          <h4>Hybrid Integration</h4>
+          <p>Seamless blend of in-person and remote experiences for maximum participation</p>
+        </div>
+        <div class="feature">
+          <h4>Technical Support</h4>
+          <p>Full technical management and support throughout your virtual event experience</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
+    <p><strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
     <p>
-      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
+      📞 813-420-6581 | ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> |
       Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
     </p>
   </footer>
