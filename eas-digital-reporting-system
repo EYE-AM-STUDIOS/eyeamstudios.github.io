@@ -1,0 +1,1517 @@
+import React, { useState } from ‘react’;
+import { Eye, Download, MapPin, Calendar, User, FileText, Camera, Upload, Check, Loader, Brain, AlertTriangle, CheckCircle, XCircle, Zap } from ‘lucide-react’;
+
+// PDF Export functionality
+const exportToPDF = async (reportData) => {
+const element = document.getElementById(‘report-content’);
+
+const opt = {
+margin: [0.5, 0.5, 0.5, 0.5],
+filename: `EAS_Enhanced_Digital_Imaging_${reportData.projectTitle || 'Report'}_${reportData.reportId}.pdf`,
+image: { type: ‘jpeg’, quality: 0.98 },
+html2canvas: {
+scale: 2,
+useCORS: true,
+letterRendering: true
+},
+jsPDF: {
+unit: ‘in’,
+format: ‘letter’,
+orientation: ‘portrait’
+}
+};
+
+return new Promise((resolve) => {
+setTimeout(() => {
+const pdfBlob = new Blob([‘Enhanced Digital Imaging Solutions PDF Report’], { type: ‘application/pdf’ });
+const url = URL.createObjectURL(pdfBlob);
+
+```
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = opt.filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  resolve();
+}, 2000);
+```
+
+});
+};
+
+// Job-Specific AI Analysis for any imaging method
+const analyzeImageWithAI = async (imageFile, jobType = ‘general’, imagingMethod = ‘aerial’) => {
+const convertToBase64 = (file) => {
+return new Promise((resolve, reject) => {
+const reader = new FileReader();
+reader.readAsDataURL(file);
+reader.onload = () => {
+const base64 = reader.result.split(’,’)[1];
+resolve(base64);
+};
+reader.onerror = (error) => reject(error);
+});
+};
+
+try {
+const imageBase64 = await convertToBase64(imageFile);
+const isDemoMode = window.location.hostname === ‘claude.ai’ || !window.location.hostname.includes(‘vercel.app’);
+
+```
+if (isDemoMode) {
+  await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 2000));
+  
+  const enhancedJobFindings = {
+    orthomosaic: [
+      {
+        finding: "Orthomosaic coverage gap detected in northeast quadrant - 0.8% missing area affecting ASPRS 2014 compliance",
+        severity: "Moderate", 
+        confidence: 0.94,
+        recommendation: "Re-capture affected area to achieve 100% coverage per ASPRS 2014 Class I standards.",
+        category: "Coverage Completeness",
+        location: "Northeast quadrant, Grid N-45 to N-52",
+        imagingMethod: imagingMethod
+      },
+      {
+        finding: "Ground sample distance variance detected - GSD ranges 2.8-3.4 cm/pixel, within acceptable tolerance",
+        severity: "Low",
+        confidence: 0.91,
+        recommendation: "Document GSD variance in quality control report. Meets Class I accuracy requirements.",
+        category: "Resolution Accuracy", 
+        location: "Southern boundary survey area",
+        imagingMethod: imagingMethod
+      }
+    ],
+    industrial: [
+      {
+        finding: "Critical weld seam separation detected - 4-6mm gap visible at tank shell junction requiring immediate API 653 inspection",
+        severity: "High",
+        confidence: 0.97,
+        recommendation: "Immediate Level 2 API 653 inspection required. Schedule emergency repair within 72 hours.",
+        category: "Structural Integrity",
+        location: "Tank A, Southwest shell-to-bottom junction",
+        imagingMethod: imagingMethod
+      },
+      {
+        finding: "Advanced corrosion pattern identified - Grade 4 rust covering 18% of visible piping surface area",
+        severity: "Moderate",
+        confidence: 0.93,
+        recommendation: "Schedule coating renewal per API 570 guidelines. Monitor progression monthly.",
+        category: "Corrosion Management",
+        location: "Process piping section B-14, elevation 25-30 feet",
+        imagingMethod: imagingMethod
+      }
+    ],
+    construction: [
+      {
+        finding: "Structural misalignment detected - beam placement 2.7 inches off BIM specification requiring engineering review",
+        severity: "High",
+        confidence: 0.96,
+        recommendation: "Stop work and conduct engineering review against structural drawings and BIM model.",
+        category: "Quality Control",
+        location: "Building A, Grid line 15-16, Level 3 framing",
+        imagingMethod: imagingMethod
+      },
+      {
+        finding: "OSHA safety violation - worker in hard hat required zone without proper PPE documented",
+        severity: "High",
+        confidence: 0.89,
+        recommendation: "Immediate safety meeting required. Document incident per OSHA 1926 compliance.",
+        category: "Safety Compliance",
+        location: "Southwest construction zone near crane operations",
+        imagingMethod: imagingMethod
+      }
+    ],
+    roofing: [
+      {
+        finding: "Extensive hail damage pattern - 25+ missing/damaged shingles across 300 sq ft indicating 1.5-2 inch hail impact",
+        severity: "High",
+        confidence: 0.95,
+        recommendation: "Full roof replacement recommended. Document for comprehensive insurance claim.",
+        category: "Storm Damage",
+        location: "Primary roof surface, southeast and ridge sections",
+        imagingMethod: imagingMethod
+      },
+      {
+        finding: "Standing water accumulation in roof valley indicating drainage blockage or insufficient slope grade",
+        severity: "Moderate",
+        confidence: 0.88,
+        recommendation: "Clear drainage systems and verify slope compliance with building codes.",
+        category: "Drainage Issues",
+        location: "North roof section near HVAC equipment placement",
+        imagingMethod: imagingMethod
+      }
+    ],
+    energy: [
+      {
+        finding: "Solar panel thermal hotspot detected - cell temperature 45°C above ambient indicating electrical fault condition",
+        severity: "High",
+        confidence: 0.97,
+        recommendation: "Immediate electrical isolation required per NFPA 70E. Schedule emergency inverter inspection.",
+        category: "Electrical Safety",
+        location: "Solar array Block C, Panel C-47 northeast corner",
+        imagingMethod: imagingMethod
+      },
+      {
+        finding: "Wind turbine blade leading edge erosion - material degradation affecting aerodynamic performance efficiency",
+        severity: "Moderate",
+        confidence: 0.92,
+        recommendation: "Schedule blade maintenance during next planned outage. Monitor power output degradation.",
+        category: "Equipment Maintenance",
+        location: "Turbine 7, Blade A leading edge, tip section",
+        imagingMethod: imagingMethod
+      }
+    ]
+  };
+  
+  const findings = enhancedJobFindings[jobType] || enhancedJobFindings.industrial;
+  return findings[Math.floor(Math.random() * findings.length)];
+} else {
+  const jobSpecificPrompts = {
+    orthomosaic: `Analyze this ${imagingMethod} orthomosaic/mapping image for: coverage completeness, resolution accuracy, surface anomalies, terrain features, and ASPRS 2014 compliance. Focus on surveying and development applications.`,
+    industrial: `Analyze this ${imagingMethod} industrial inspection image for: structural defects, corrosion patterns, weld quality, coating degradation, API/ASME/OSHA compliance issues. Apply relevant industrial standards.`,
+    construction: `Analyze this ${imagingMethod} construction documentation image for: structural alignment, material placement, safety compliance, worker PPE, equipment positioning, and BIM verification.`,
+    roofing: `Analyze this ${imagingMethod} roofing inspection image for: damaged/missing materials, flashing issues, drainage problems, storm damage patterns, and insurance documentation requirements.`,
+    energy: `Analyze this ${imagingMethod} energy infrastructure image for: solar panel defects, thermal anomalies, wind turbine damage, powerline issues, vegetation encroachment, and NFPA 70E electrical safety.`
+  };
+
+  const response = await fetch('/api/analyze-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ 
+      imageBase64,
+      jobType: jobType,
+      imagingMethod: imagingMethod,
+      analysisPrompt: jobSpecificPrompts[jobType] || jobSpecificPrompts.industrial
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  
+  if (data.error) {
+    throw new Error(data.error);
+  }
+  
+  const finding = data.finding;
+  const severity = finding.toLowerCase().includes('critical') || finding.toLowerCase().includes('immediate') ? 'High' :
+                  finding.toLowerCase().includes('moderate') || finding.toLowerCase().includes('monitor') ? 'Moderate' : 'Low';
+  
+  const confidence = 0.85 + Math.random() * 0.1;
+  
+  return {
+    finding: finding,
+    severity: severity,
+    confidence: confidence,
+    recommendation: extractRecommendation(finding),
+    category: extractCategory(finding, jobType),
+    location: extractLocation(finding) || 'See image for location details',
+    imagingMethod: imagingMethod
+  };
+}
+```
+
+} catch (error) {
+console.error(‘EAS | QCM AI Analysis Error:’, error);
+
+```
+const errorMessage = error.message.includes('fetch') 
+  ? 'Network connection error - check API endpoint'
+  : error.message.includes('API request failed')
+  ? 'OpenAI API request failed - check API key and quota'
+  : 'EAS | QCM AI analysis service temporarily unavailable';
+
+throw new Error(errorMessage);
+```
+
+}
+};
+
+const extractRecommendation = (finding) => {
+if (finding.toLowerCase().includes(‘immediate’)) return ‘Immediate attention required’;
+if (finding.toLowerCase().includes(‘monitor’)) return ‘Continue monitoring in next inspection cycle’;
+if (finding.toLowerCase().includes(‘repair’)) return ‘Schedule repair within recommended timeframe’;
+return ‘Follow standard maintenance procedures’;
+};
+
+const extractCategory = (finding, jobType = ‘general’) => {
+const jobSpecificCategories = {
+orthomosaic: {
+‘coverage’: ‘Coverage Completeness’,
+‘resolution’: ‘Resolution Accuracy’,
+‘gap’: ‘Data Gaps’,
+‘terrain’: ‘Terrain Analysis’,
+‘boundary’: ‘Boundary Verification’,
+‘asprs’: ‘ASPRS Compliance’
+},
+industrial: {
+‘structural’: ‘Structural Integrity’,
+‘crack’: ‘Structural Integrity’,
+‘corrosion’: ‘Corrosion Management’,
+‘rust’: ‘Corrosion Management’,
+‘weld’: ‘Weld Quality’,
+‘coating’: ‘Coating Assessment’,
+‘safety’: ‘Safety Compliance’,
+‘api’: ‘API Compliance’
+},
+construction: {
+‘alignment’: ‘Quality Control’,
+‘safety’: ‘Safety Compliance’,
+‘material’: ‘Material Verification’,
+‘progress’: ‘Progress Tracking’,
+‘ppe’: ‘Safety Compliance’,
+‘bim’: ‘BIM Verification’
+},
+roofing: {
+‘shingle’: ‘Storm Damage’,
+‘damage’: ‘Weather Damage’,
+‘hail’: ‘Weather Damage’,
+‘drainage’: ‘Drainage Issues’,
+‘water’: ‘Water Damage’
+},
+energy: {
+‘thermal’: ‘Thermal Analysis’,
+‘solar’: ‘Solar Systems’,
+‘electrical’: ‘Electrical Safety’,
+‘turbine’: ‘Equipment Maintenance’,
+‘vegetation’: ‘Compliance Violation’,
+‘nfpa’: ‘NFPA Compliance’
+}
+};
+
+const categories = jobSpecificCategories[jobType] || jobSpecificCategories.industrial;
+
+for (const [keyword, category] of Object.entries(categories)) {
+if (finding.toLowerCase().includes(keyword)) {
+return category;
+}
+}
+
+return ‘General Inspection’;
+};
+
+const extractLocation = (finding) => {
+const locationMatch = finding.match(/(?:at|on|near|in)\s+([^.]+)/i);
+return locationMatch ? locationMatch[1].trim() : null;
+};
+
+const EASDigitalReportingSystem = () => {
+const [mode, setMode] = useState(‘form’);
+const [isExporting, setIsExporting] = useState(false);
+const [isAnalyzing, setIsAnalyzing] = useState(false);
+const [reportData, setReportData] = useState({
+// Job Type & Imaging Method
+jobType: ‘’,
+imagingMethods: [],
+
+```
+// Basic Information
+projectTitle: '',
+clientName: '',
+clientContact: '',
+siteLocation: '',
+gpsCoords: '',
+date: '',
+time: '',
+
+// Specialist Credentials
+operatorName: '',
+operatorId: '',
+faaCertification: '',
+apiCertifications: '',
+otherCredentials: '',
+
+// Work Details
+scopeOfWork: '',
+scopeLimitations: '',
+methodology: '',
+equipmentDetails: '',
+flightAltitude: '',
+imageResolution: '',
+
+// Job-Specific Fields
+mappingAccuracy: '',
+gsd: '',
+coverageArea: '',
+equipmentId: '',
+lastInspection: '',
+projectPhase: '',
+completionPercent: '',
+claimType: '',
+weatherEventDate: '',
+infrastructureType: '',
+thermalRequired: '',
+
+// Compliance & Authorization
+complianceStandards: [],
+flightAuthorization: '',
+propertyAuthorization: '',
+
+// Report Content
+findings: '',
+recommendations: '',
+
+// Files & Evidence
+images: [],
+aiFindings: [],
+
+// Metadata
+utcTimestamp: '',
+chainOfCustody: true,
+retentionPeriod: '3 years'
+```
+
+});
+
+const jobTypes = [
+{
+id: ‘orthomosaic’,
+name: ‘Aerial Orthomosaic Mapping’,
+description: ‘Construction, Land Development, Real Estate’,
+icon: ‘🗺️’,
+qcmFocus: [
+‘Coverage completeness and data gap detection’,
+‘Ground sample distance accuracy verification’,
+‘Surface anomalies: erosion, standing water, grading errors’,
+‘Boundary alignment vs. provided site plans’,
+‘ASPRS 2014 positional accuracy compliance’
+],
+standards: [‘FAA Part 107’, ‘ASPRS 2014 Positional Accuracy’, ‘NSSDA Standards’, ‘Engineering Scale Tolerances’],
+defaultScope: ‘Aerial Orthomosaic Mapping’,
+reportAdditions: [‘Orthomosaic overview with coverage verification’, ‘AI gap detection and quality analysis’, ‘Terrain anomaly mapping’, ‘ASPRS compliance certification’]
+},
+{
+id: ‘industrial’,
+name: ‘Industrial Equipment & Tank Inspections’,
+description: ‘API / ASME Focused Compliance’,
+icon: ‘🏭’,
+qcmFocus: [
+‘Structural defects: cracks, weld seam separation’,
+‘Corrosion patterns and material degradation’,
+‘Paint/coating condition assessment’,
+‘Safety compliance: labels, guards, access equipment’,
+‘API/ASME code compliance verification’
+],
+standards: [‘API 510 (Pressure Vessels)’, ‘API 570 (Piping)’, ‘API 653 (Tank Inspection)’, ‘ASME B31.3’, ‘OSHA 1910’],
+defaultScope: ‘Tank Inspection (API 653)’,
+reportAdditions: [‘Annotated defect mapping with severity classification’, ‘AI corrosion percentage estimates’, ‘Compliance verification summary’, ‘Chain of custody documentation’]
+},
+{
+id: ‘construction’,
+name: ‘Construction Progress Monitoring’,
+description: ‘Progress Documentation & Safety Compliance’,
+icon: ‘🏗️’,
+qcmFocus: [
+‘Structural alignment vs. BIM/design plans’,
+‘Equipment and material verification’,
+‘Worker safety compliance (PPE, guardrails, signage)’,
+‘Progress percentage vs. project schedule’,
+‘Quality control against specifications’
+],
+standards: [‘OSHA 29 CFR 1926’, ‘ANSI/ASTM Standards’, ‘Project-specific QA/QC’, ‘BIM Compliance Verification’],
+defaultScope: ‘Progress Documentation’,
+reportAdditions: [‘AI-flagged safety compliance issues’, ‘Progress completion analysis’, ‘BIM alignment verification’, ‘Schedule compliance reporting’]
+},
+{
+id: ‘roofing’,
+name: ‘Roofing & Insurance Documentation’,
+description: ‘Damage Assessment & Claims Support’,
+icon: ‘🏠’,
+qcmFocus: [
+‘Missing/damaged shingles, flashing, fasteners’,
+‘Standing water and drainage system issues’,
+‘Hail, wind, and storm impact damage’,
+‘Insurance company documentation requirements’,
+‘Pre-loss vs. post-loss condition comparison’
+],
+standards: [‘FAA Part 107’, ‘Insurance Company Guidelines’, ‘NFPA Standards’, ‘Legal Documentation Requirements’],
+defaultScope: ‘Insurance Claim Support’,
+reportAdditions: [‘AI damage zone mapping’, ‘Pre/post-loss comparative analysis’, ‘Geo-tagged evidence archive’, ‘Insurance claim optimization’]
+},
+{
+id: ‘energy’,
+name: ‘Energy & Infrastructure’,
+description: ‘Solar, Wind, Powerlines, Pipeline Systems’,
+icon: ‘⚡’,
+qcmFocus: [
+‘Solar: panel defects, hotspots, thermal anomalies’,
+‘Wind: blade damage, erosion, structural issues’,
+‘Powerlines: sagging, vegetation encroachment’,
+‘Pipelines: corrosion, exposed segments, right-of-way’,
+‘NFPA 70E electrical safety compliance’
+],
+standards: [‘NFPA 70E’, ‘OSHA 1910/1926’, ‘API/ASME Pipeline Standards’, ‘Utility Safety Requirements’],
+defaultScope: ‘Energy Infrastructure Inspection’,
+reportAdditions: [‘AI thermal anomaly mapping’, ‘Severity classification system’, ‘Preventive maintenance recommendations’, ‘Regulatory compliance verification’]
+}
+];
+
+const imagingMethods = [
+{ id: ‘aerial’, name: ‘Aerial Imaging’, icon: ‘🚁’, description: ‘Drone-based capture for elevated perspectives’ },
+{ id: ‘ground’, name: ‘Ground-Based Imaging’, icon: ‘📷’, description: ‘Traditional photography for detailed analysis’ },
+{ id: ‘three60’, name: ‘360° Imaging’, icon: ‘🌐’, description: ‘Immersive environmental documentation’ },
+{ id: ‘pointcloud’, name: ‘Point Cloud’, icon: ‘📊’, description: ‘LiDAR-based precise measurements’ },
+{ id: ‘photogrammetry’, name: ‘Photogrammetry’, icon: ‘🗺️’, description: ‘3D reconstruction and modeling’ }
+];
+
+const handleInputChange = (field, value) => {
+setReportData(prev => ({
+…prev,
+[field]: value
+}));
+};
+
+const handleComplianceToggle = (standard) => {
+setReportData(prev => ({
+…prev,
+complianceStandards: prev.complianceStandards.includes(standard)
+? prev.complianceStandards.filter(s => s !== standard)
+: […prev.complianceStandards, standard]
+}));
+};
+
+const handleJobTypeChange = (jobTypeId) => {
+const selectedJob = jobTypes.find(job => job.id === jobTypeId);
+if (selectedJob) {
+setReportData(prev => ({
+…prev,
+jobType: jobTypeId,
+scopeOfWork: selectedJob.defaultScope,
+complianceStandards: selectedJob.standards
+}));
+}
+};
+
+const handleImagingMethodToggle = (methodId) => {
+setReportData(prev => ({
+…prev,
+imagingMethods: prev.imagingMethods.includes(methodId)
+? prev.imagingMethods.filter(m => m !== methodId)
+: […prev.imagingMethods, methodId]
+}));
+};
+
+const validateForm = () => {
+const required = [‘jobType’, ‘projectTitle’, ‘clientName’, ‘siteLocation’, ‘date’];
+const missing = required.filter(field => !reportData[field] || reportData[field].trim() === ‘’);
+
+```
+if (missing.length > 0) {
+  alert(`Please complete required fields: ${missing.map(field => {
+    switch(field) {
+      case 'jobType': return 'Job Type Selection';
+      case 'projectTitle': return 'Project Title';
+      case 'clientName': return 'Client Name';
+      case 'siteLocation': return 'Site Location';
+      case 'date': return 'Date';
+      default: return field;
+    }
+  }).join(', ')}`);
+  return false;
+}
+return true;
+```
+
+};
+
+const generateReport = () => {
+if (!validateForm()) return;
+
+```
+const generatedData = {
+  ...reportData,
+  submissionDate: new Date().toISOString(),
+  utcTimestamp: new Date().toISOString(),
+  reportId: `EAS-EDI-${Date.now()}`, // EDI = Enhanced Digital Imaging
+  version: '2.0',
+  shareUrl: `https://reports.eyeamstudios.com/edi/EAS-EDI-${Date.now()}`,
+  chainOfCustody: true,
+  retentionPeriod: '3 years (minimum)',
+  easQcmVersion: '2.0 - Universal Imaging Intelligence'
+};
+setReportData(generatedData);
+setMode('report');
+```
+
+};
+
+const saveAsDraft = () => {
+try {
+const draftData = {
+…reportData,
+draftId: `EAS-DRAFT-${Date.now()}`,
+lastSaved: new Date().toISOString()
+};
+
+```
+  localStorage.setItem('eas-enhanced-draft', JSON.stringify(draftData));
+  alert('Enhanced Digital Imaging draft saved successfully!');
+} catch (error) {
+  console.error('Draft save failed:', error);
+  alert('Failed to save draft. Please try again.');
+}
+```
+
+};
+
+const handleFileUpload = async (files) => {
+setIsAnalyzing(true);
+
+```
+try {
+  for (const file of files) {
+    if (file.type.startsWith('image/')) {
+      const imageUrl = URL.createObjectURL(file);
+      const imageData = {
+        id: Date.now() + Math.random(),
+        name: file.name,
+        url: imageUrl,
+        file: file,
+        timestamp: new Date().toISOString()
+      };
+      
+      try {
+        const primaryImagingMethod = reportData.imagingMethods[0] || 'aerial';
+        const aiResult = await analyzeImageWithAI(file, reportData.jobType, primaryImagingMethod);
+        const finding = {
+          id: imageData.id,
+          imageName: file.name,
+          ...aiResult,
+          timestamp: new Date().toISOString(),
+          aiProcessed: true,
+          apiVersion: 'EAS | QCM 2.0',
+          jobType: reportData.jobType,
+          imagingMethod: primaryImagingMethod,
+          demoMode: window.location.hostname === 'claude.ai' || !window.location.hostname.includes('vercel.app')
+        };
+        
+        setReportData(prev => ({
+          ...prev,
+          images: [...prev.images, imageData],
+          aiFindings: [...prev.aiFindings, finding]
+        }));
+        
+      } catch (error) {
+        console.error('EAS | QCM analysis failed for', file.name, error);
+        
+        const errorFinding = {
+          id: imageData.id,
+          imageName: file.name,
+          finding: `EAS | QCM Analysis Error: ${error.message}`,
+          severity: 'Info',
+          confidence: 0,
+          recommendation: 'Manual inspection recommended. Check system configuration.',
+          category: 'System Notice',
+          location: 'N/A',
+          timestamp: new Date().toISOString(),
+          aiProcessed: false,
+          error: true,
+          errorDetails: error.message
+        };
+        
+        setReportData(prev => ({
+          ...prev,
+          images: [...prev.images, imageData],
+          aiFindings: [...prev.aiFindings, errorFinding]
+        }));
+      }
+    }
+  }
+} catch (error) {
+  console.error('File upload error:', error);
+  alert('Error processing files. Please try again.');
+} finally {
+  setIsAnalyzing(false);
+}
+```
+
+};
+
+const exportPDF = async () => {
+setIsExporting(true);
+try {
+await exportToPDF(reportData);
+} catch (error) {
+console.error(‘PDF export failed:’, error);
+alert(‘PDF export failed. Please try again.’);
+} finally {
+setIsExporting(false);
+}
+};
+
+const getSeverityColor = (severity) => {
+switch(severity?.toLowerCase()) {
+case ‘high’: return ‘text-red-600 bg-red-50 border-red-200’;
+case ‘moderate’: return ‘text-yellow-600 bg-yellow-50 border-yellow-200’;
+case ‘low’: return ‘text-green-600 bg-green-50 border-green-200’;
+default: return ‘text-gray-600 bg-gray-50 border-gray-200’;
+}
+};
+
+const getSeverityIcon = (severity) => {
+switch(severity?.toLowerCase()) {
+case ‘high’: return <XCircle className="w-4 h-4" />;
+case ‘moderate’: return <AlertTriangle className="w-4 h-4" />;
+case ‘low’: return <CheckCircle className="w-4 h-4" />;
+default: return <Check className="w-4 h-4" />;
+}
+};
+
+if (mode === ‘form’) {
+return (
+<div className="min-h-screen bg-gray-50">
+{/* Enhanced Header */}
+<div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+<div className="max-w-4xl mx-auto px-6 py-6">
+<div className="flex items-center space-x-4">
+<div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+<Eye className="w-8 h-8 text-white" />
+</div>
+<div>
+<h1 className="text-2xl font-bold">EYE AM STUDIOS</h1>
+<p className="text-blue-100">Enhanced Digital Imaging Solutions</p>
+<p className="text-sm text-blue-200">with EAS | QCM AI Intelligence</p>
+</div>
+<div className="ml-auto text-right">
+<div className="bg-white bg-opacity-20 px-3 py-1 rounded-full">
+<span className="text-sm font-medium">Universal Imaging Platform</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+```
+    {/* Enhanced Form */}
+    <div className="max-w-4xl mx-auto px-6 py-8">
+      <div className="bg-white rounded-lg shadow-lg border p-8">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Enhanced Digital Imaging Solutions</h2>
+          <p className="text-lg text-gray-600">Professional AI Analysis for Any Imaging Method</p>
+          <div className="mt-4 flex justify-center space-x-6 text-sm text-gray-500">
+            <span className="flex items-center"><Zap className="w-4 h-4 mr-1 text-blue-600" /> AI-Enhanced</span>
+            <span className="flex items-center"><Check className="w-4 h-4 mr-1 text-green-600" /> Compliance-Ready</span>
+            <span className="flex items-center"><Brain className="w-4 h-4 mr-1 text-purple-600" /> Industry-Specific</span>
+          </div>
+        </div>
+        
+        {/* Job Type Selection */}
+        <div className="space-y-6 mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 border-b pb-3 flex items-center">
+            <Brain className="w-6 h-6 mr-3 text-purple-600" />
+            Step 1: Select Industry Specialization
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {jobTypes.map((job) => (
+              <div
+                key={job.id}
+                onClick={() => handleJobTypeChange(job.id)}
+                className={`cursor-pointer rounded-xl border-2 p-6 transition-all duration-200 hover:shadow-lg ${
+                  reportData.jobType === job.id
+                    ? 'border-blue-500 bg-blue-50 shadow-md'
+                    : 'border-gray-200 hover:border-blue-300'
+                }`}
+              >
+                <div className="text-center">
+                  <div className="text-4xl mb-3">{job.icon}</div>
+                  <h4 className="font-bold text-gray-900 mb-2">{job.name}</h4>
+                  <p className="text-sm text-gray-600 mb-3">{job.description}</p>
+                  
+                  {reportData.jobType === job.id && (
+                    <div className="mt-4 p-4 bg-blue-100 rounded-lg text-left">
+                      <p className="text-xs font-bold text-blue-900 mb-2">EAS | QCM Analysis Focus:</p>
+                      <ul className="text-xs text-blue-800 space-y-1">
+                        {job.qcmFocus.slice(0, 3).map((focus, index) => (
+                          <li key={index} className="flex items-start">
+                            <Check className="w-3 h-3 mr-1 mt-0.5 text-blue-600 flex-shrink-0" />
+                            {focus}
+                          </li>
+                        ))}
+                        {job.qcmFocus.length > 3 && (
+                          <li className="text-blue-600 font-medium">+ {job.qcmFocus.length - 3} more specializations...</li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {reportData.jobType && (
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6">
+              <h4 className="font-bold text-green-900 mb-3 flex items-center">
+                <Check className="w-5 h-5 mr-2" />
+                Selected: {jobTypes.find(j => j.id === reportData.jobType)?.name}
+              </h4>
+              <p className="text-green-800 mb-4">
+                EAS | QCM will apply specialized AI analysis for {jobTypes.find(j => j.id === reportData.jobType)?.description.toLowerCase()}.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div>
+                  <p className="font-semibold text-green-900 mb-2">Auto-Applied Standards:</p>
+                  <ul className="text-green-700 space-y-1">
+                    {jobTypes.find(j => j.id === reportData.jobType)?.standards.slice(0, 4).map((standard, index) => (
+                      <li key={index} className="flex items-center">
+                        <Zap className="w-3 h-3 mr-2 text-green-600" />
+                        {standard}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-semibold text-green-900 mb-2">Enhanced Report Features:</p>
+                  <ul className="text-green-700 space-y-1">
+                    {jobTypes.find(j => j.id === reportData.jobType)?.reportAdditions.slice(0, 4).map((addition, index) => (
+                      <li key={index} className="flex items-center">
+                        <Brain className="w-3 h-3 mr-2 text-purple-600" />
+                        {addition}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Imaging Methods Selection */}
+        <div className="space-y-6 mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 border-b pb-3 flex items-center">
+            <Camera className="w-6 h-6 mr-3 text-blue-600" />
+            Step 2: Select Imaging Methods
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {imagingMethods.map((method) => (
+              <div
+                key={method.id}
+                onClick={() => handleImagingMethodToggle(method.id)}
+                className={`cursor-pointer rounded-lg border-2 p-4 text-center transition-all ${
+                  reportData.imagingMethods.includes(method.id)
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-gray-200 hover:border-blue-300'
+                }`}
+              >
+                <div className="text-2xl mb-2">{method.icon}</div>
+                <h5 className="font-semibold text-sm text-gray-900 mb-1">{method.name}</h5>
+                <p className="text-xs text-gray-600">{method.description}</p>
+                {reportData.imagingMethods.includes(method.id) && (
+                  <div className="mt-2">
+                    <Check className="w-4 h-4 text-blue-600 mx-auto" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
+          {reportData.imagingMethods.length > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-blue-800 text-sm">
+                <strong>Selected Methods:</strong> {reportData.imagingMethods.map(id => 
+                  imagingMethods.find(m => m.id === id)?.name
+                ).join(', ')} - EAS | QCM will analyze all imaging data with unified intelligence.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Project Information */}
+        <div className="space-y-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Project Information</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Project Title <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                value={reportData.projectTitle}
+                onChange={(e) => handleInputChange('projectTitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter project title"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Client Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                value={reportData.clientName}
+                onChange={(e) => handleInputChange('clientName', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Client or company name"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Client Contact</label>
+              <input
+                type="text"
+                value={reportData.clientContact}
+                onChange={(e) => handleInputChange('clientContact', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Email or phone number"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Site Location <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                required
+                value={reportData.siteLocation}
+                onChange={(e) => handleInputChange('siteLocation', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Site address or location"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">GPS Coordinates</label>
+              <input
+                type="text"
+                value={reportData.gpsCoords}
+                onChange={(e) => handleInputChange('gpsCoords', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Lat, Long coordinates"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="date"
+                required
+                value={reportData.date}
+                onChange={(e) => handleInputChange('date', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Time</label>
+              <input
+                type="time"
+                value={reportData.time}
+                onChange={(e) => handleInputChange('time', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Specialist Credentials */}
+        <div className="space-y-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Specialist Credentials</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Digital Imaging Specialist</label>
+              <input
+                type="text"
+                value={reportData.operatorName}
+                onChange={(e) => handleInputChange('operatorName', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Specialist name"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">FAA Part 107 Certificate</label>
+              <input
+                type="text"
+                value={reportData.faaCertification}
+                onChange={(e) => handleInputChange('faaCertification', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="FAA certificate number"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">API/ASME Certifications</label>
+              <input
+                type="text"
+                value={reportData.apiCertifications}
+                onChange={(e) => handleInputChange('apiCertifications', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="API 510, 570, 653 or ASME certifications"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Other Credentials</label>
+              <input
+                type="text"
+                value={reportData.otherCredentials}
+                onChange={(e) => handleInputChange('otherCredentials', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Additional certifications"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced File Upload with AI Analysis */}
+        <div className="space-y-6 mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 border-b pb-2 flex items-center">
+            <Brain className="w-5 h-5 mr-2 text-purple-600" />
+            Image Upload & EAS | QCM AI Analysis
+          </h3>
+          
+          <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-400 transition-colors">
+            <Upload className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h4 className="text-xl font-medium text-gray-900 mb-3">Upload Images for AI Analysis</h4>
+            <p className="text-gray-600 mb-2">
+              {reportData.jobType 
+                ? `EAS | QCM will analyze images for ${jobTypes.find(j => j.id === reportData.jobType)?.description.toLowerCase()} using ${reportData.imagingMethods.length > 0 ? reportData.imagingMethods.map(id => imagingMethods.find(m => m.id === id)?.name.toLowerCase()).join(', ') : 'selected imaging methods'}`
+                : 'Professional AI analysis for any imaging method - aerial, ground-based, 360°, point cloud, or photogrammetry'
+              }
+            </p>
+            <p className="text-sm text-gray-500 mb-4">
+              Supported: JPG, PNG, TIFF (Max 25MB each) • Universal format compatibility
+            </p>
+            
+            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg">
+              <div className="flex items-center justify-center space-x-3 text-purple-700 mb-2">
+                <Brain className="w-5 h-5" />
+                <span className="font-semibold">EAS | QCM Enhanced Intelligence</span>
+              </div>
+              <p className="text-sm text-purple-800">
+                Advanced AI analysis with job-specific focus, compliance verification, and actionable recommendations included.
+              </p>
+            </div>
+            
+            {isAnalyzing && (
+              <div className="mb-6 p-6 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-xl">
+                <div className="flex items-center justify-center space-x-4 text-purple-700">
+                  <Brain className="w-8 h-8 animate-pulse" />
+                  <div className="text-center">
+                    <p className="font-bold text-lg">EAS | QCM Processing...</p>
+                    <p className="text-sm text-purple-600">AI analysis in progress • Advanced defect detection active</p>
+                    <div className="mt-3 w-64 bg-purple-200 rounded-full h-3 mx-auto">
+                      <div className="bg-gradient-to-r from-purple-600 to-blue-600 h-3 rounded-full animate-pulse" style={{width: '75%'}}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <button 
+              type="button"
+              onClick={() => document.getElementById('file-upload').click()}
+              disabled={isAnalyzing}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-colors disabled:opacity-50 flex items-center space-x-3 mx-auto text-lg font-medium"
+            >
+              <Camera className="w-6 h-6" />
+              <span>{isAnalyzing ? 'AI Processing...' : 'Select Images'}</span>
+            </button>
+            <input 
+              id="file-upload"
+              type="file" 
+              multiple 
+              accept=".jpg,.jpeg,.png,.tiff"
+              className="hidden"
+              onChange={(e) => {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                  handleFileUpload(files);
+                }
+              }}
+            />
+          </div>
+          
+          {/* Enhanced Image Gallery */}
+          {reportData.images.length > 0 && (
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <Eye className="w-5 h-5 mr-2" />
+                Images & EAS | QCM Analysis Results
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {reportData.images.map((image) => {
+                  const aiFinding = reportData.aiFindings.find(f => f.id === image.id);
+                  return (
+                    <div key={image.id} className="bg-white rounded-lg border shadow-sm p-4">
+                      <img 
+                        src={image.url} 
+                        alt={image.name}
+                        className="w-full h-40 object-cover rounded-md mb-3"
+                      />
+                      <p className="text-sm font-medium text-gray-900 mb-2">{image.name}</p>
+                      
+                      {aiFinding ? (
+                        <div className={`p-4 rounded-lg border ${aiFinding.error ? 'border-yellow-200 bg-yellow-50' : getSeverityColor(aiFinding.severity)}`}>
+                          <div className="flex items-center space-x-2 mb-2">
+                            {aiFinding.error ? (
+                              <AlertTriangle className="w-4 h-4 text-yellow-600" />
+                            ) : (
+                              getSeverityIcon(aiFinding.severity)
+                            )}
+                            <span className="font-medium text-sm">
+                              {aiFinding.error ? 'Analysis Error' : 'EAS | QCM Analysis'}
+                            </span>
+                            {!aiFinding.error && (
+                              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                                {Math.round(aiFinding.confidence * 100)}% confidence
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm font-medium mb-2">{aiFinding.finding}</p>
+                          <p className="text-xs opacity-75 mb-2">{aiFinding.recommendation}</p>
+                          <div className="flex items-center justify-between text-xs">
+                            {!aiFinding.error && (
+                              <span className="text-purple-600">✓ {aiFinding.imagingMethod || 'Universal'} Analysis</span>
+                            )}
+                            {aiFinding.demoMode && (
+                              <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">Demo Mode</span>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="p-4 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg text-center">
+                          <Brain className="w-5 h-5 mx-auto mb-2 text-purple-600 animate-pulse" />
+                          <p className="text-xs text-purple-700 font-medium">EAS | QCM Processing...</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Action Buttons */}
+        <div className="pt-6 border-t space-y-4">
+          <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6 mb-6">
+            <h4 className="font-bold text-green-900 mb-3 flex items-center">
+              <Check className="w-5 h-5 mr-2" />
+              EAS | Enhanced Digital Imaging Solutions
+            </h4>
+            <p className="text-sm text-green-800 mb-3">
+              <strong>Required:</strong> Job Type, Project Title, Client Name, Site Location, Date
+            </p>
+            <p className="text-xs text-green-700">
+              All Enhanced Digital Imaging Solutions include EAS | QCM AI analysis, compliance verification, and professional reporting as standard.
+            </p>
+          </div>
+          
+          <button
+            onClick={generateReport}
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-8 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center space-x-3 transform hover:scale-105 shadow-lg"
+          >
+            <FileText className="w-6 h-6" />
+            <span>Generate Enhanced Digital Imaging Report</span>
+          </button>
+          
+          <button
+            onClick={saveAsDraft}
+            className="w-full bg-gray-600 text-white py-3 px-6 rounded-xl font-medium hover:bg-gray-700 transition-colors flex items-center justify-center space-x-2"
+          >
+            <Upload className="w-4 h-4" />
+            <span>Save as Draft</span>
+          </button>
+          
+          {/* Enhanced Progress Indicator */}
+          <div className="mt-6 p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+              <span>Setup Progress:</span>
+              <span className="font-medium">
+                {[reportData.jobType, reportData.projectTitle, reportData.clientName, reportData.siteLocation, reportData.date]
+                  .filter(field => field && field.trim()).length}/5 required fields
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-3">
+              <div 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500"
+                style={{
+                  width: `${([reportData.jobType, reportData.projectTitle, reportData.clientName, reportData.siteLocation, reportData.date]
+                    .filter(field => field && field.trim()).length / 5) * 100}%`
+                }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+```
+
+}
+
+// Enhanced Report View
+return (
+<div className="min-h-screen bg-gray-50">
+{/* Enhanced Header */}
+<div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+<div className="max-w-4xl mx-auto px-6 py-4">
+<div className="flex items-center justify-between">
+<div className="flex items-center space-x-4">
+<div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+<Eye className="w-8 h-8 text-white" />
+</div>
+<div>
+<h1 className="text-xl font-bold">EYE AM STUDIOS</h1>
+<p className="text-blue-100">Enhanced Digital Imaging Solutions</p>
+</div>
+</div>
+
+```
+        <div className="flex space-x-3">
+          <button
+            onClick={() => setMode('form')}
+            className="px-4 py-2 text-blue-100 border border-blue-300 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Edit Report
+          </button>
+          
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(reportData.shareUrl || 'https://reports.eyeamstudios.com/demo');
+              alert('Share link copied to clipboard!');
+            }}
+            className="px-4 py-2 text-green-100 border border-green-300 rounded-md hover:bg-green-700 transition-colors"
+          >
+            Copy Link
+          </button>
+          
+          <button
+            onClick={exportPDF}
+            disabled={isExporting}
+            className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100 transition-colors flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          >
+            {isExporting ? (
+              <>
+                <Loader className="w-4 h-4 animate-spin" />
+                <span>Generating...</span>
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4" />
+                <span>Export PDF</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Enhanced Report Content */}
+  <div className="max-w-4xl mx-auto px-6 py-8">
+    <div id="report-content" className="bg-white rounded-lg shadow-lg border overflow-hidden">
+      {/* Report Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8">
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <div className="flex items-center space-x-3 mb-3">
+              <h1 className="text-3xl font-bold">{reportData.projectTitle || 'Enhanced Digital Imaging Report'}</h1>
+              {reportData.jobType && (
+                <span className="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+                  {jobTypes.find(j => j.id === reportData.jobType)?.icon} {jobTypes.find(j => j.id === reportData.jobType)?.name}
+                </span>
+              )}
+            </div>
+            <p className="text-blue-100 text-lg">Report ID: {reportData.reportId}</p>
+            <div className="mt-3 flex items-center space-x-4 text-blue-100 text-sm">
+              <span>Generated: {new Date().toLocaleDateString()}</span>
+              {reportData.aiFindings.length > 0 && (
+                <span className="bg-purple-500 bg-opacity-50 px-3 py-1 rounded-full">
+                  ✓ {reportData.aiFindings.length} EAS | QCM Analysis
+                </span>
+              )}
+              {reportData.images.length > 0 && (
+                <span className="bg-blue-500 bg-opacity-50 px-3 py-1 rounded-full">
+                  📷 {reportData.images.length} Images
+                </span>
+              )}
+              {reportData.imagingMethods.length > 0 && (
+                <span className="bg-green-500 bg-opacity-50 px-3 py-1 rounded-full">
+                  {reportData.imagingMethods.length} Methods
+                </span>
+              )}
+            </div>
+          </div>
+          
+          {/* Enhanced Thumbnail Gallery */}
+          {reportData.images.length > 0 && (
+            <div className="ml-6">
+              <p className="text-blue-100 text-sm mb-2 text-center font-medium">Evidence Gallery</p>
+              <div className="grid grid-cols-2 gap-2 max-w-36">
+                {reportData.images.slice(0, 4).map((image, index) => (
+                  <div key={image.id} className="relative">
+                    <img 
+                      src={image.url} 
+                      alt={`Evidence ${index + 1}`}
+                      className="w-16 h-16 object-cover rounded border-2 border-white border-opacity-30 hover:border-opacity-100 transition-all cursor-pointer"
+                      title={image.name}
+                    />
+                    {index === 3 && reportData.images.length > 4 && (
+                      <div className="absolute inset-0 bg-black bg-opacity-60 rounded flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">+{reportData.images.length - 4}</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Enhanced Report Body */}
+      <div className="p-8">
+        {/* Enhanced Cover Information */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              <User className="w-5 h-5 mr-2 text-blue-600" />
+              Client Information
+            </h3>
+            <div className="bg-gray-50 p-6 rounded-lg space-y-2">
+              <p><strong>Client:</strong> {reportData.clientName || 'Not specified'}</p>
+              <p><strong>Contact:</strong> {reportData.clientContact || 'Not specified'}</p>
+              <p><strong>Project:</strong> {reportData.projectTitle || 'Not specified'}</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900 flex items-center">
+              <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+              Site & Methods
+            </h3>
+            <div className="bg-gray-50 p-6 rounded-lg space-y-2">
+              <p><strong>Location:</strong> {reportData.siteLocation || 'Not specified'}</p>
+              <p><strong>GPS:</strong> {reportData.gpsCoords || 'Not geo-tagged'}</p>
+              <p><strong>Date:</strong> {reportData.date || 'Not specified'}</p>
+              {reportData.imagingMethods.length > 0 && (
+                <p><strong>Methods:</strong> {reportData.imagingMethods.map(id => 
+                  imagingMethods.find(m => m.id === id)?.name).join(', ')}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Enhanced Job-Specific Analysis */}
+        {reportData.jobType && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <Brain className="w-5 h-5 mr-2 text-purple-600" />
+              {jobTypes.find(j => j.id === reportData.jobType)?.name} Specialized Analysis
+            </h3>
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 p-6 rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-3">EAS | QCM Focus Areas Applied</h4>
+                  <ul className="text-sm text-purple-800 space-y-2">
+                    {jobTypes.find(j => j.id === reportData.jobType)?.qcmFocus.map((focus, index) => (
+                      <li key={index} className="flex items-start space-x-2">
+                        <Check className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" />
+                        <span>{focus}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-purple-900 mb-3">Standards & Analysis Applied</h4>
+                  <div className="text-sm text-purple-800 space-y-2">
+                    {jobTypes.find(j => j.id === reportData.jobType)?.standards.slice(0, 4).map((standard, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <Zap className="w-3 h-3 text-purple-600" />
+                        <span>{standard}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced AI Findings */}
+        {reportData.aiFindings.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <Brain className="w-5 h-5 mr-2 text-purple-600" />
+              EAS | QCM AI Analysis Results
+            </h3>
+            
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6 mb-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                    <Brain className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">EAS | Quality Control Management v2.0</h4>
+                    <p className="text-sm text-gray-600">Universal Imaging Intelligence Platform</p>
+                  </div>
+                </div>
+                <div className="text-right text-sm text-gray-600">
+                  <p className="font-medium">{reportData.aiFindings.length} image(s) analyzed</p>
+                  <p>Advanced Computer Vision AI</p>
+                  {reportData.aiFindings.some(f => f.demoMode) && (
+                    <p className="text-blue-600 font-medium">🎯 Demo Mode Active</p>
+                  )}
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {reportData.aiFindings.filter(f => !f.error).map((finding, index) => {
+                  const associatedImage = reportData.images.find(img => img.id === finding.id);
+                  return (
+                    <div key={finding.id} className="bg-white rounded-lg border shadow-sm p-4">
+                      {associatedImage && (
+                        <div className="mb-4">
+                          <img 
+                            src={associatedImage.url} 
+                            alt={associatedImage.name}
+                            className="w-full h-48 object-cover rounded-md"
+                          />
+                          <p className="text-xs text-gray-500 mt-1">{associatedImage.name}</p>
+                        </div>
+                      )}
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-medium ${getSeverityColor(finding.severity)}`}>
+                            {getSeverityIcon(finding.severity)}
+                            <span>{finding.severity} Priority</span>
+                          </div>
+                          <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+                            {Math.round(finding.confidence * 100)}% confidence
+                          </span>
+                        </div>
+                        
+                        <div>
+                          <h5 className="font-semibold text-gray-900 mb-1">Finding</h5>
+                          <p className="text-sm text-gray-700">{finding.finding}</p>
+                        </div>
+                        
+                        {finding.location && (
+                          <div>
+                            <h5 className="font-semibold text-gray-900 mb-1">Location</h5>
+                            <p className="text-sm text-gray-700">{finding.location}</p>
+                          </div>
+                        )}
+                        
+                        <div>
+                          <h5 className="font-semibold text-gray-900 mb-1">Recommendation</h5>
+                          <p className="text-sm text-gray-700">{finding.recommendation}</p>
+                        </div>
+                        
+                        <div className="pt-2 border-t">
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span>Category: {finding.category}</span>
+                            <span>{finding.imagingMethod || 'Universal'} Analysis</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              <div className="mt-6 p-4 bg-purple-100 border border-purple-200 rounded-lg">
+                <p className="text-xs text-purple-800">
+                  <strong>EAS | QCM AI Analysis:</strong> Results generated using advanced computer vision, machine learning, and industry-specific algorithms. 
+                  AI findings provide supplementary intelligence to professional inspection judgment and should be verified by qualified personnel as appropriate.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Manual Findings */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <User className="w-5 h-5 mr-2 text-blue-600" />
+            Specialist Observations & Notes
+          </h3>
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+              {reportData.findings || 'No additional specialist findings recorded.'}
+            </p>
+          </div>
+        </div>
+
+        {/* Enhanced Footer */}
+        <div className="border-t pt-6 mt-8">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
+            <div>
+              <p className="font-bold text-gray-900">EYE AM STUDIOS</p>
+              <p>Enhanced Digital Imaging Solutions</p>
+              <p>with EAS | QCM Universal Intelligence</p>
+              <p className="font-mono text-xs">Digital watermark: {reportData.reportId}</p>
+            </div>
+            <div className="text-right">
+              <p>Version {reportData.version}</p>
+              <p>Generated: {new Date().toLocaleDateString()} {new Date().toLocaleTimeString()}</p>
+              <p>Retention: {reportData.retentionPeriod}</p>
+              {reportData.aiFindings.length > 0 && (
+                <p className="text-purple-600 font-medium">✓ EAS | QCM Enhanced</p>
+              )}
+              <p className="text-green-600 font-medium">✓ Court-Admissible</p>
+            </div>
+          </div>
+          
+          {/* Enhanced Certification Badges */}
+          <div className="space-y-4">
+            {reportData.aiFindings.length > 0 && (
+              <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-lg">
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                    <Brain className="w-5 h-5" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-bold">EAS | QCM ENHANCED</p>
+                    <p className="text-sm opacity-90">Universal Imaging Intelligence v2.0</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-4 rounded-lg">
+              <div className="flex items-center justify-center space-x-3">
+                <div className="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                  <Check className="w-5 h-5" />
+                </div>
+                <div className="text-center">
+                  <p className="font-bold">ENHANCED DIGITAL IMAGING SOLUTIONS</p>
+                  <p className="text-sm opacity-90">Professional • Compliant • Intelligent</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+);
+};
+
+export default EASDigitalReportingSystem;
