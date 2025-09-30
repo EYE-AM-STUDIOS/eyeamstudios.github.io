@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EAS | VisionPrints</title>
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #ffffff;
+      background: linear-gradient(135deg, #000000 0%, #0D1B2A 60%, #1a365d 100%);
+      min-height: 100vh;
+    }
+
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--jet-black);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--electric-cyan);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: var(--white);
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: var(--electric-cyan);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--white);
+    }
+
+    .service-card p {
+      font-size: 1rem;
+      color: #dce3ed;
+      margin-bottom: 10px;
+    }
+
+    .service-card .price {
+      color: var(--electric-cyan);
+      font-weight: bold;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .cta a {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cta a:hover {
+      background: #0090cc;
+    }
+
+    footer {
+      background: var(--jet-black);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EAS | VisionPrints</h1>
+    <p>Where Vision Meets Precision in Print</p>
+  </header>
+
+  <section class="section">
+    <h2>Our Core Services</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>Workforce Showcase Prints</h3>
+        <p>Large-format portraits and team banners highlighting the people behind your projects.</p>
+        <p class="price">Starting at $350 per print</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Project Milestone Prints</h3>
+        <p>Transform aerial maps, progress photos, or technical visuals into professional wall displays.</p>
+        <p class="price">24x36” – $400 | 36x48” – $600 | 48x72” – $950</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Environmental Identity Prints</h3>
+        <p>Branded wall graphics, murals, or workplace identity installations for bold environments.</p>
+        <p class="price">Canvas from $500 | Vinyl $18/sq ft | Mounted $22/sq ft</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Event & Exhibition Prints</h3>
+        <p>Command attention with posters, roll-up banners, and trade show backdrops.</p>
+        <p class="price">Poster Boards $250 | Roll-Up $350 | Backdrop $1,200</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Proposal Solutions</h3>
+        <p>Professional print & digital proposals designed to help businesses win bids.</p>
+        <p class="price">Digital $750+ | Hybrid $2,500+</p>
+      </div>
+
+      <div class="service-card">
+        <h3>VisionPrints Premium Package</h3>
+        <p>A turnkey showcase: portraits, milestone prints, and event visuals bundled together.</p>
+        <p class="price">Complete Package – $3,500</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <a href="mailto:kbyb@eyeamstudios.com">Request a Quote</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 EYE AM STUDIOS, LLC | VisionPrints Division
+  </footer>
+</body>
+</html>
 
