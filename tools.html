@@ -5,96 +5,210 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EYE AM STUDIOS | Tools</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #0D1B2A;
       color: #FFFFFF;
       line-height: 1.6;
     }
-    header {
-      background: #000000;
-      padding: 20px;
-      text-align: center;
+
+    /* Color Variables */
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --neon-cyan: #00ffff;
+      --white: #FFFFFF;
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-bg: rgba(255, 255, 255, 0.05);
     }
-    header h1 {
-      color: #00BFFF;
-      margin: 0;
-      font-size: 2rem;
-    }
+
+    /* Navigation */
     nav {
-      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
     }
-    nav a {
-      color: #FFFFFF;
-      margin: 0 15px;
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    nav h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: var(--white);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
     }
-    nav a:hover {
-      color: #00BFFF;
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      border-radius: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
+
+    nav ul li a:hover {
+      color: var(--jet-black);
+      transform: translateY(-2px);
+    }
+
+    nav ul li a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero */
     .hero {
       text-align: center;
-      padding: 60px 20px;
-      background: linear-gradient(135deg, #0D1B2A, #000000);
+      padding: 80px 20px;
+      background: linear-gradient(135deg, var(--midnight-blue), var(--jet-black));
     }
+
     .hero h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 15px;
-      color: #00BFFF;
+      background: linear-gradient(135deg, var(--white), var(--electric-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Sections */
     .section {
       padding: 40px 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #00BFFF;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--electric-cyan);
     }
+
     .tool-card {
-      background: #1a2535;
-      border-radius: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
       padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
     }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--electric-cyan);
+      box-shadow: 0 10px 30px rgba(0, 191, 255, 0.2);
+    }
+
     .tool-card h4 {
       margin-top: 0;
-      color: #FFFFFF;
+      color: var(--white);
+      font-size: 1.2rem;
     }
+
     .tool-card p {
       margin: 10px 0;
+      opacity: 0.9;
     }
+
+    /* Footer */
     footer {
       background: #000000;
       text-align: center;
       padding: 20px;
       font-size: 0.9rem;
       color: #999999;
+      border-top: 1px solid var(--glass-border);
+      margin-top: 2rem;
+    }
+
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--neon-cyan);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>EYE AM STUDIOS</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="edis.html">EDIS</a>
-      <a href="events.html">Events</a>
-      <a href="tools.html">Tools</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
 
+  <!-- Navigation -->
+  <nav>
+    <h1>EYE AM STUDIOS</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="edis.html">EDIS</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="VisionPrints.html">VisionPrints</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
   <div class="hero">
     <h2>Tools, Training & Development</h2>
     <p>Empowering businesses with digital tools, training systems, and resource libraries.</p>
   </div>
 
+  <!-- Sections -->
   <div class="section">
     <h3>Digital Business Tools</h3>
     <div class="tool-card">
@@ -127,8 +241,11 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
-    <p>© 2025 EYE AM STUDIOS, LLC. All rights reserved.</p>
+    <p>© 2025 <strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
+    <p>✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
   </footer>
+
 </body>
 </html>
