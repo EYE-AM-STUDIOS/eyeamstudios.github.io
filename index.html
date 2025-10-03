@@ -72,16 +72,30 @@
       margin: auto;
     }
 
+    /* Updated Hero */
     .hero {
-      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
-      color: var(--white);
+      background: linear-gradient(135deg, #f9fbfd, #e6f2fa);
+      color: var(--midnight-blue);
       text-align: center;
-      padding: 120px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
     }
 
     .hero h1 {
       font-size: 2.5em;
       margin-bottom: 20px;
+      color: var(--midnight-blue);
+    }
+
+    .hero p {
+      color: var(--jet-black);
+      font-size: 1.1em;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
     }
 
     .cta-btn {
@@ -168,7 +182,7 @@
 </head>
 <body>
 
-  <!-- Header with Correct Menu -->
+  <!-- Header -->
   <header>
     <h1>EYE AM STUDIOS</h1>
     <nav>
