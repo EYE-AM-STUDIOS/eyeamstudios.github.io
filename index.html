@@ -72,30 +72,34 @@
       margin: auto;
     }
 
-    /* Clean White Hero */
+    /* Hero Section */
     .hero {
       background: none;
-      color: var(--midnight-blue);
       text-align: center;
-      min-height: 100vh;
+      min-height: calc(100vh - 80px); /* account for header height */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 40px 20px;
+      padding: 100px 20px 60px 20px;
+      margin-top: 40px;
     }
 
     .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: var(--midnight-blue);
+      font-size: 3em;
+      margin-bottom: 25px;
+      color: #002B5B; /* brighter shade of midnight blue */
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .hero p {
       color: var(--jet-black);
-      font-size: 1.1em;
-      max-width: 800px;
-      margin: 0 auto 20px auto;
+      font-size: 1.15em;
+      max-width: 850px;
+      margin: 0 auto 25px auto;
+      line-height: 1.7;
     }
 
     .cta-btn {
