@@ -20,13 +20,50 @@
       line-height: 1.6;
     }
 
+    header {
+      background: var(--jet-black);
+      color: var(--white);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      margin: 0;
+      color: var(--electric-cyan);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--electric-cyan);
+    }
+
     h1, h2, h3 {
       color: var(--midnight-blue);
       margin-bottom: 0.5em;
-    }
-
-    p {
-      margin-bottom: 1em;
     }
 
     section {
@@ -39,7 +76,7 @@
       background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
       color: var(--white);
       text-align: center;
-      padding: 100px 20px;
+      padding: 120px 20px;
     }
 
     .hero h1 {
@@ -131,6 +168,22 @@
 </head>
 <body>
 
+  <!-- Header with Menu -->
+  <header>
+    <h1>EYE AM STUDIOS</h1>
+    <nav>
+      <ul>
+        <li><a href="#deliverables">Deliverables</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#visionprints">VisionPrints</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#usecases">Use Cases</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <!-- Hero -->
   <section class="hero">
     <h1>We don’t just deliver images — we deliver interactive digital solutions.</h1>
@@ -138,19 +191,7 @@
     <a href="#deliverables" class="cta-btn">👉 Explore Deliverables</a>
   </section>
 
-  <!-- Value Proposition -->
-  <section>
-    <h2>Why Interactive?</h2>
-    <p>Interactive deliverables go beyond static photos. They:</p>
-    <ul>
-      <li><strong>Create Clarity</strong> – turn complex data into intuitive visuals.</li>
-      <li><strong>Reduce Risk</strong> – provide verifiable, measurable documentation.</li>
-      <li><strong>Drive Action</strong> – empower teams to collaborate, decide, and move forward with confidence.</li>
-    </ul>
-    <p>🔍 Explore • 🎯 Engage • 🚀 Act</p>
-  </section>
-
-  <!-- Core Deliverables -->
+  <!-- Deliverables -->
   <section id="deliverables">
     <h2>Core Interactive Deliverables</h2>
     <div class="grid">
@@ -163,7 +204,7 @@
   </section>
 
   <!-- Services -->
-  <section>
+  <section id="services">
     <h2>Solutions & Services That Power Them</h2>
     <div class="grid">
       <div class="card"><h3>🚁 Aerial Imaging & Mapping</h3><p>Orthomosaics, DSMs, and inspections captured with enterprise-grade drone tech.</p></div>
@@ -174,7 +215,7 @@
   </section>
 
   <!-- VisionPrints -->
-  <section class="visionprints">
+  <section id="visionprints" class="visionprints">
     <h2>EAS | VisionPrints</h2>
     <p><em>“Showcasing Vision. Printing Precision.”</em></p>
     <p>VisionPrints is the Large Format Printing Solutions division of EYE AM STUDIOS, delivering professional-grade prints that bring clarity, identity, and impact to every space.</p>
@@ -187,7 +228,7 @@
   </section>
 
   <!-- Process -->
-  <section>
+  <section id="process">
     <h2>How It Works</h2>
     <div class="process-steps">
       <div class="step"><strong>1️⃣ Capture</strong> – Aerial & ground-based imaging collected with precision.</div>
@@ -198,7 +239,7 @@
   </section>
 
   <!-- Use Cases -->
-  <section>
+  <section id="usecases">
     <h2>Industry-Specific Use Cases</h2>
     <div class="grid">
       <div class="card"><h3>🏗️ Construction</h3><p>Monitor site progress with measurable imaging.</p></div>
@@ -210,7 +251,7 @@
   </section>
 
   <!-- FAQ -->
-  <section>
+  <section id="faq">
     <h2>FAQ</h2>
     <div class="faq">
       <p><strong>How accurate is the imaging?</strong> Our aerial mapping uses RTK/GCP workflows for survey-grade precision.</p>
@@ -221,7 +262,7 @@
   </section>
 
   <!-- Footer CTA -->
-  <footer>
+  <footer id="contact">
     <h2>Your Future. Our Focus.</h2>
     <a href="#contact" class="cta-btn">Request a Demo</a>
     <a href="#samples" class="cta-btn">See Interactive Samples</a>
