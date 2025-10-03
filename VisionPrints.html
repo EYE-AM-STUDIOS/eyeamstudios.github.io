@@ -19,24 +19,107 @@
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
+      --neon-cyan: #00ffff;
       --white: #FFFFFF;
     }
 
+    /* Navigation */
+    nav {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 191, 255, 0.25);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    nav h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      border-radius: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    nav ul li a:hover {
+      color: var(--jet-black);
+      transform: translateY(-2px);
+    }
+
+    nav ul li a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero */
     header {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px 60px;
       background: var(--jet-black);
     }
 
-    header h1 {
+    header h2 {
       font-size: 2.5rem;
-      color: var(--electric-cyan);
+      font-weight: 900;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--white), var(--electric-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     header p {
       font-size: 1.2rem;
-      margin-top: 10px;
       color: var(--white);
+      opacity: 0.9;
     }
 
     .section {
@@ -108,14 +191,6 @@
       background: #0090cc;
     }
 
-    footer {
-      background: var(--jet-black);
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #888;
-    }
-
     .pairing {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
@@ -152,14 +227,44 @@
       color: #dce3ed;
       font-size: 1rem;
     }
+
+    footer {
+      background: var(--jet-black);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Navigation -->
+  <nav>
+    <h1>EYE AM STUDIOS</h1>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="edis.html">EDIS</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="VisionPrints.html">VisionPrints</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
   <header>
-    <h1>EAS | VisionPrints</h1>
+    <h2>EAS | VisionPrints</h2>
     <p>Where Vision Meets Precision in Print</p>
   </header>
 
+  <!-- Services -->
   <section class="section">
     <h2>Our Core Services</h2>
     <div class="services">
@@ -216,8 +321,10 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     © 2025 EYE AM STUDIOS, LLC | VisionPrints Division
   </footer>
+
 </body>
 </html>
