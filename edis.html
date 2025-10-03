@@ -28,31 +28,7 @@
       --electric-cyan: #00BFFF;
       --neon-cyan: #00ffff;
       --white: #FFFFFF;
-      --light-gray: rgba(248, 249, 250, 0.1);
-      --glass-bg: rgba(255, 255, 255, 0.1);
       --glass-border: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Animated Background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 80%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(13, 27, 42, 0.2) 0%, transparent 50%);
-      animation: backgroundShift 20s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes backgroundShift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(-10px, -10px) scale(1.05); }
-      66% { transform: translate(10px, -5px) scale(0.95); }
     }
 
     /* Navigation */
@@ -141,22 +117,6 @@
       overflow: hidden;
     }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(0, 191, 255, 0.1), transparent);
-      animation: sweep 8s linear infinite;
-    }
-
-    @keyframes sweep {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
-
     header h2 {
       font-size: 3.2rem;
       font-weight: 900;
@@ -166,8 +126,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 50px rgba(0, 191, 255, 0.3);
-      position: relative;
-      z-index: 1;
     }
 
     header p {
@@ -175,8 +133,6 @@
       opacity: 0.9;
       max-width: 900px;
       margin: 0 auto;
-      position: relative;
-      z-index: 1;
       line-height: 1.7;
     }
 
@@ -190,43 +146,14 @@
     }
 
     .service-container {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--glass-border);
       border-radius: 25px;
       padding: 3rem;
       margin: 2rem 0;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
-    .service-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--electric-cyan), var(--neon-cyan));
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-      transform-origin: left;
-    }
-
-    .service-container:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 60px rgba(0, 191, 255, 0.2);
-      border-color: rgba(0, 191, 255, 0.3);
-    }
-
-    .service-container:hover::before {
-      transform: scaleX(1);
-    }
-
-    /* Section Images */
     .section-image {
       width: 100%;
       max-width: 800px;
@@ -234,19 +161,7 @@
       object-fit: cover;
       border-radius: 20px;
       margin-bottom: 2rem;
-      transition: all 0.4s ease;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
       border: 2px solid var(--glass-border);
-    }
-
-    .section-image:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 50px rgba(0, 191, 255, 0.2);
-      border-color: rgba(0, 191, 255, 0.4);
-    }
-
-    .section-image.portrait {
-      object-position: top center;
     }
 
     section h3 {
@@ -270,57 +185,6 @@
       margin-right: auto;
     }
 
-    /* Service Lists */
-    section ul {
-      list-style: none;
-      margin: 2rem 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    section ul li {
-      background: rgba(0, 191, 255, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 191, 255, 0.2);
-      border-radius: 15px;
-      padding: 1rem 1.5rem;
-      margin: 0.5rem 0;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    section ul li::before {
-      content: '◆';
-      color: var(--electric-cyan);
-      font-weight: bold;
-      margin-right: 0.8rem;
-      font-size: 0.8rem;
-    }
-
-    section ul li:hover {
-      background: rgba(0, 191, 255, 0.2);
-      transform: translateY(-3px);
-      border-color: var(--electric-cyan);
-      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.2);
-    }
-
-    /* Alternating Backgrounds */
-    .bg-variant-1 {
-      background: linear-gradient(135deg, rgba(13, 27, 42, 0.3), rgba(0, 0, 0, 0.2));
-    }
-
-    .bg-variant-2 {
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(13, 27, 42, 0.3));
-    }
-
     /* Footer */
     footer {
       background: rgba(0, 0, 0, 0.9);
@@ -329,100 +193,19 @@
       border-top: 1px solid var(--glass-border);
       color: var(--white);
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2rem 2rem;
       font-size: 1rem;
-      margin-top: 4rem;
-    }
-
-    footer p {
-      margin-bottom: 1rem;
-      opacity: 0.9;
+      margin-top: 2rem;
     }
 
     footer a {
       color: var(--electric-cyan);
       text-decoration: none;
-      transition: all 0.3s ease;
     }
 
     footer a:hover {
       color: var(--neon-cyan);
       text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
-      }
-
-      nav ul {
-        gap: 1rem;
-      }
-
-      header h2 {
-        font-size: 2.2rem;
-      }
-
-      header p {
-        font-size: 1.1rem;
-      }
-
-      section {
-        padding: 3rem 1rem;
-      }
-
-      .service-container {
-        padding: 2rem;
-      }
-
-      .section-image {
-        height: 300px;
-      }
-
-      section h3 {
-        font-size: 1.8rem;
-      }
-
-      section ul {
-        grid-template-columns: 1fr;
-        gap: 0.8rem;
-      }
-    }
-
-    /* Scroll animations */
-    @media (prefers-reduced-motion: no-preference) {
-      .service-container {
-        opacity: 0;
-        transform: translateY(50px);
-        animation: fadeInUp 0.8s ease forwards;
-      }
-
-      .service-container:nth-child(1) { animation-delay: 0.1s; }
-      .service-container:nth-child(2) { animation-delay: 0.3s; }
-      .service-container:nth-child(3) { animation-delay: 0.5s; }
-      .service-container:nth-child(4) { animation-delay: 0.7s; }
-
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    }
-
-    /* Loading placeholder for images */
-    .section-image {
-      background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
     }
   </style>
 </head>
@@ -435,8 +218,9 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="edis.html">EDIS</a></li>
       <li><a href="events.html">Events</a></li>
-      <li><a href="index.html#tools">Tools</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="VisionPrints.html">VisionPrints</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
   </nav>
 
@@ -446,204 +230,19 @@
     <p>Delivering advanced aerial and ground-based imaging solutions for construction, insurance, manufacturing, and commercial industries with precision, clarity, and professional excellence.</p>
   </header>
 
-  <!-- Aerial Services -->
-  <section class="bg-variant-1">
+  <!-- Example Service Section -->
+  <section>
     <div class="service-container">
       <img src="images/edis-aerial.jpg" alt="Aerial Services" class="section-image">
       <h3>Aerial Services</h3>
       <p>High-resolution aerial imaging for construction, industrial, and environmental projects using cutting-edge drone technology and advanced mapping solutions.</p>
-      <ul>
-        <li>Orthomosaic mapping</li>
-        <li>Aerial inspections</li>
-        <li>DSM/DTM models</li>
-        <li>Progress monitoring</li>
-      </ul>
-   <!-- CTA Button for Aerial Services Section -->
-
-<div style="text-align: center; margin-top: 3rem; padding-bottom: 2rem;">
-  <a href="https://clients.eyeamstudios.com/public/68d5e38d48101600216ca3ad" 
-     target="_blank"
-     style="display: inline-block; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan)); color: var(--jet-black); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3); z-index: 1;"
-     onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(0, 191, 255, 0.4)'"
-     onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0, 191, 255, 0.3)'">
-    Request Aerial Services
-  </a>
-</div>
-
-<style>
-/* Enhance button with shimmer effect */
-.aerial-cta-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.aerial-cta-btn:hover::before {
-  left: 100%;
-}
-</style>
     </div>
   </section>
 
-  <!-- Ground Services -->
-  <section class="bg-variant-2">
-    <div class="service-container">
-      <img src="images/edis-ground.jpg" alt="Ground Services" class="section-image">
-      <h3>Ground Services</h3>
-      <p>High-definition ground-based imaging for facilities, assets, and events delivering stunning visual documentation and comprehensive coverage.</p>
-      <ul>
-        <li>High-resolution photography</li>
-        <li>360° Imaging/Tours</li>
-        <li>Architectural documentation</li>
-        <li>Product and asset imaging</li>
-      </ul>
-       <!-- CTA Button for Ground Services Section -->
-
-<div style="text-align: center; margin-top: 3rem; padding-bottom: 2rem;">
-  <a href="https://clients.eyeamstudios.com/public/68d6ced6287118001f19360a" 
-     target="_blank"
-     style="display: inline-block; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan)); color: var(--jet-black); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3); z-index: 1;"
-     onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(0, 191, 255, 0.4)'"
-     onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0, 191, 255, 0.3)'">
-    Request Ground Services
-  </a>
-</div>
-</section>
-
-  <!-- Compliance & Safety -->
-  <section class="bg-variant-1">
-    <div class="service-container">
-      <img src="images/edis-safety.jpeg" alt="Compliance and Safety" class="section-image">
-      <h3>Compliance & Safety</h3>
-      <p>Supporting organizations with verifiable compliance and risk management imaging solutions that meet industry standards and regulatory requirements.</p>
-      <ul>
-        <li>OSHA compliance documentation</li>
-        <li>Insurance Visual Documentation & Imaging</li>
-        <li>Forensic reporting</li>
-        <li>Pre/post-construction inspections</li>
-      </ul>
-       <!-- CTA Button for Compliance & Safety Section -->
-
-<div style="text-align: center; margin-top: 3rem; padding-bottom: 2rem;">
-  <a href="https://clients.eyeamstudios.com/public/68d5e38d48101600216ca3ad" 
-     target="_blank"
-     style="display: inline-block; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan)); color: var(--jet-black); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3); z-index: 1;"
-     onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(0, 191, 255, 0.4)'"
-     onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0, 191, 255, 0.3)'">
-    Request Compliance & Safety
-  </a>
-</div>
-</section>
-<!-- Call to Action Section for EDIS -->
-
-<section style="background: linear-gradient(135deg, var(--midnight-blue), var(--jet-black)); padding: 3rem 2rem; text-align: center; margin-top: 2rem;">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <h2 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--white), var(--electric-cyan)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Ready to Elevate Your Project?</h2>
-
-```
-<p style="font-size: 1.3rem; margin-bottom: 2.5rem; color: #ffffff; line-height: 1.6;">
-  Get precise aerial mapping, comprehensive inspections, and advanced imaging solutions that deliver the data you need to make informed decisions with confidence.
-</p>
-
-<div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-  <a href="https://clients.eyeamstudios.com/public/68d5e38d48101600216ca3ad" 
-     target="_blank"
-     class="btn-primary" 
-     style="display: inline-block; margin: 0; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan)); color: var(--jet-black); font-weight: 700; font-size: 1.1rem; text-decoration: none; border-radius: 50px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3); z-index: 1;">
-   
-    Get Custom Quote
-  </a>
-</div>
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-  <div style="text-align: center;">
-    <div style="font-size: 2rem; color: var(--electric-cyan); margin-bottom: 0.5rem;">🎯</div>
-    <h4 style="color: var(--electric-cyan); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 700;">Precision Mapping</h4>
-    <p style="font-size: 1rem; color: #ffffff; line-height: 1.5;">Advanced GPS and imaging technology for accurate geospatial data</p>
-  </div>
-  
-  <div style="text-align: center;">
-    <div style="font-size: 2rem; color: var(--electric-cyan); margin-bottom: 0.5rem;">📊</div>
-    <h4 style="color: var(--electric-cyan); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 700;">Detailed Analysis</h4>
-    <p style="font-size: 1rem; color: #ffffff; line-height: 1.5;">Comprehensive reporting and data visualization for informed decisions</p>
-  </div>
-  
-  <div style="text-align: center;">
-    <div style="font-size: 2rem; color: var(--electric-cyan); margin-bottom: 0.5rem;">🚀</div>
-    <h4 style="color: var(--electric-cyan); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 700;">Rapid Deployment</h4>
-    <p style="font-size: 1rem; color: #ffffff; line-height: 1.5;">Quick mobilization and efficient data collection for time-sensitive projects</p>
-  </div>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- Reduced Footer Spacing -->
-
-<style>
-  footer {
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--glass-border);
-    color: var(--white);
-    text-align: center;
-    padding: 2rem 2rem;
-    font-size: 1rem;
-    margin-top: 1rem;
-  }
-
-  footer p {
-    margin-bottom: 1rem;
-    opacity: 0.9;
-  }
-
-  footer a {
-    color: var(--electric-cyan);
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  footer a:hover {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  }
-
-  /* Ensure CTA buttons have proper hover effects */
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(0, 191, 255, 0.4);
-  }
-
-  .btn-primary:hover::before {
-    left: 100%;
-  }
-</style>
-
   <!-- Footer -->
-  <footer id="contact">
+  <footer>
     <p><strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
-    <p>
-       ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> |
-      Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
-    </p>
+    <p>✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
   </footer>
 
 </body>
