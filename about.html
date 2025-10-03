@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About EYE AM STUDIOS</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background-color: #ffffff;
       color: #000000;
       line-height: 1.6;
@@ -18,60 +23,112 @@
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
+      --neon-cyan: #00ffff;
       --white: #FFFFFF;
       --light-gray: #f8f9fa;
+      --glass-border: rgba(0, 191, 255, 0.25);
     }
 
     /* Navigation */
     nav {
-      background: var(--jet-black);
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+
+    nav:hover {
+      background: rgba(0, 0, 0, 0.95);
     }
 
     nav h1 {
-      font-size: 1.4rem;
-      color: var(--electric-cyan);
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     nav ul li a {
       color: var(--white);
       text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
+      border-radius: 25px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
 
     nav ul li a:hover {
-      color: var(--electric-cyan);
+      color: var(--jet-black);
+      transform: translateY(-2px);
     }
 
+    nav ul li a:hover::before {
+      opacity: 1;
+    }
+
+    /* Hero */
     header {
       background: linear-gradient(180deg, var(--midnight-blue), var(--jet-black));
       color: var(--white);
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 5rem 2rem;
     }
 
     header h2 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: bold;
       margin-bottom: 1rem;
-      color: var(--electric-cyan);
+      background: linear-gradient(135deg, var(--white), var(--electric-cyan));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     header p {
-      font-size: 1.1rem;
-      margin-bottom: 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
     }
 
+    /* Content */
     section {
       padding: 4rem 2rem;
       max-width: 1100px;
@@ -92,8 +149,12 @@
       box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
     }
 
-    .about-block p {
-      margin-bottom: 1rem;
+    .about-block h3 {
+      color: var(--electric-cyan);
+    }
+
+    .about-block ul {
+      margin-left: 1.5rem;
     }
 
     footer {
@@ -102,11 +163,18 @@
       text-align: center;
       padding: 2rem 1rem;
       font-size: 0.9rem;
+      border-top: 1px solid var(--glass-border);
     }
 
     footer a {
       color: var(--electric-cyan);
       text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
   </style>
 </head>
@@ -116,9 +184,11 @@
   <nav>
     <h1>EYE AM STUDIOS</h1>
     <ul>
+      <li><a href="index.html">Home</a></li>
       <li><a href="edis.html">EDIS</a></li>
       <li><a href="events.html">Events</a></li>
       <li><a href="tools.html">Tools</a></li>
+      <li><a href="VisionPrints.html">VisionPrints</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
   </nav>
@@ -164,7 +234,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>EYE AM STUDIOS, LLC | Your Future. Our Focus.</p>
+    <p><strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
     <p>
       ✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | 
       Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a>
