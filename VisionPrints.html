@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EAS | VisionPrints</title>
+  <title>EDIS | Enhanced Digital Imaging Solutions</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,8 +11,9 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
       color: #ffffff;
-      background: linear-gradient(135deg, #000000 0%, #0D1B2A 60%, #1a365d 100%);
+      background: linear-gradient(135deg, #000000 0%, #0D1B2A 50%, #1a365d 100%);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     :root {
@@ -21,14 +22,14 @@
       --electric-cyan: #00BFFF;
       --neon-cyan: #00ffff;
       --white: #FFFFFF;
+      --glass-border: rgba(0,191,255,0.25);
     }
 
     /* Navigation */
     nav {
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0, 191, 255, 0.25);
+      border-bottom: 1px solid var(--glass-border);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -36,197 +37,69 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: all 0.3s ease;
-    }
-
-    nav:hover {
-      background: rgba(0, 0, 0, 0.95);
     }
 
     nav h1 {
       font-size: 1.6rem;
       font-weight: 800;
       background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-      animation: glow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 20px rgba(0,191,255,0.5);
     }
 
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
-      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
+    nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a {
-      color: var(--white);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      transition: all 0.3s ease;
+      color: var(--white); text-decoration: none; font-weight: 600;
+      padding: 0.5rem 1rem; border-radius: 25px; transition: 0.3s;
     }
-
-    nav ul li a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      border-radius: 25px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
-
     nav ul li a:hover {
+      background: linear-gradient(135deg,var(--electric-cyan),var(--neon-cyan));
       color: var(--jet-black);
-      transform: translateY(-2px);
-    }
-
-    nav ul li a:hover::before {
-      opacity: 1;
     }
 
     /* Hero */
     header {
       text-align: center;
-      padding: 80px 20px 60px;
-      background: var(--jet-black);
+      padding: 80px 20px;
+      background: linear-gradient(180deg,var(--midnight-blue),var(--jet-black));
     }
-
     header h2 {
-      font-size: 2.5rem;
-      font-weight: 900;
-      margin-bottom: 15px;
+      font-size: 2.8rem; font-weight: 900;
       background: linear-gradient(135deg, var(--white), var(--electric-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
     }
+    header p { font-size: 1.2rem; max-width: 900px; margin: auto; }
 
-    header p {
-      font-size: 1.2rem;
-      color: var(--white);
-      opacity: 0.9;
-    }
-
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* Sections */
+    section {
       padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
     }
-
-    .section h2 {
+    section h3 {
       font-size: 2rem;
       color: var(--electric-cyan);
       margin-bottom: 20px;
-      text-align: center;
     }
-
-    .services {
+    .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
       gap: 30px;
       margin-top: 30px;
     }
-
-    .service-card {
-      background: rgba(255, 255, 255, 0.05);
+    .card {
+      background: rgba(255,255,255,0.05);
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       transition: transform 0.3s;
     }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-    }
-
-    .service-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      color: var(--white);
-    }
-
-    .service-card p {
-      font-size: 1rem;
-      color: #dce3ed;
-      margin-bottom: 10px;
-    }
-
-    .service-card .price {
-      color: var(--electric-cyan);
-      font-weight: bold;
-    }
-
-    .cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .cta a {
-      background: var(--electric-cyan);
-      color: var(--jet-black);
-      padding: 15px 30px;
-      border-radius: 8px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .cta a:hover {
-      background: #0090cc;
-    }
-
-    .pairing {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 40px;
-      margin-top: 50px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .pairing h3 {
-      color: var(--electric-cyan);
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .pairing p {
-      color: #e2e8f0;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .pairing ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      max-width: 800px;
-    }
-
-    .pairing ul li {
-      background: rgba(0,0,0,0.4);
-      margin: 10px 0;
-      padding: 12px 18px;
-      border-radius: 8px;
-      color: #dce3ed;
-      font-size: 1rem;
-    }
+    .card:hover { transform: translateY(-6px); }
+    .card h4 { color: var(--white); margin-bottom: 10px; }
+    .card p { color: #dce3ed; }
 
     footer {
       background: var(--jet-black);
@@ -236,11 +109,7 @@
       color: #888;
       margin-top: 50px;
     }
-
-    footer a {
-      color: var(--electric-cyan);
-      text-decoration: none;
-    }
+    footer a { color: var(--electric-cyan); }
   </style>
 </head>
 <body>
@@ -260,70 +129,34 @@
 
   <!-- Hero -->
   <header>
-    <h2>EAS | VisionPrints</h2>
-    <p>Where Vision Meets Precision in Print</p>
+    <h2>Enhanced Digital Imaging Solutions (EDIS)</h2>
+    <p>Optimizing clarity, compliance, and operational excellence through aerial & ground-based imaging, 3D models, and interactive reporting.</p>
   </header>
 
-  <!-- Services -->
-  <section class="section">
-    <h2>Our Core Services</h2>
-    <div class="services">
-      <div class="service-card">
-        <h3>Workforce Showcase Prints</h3>
-        <p>Large-format portraits and team banners highlighting the people behind your projects.</p>
-        <p class="price">Starting at $350 per print</p>
-      </div>
-
-      <div class="service-card">
-        <h3>Project Milestone Prints</h3>
-        <p>Transform aerial maps, progress photos, or technical visuals into professional wall displays.</p>
-        <p class="price">24x36” – $400 | 36x48” – $600 | 48x72” – $950</p>
-      </div>
-
-      <div class="service-card">
-        <h3>Environmental Identity Prints</h3>
-        <p>Branded wall graphics, murals, or workplace identity installations for bold environments.</p>
-        <p class="price">Canvas from $500 | Vinyl $18/sq ft | Mounted $22/sq ft</p>
-      </div>
-
-      <div class="service-card">
-        <h3>Event & Exhibition Prints</h3>
-        <p>Command attention with posters, roll-up banners, and trade show backdrops.</p>
-        <p class="price">Poster Boards $250 | Roll-Up $350 | Backdrop $1,200</p>
-      </div>
-
-      <div class="service-card">
-        <h3>Proposal Solutions</h3>
-        <p>Professional print & digital proposals designed to help businesses win bids.</p>
-        <p class="price">Digital $750+ | Hybrid $2,500+</p>
-      </div>
-
-      <div class="service-card">
-        <h3>VisionPrints Premium Package</h3>
-        <p>A turnkey showcase: portraits, milestone prints, and event visuals bundled together.</p>
-        <p class="price">Complete Package – $3,500</p>
-      </div>
-    </div>
-
-    <div class="pairing">
-      <h3>How VisionPrints + EDIS Work Together</h3>
-      <p>By pairing our <strong>Enhanced Digital Imaging Solutions (EDIS)</strong> with VisionPrints, we provide end-to-end visual solutions that capture and showcase the full story of your work.</p>
-      <ul>
-        <li>📸 Professional Team & Individual Portraits – captured on-site, printed large-format for workforce showcases.</li>
-        <li>🚁 Aerial Imaging of Worksites – drone photography and mapping turned into milestone display prints.</li>
-        <li>🏗️ Ground-Based Imaging – equipment, facilities, and project documentation transformed into wall graphics.</li>
-        <li>📊 Integrated Proposal Solutions – use EDIS imagery inside VisionPrints-designed proposal packets to win bids.</li>
-      </ul>
-    </div>
-
-    <div class="cta">
-      <a href="mailto:kbyb@eyeamstudios.com">Request a Quote</a>
+  <!-- Deliverables -->
+  <section>
+    <h3>Core Interactive Deliverables</h3>
+    <div class="cards">
+      <div class="card"><h4>📑 Interactive Reports</h4><p>Annotated, clickable reports with AI-assisted insights.</p></div>
+      <div class="card"><h4>🌐 360° Imaging</h4><p>Immersive site and event walkthroughs accessible anywhere.</p></div>
+      <div class="card"><h4>🗺️ 3D Models & Point Clouds</h4><p>Explorable, measurable environments for planning and compliance.</p></div>
+      <div class="card"><h4>🔒 Client Portals</h4><p>Secure hubs for deliverables, collaboration, and downloads.</p></div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Industry Use Cases -->
+  <section>
+    <h3>Industry-Specific Solutions</h3>
+    <div class="cards">
+      <div class="card"><h4>🏗️ Construction</h4><p>Track progress, site safety, and inspections with measurable imaging.</p></div>
+      <div class="card"><h4>📋 Insurance</h4><p>Forensic-level documentation for claims and risk assessments.</p></div>
+      <div class="card"><h4>⚙️ Industrial</h4><p>Equipment monitoring, facility assessments, and compliance checks.</p></div>
+      <div class="card"><h4>🛡️ Safety</h4><p>Visual risk audits, training aids, and compliance reporting.</p></div>
+    </div>
+  </section>
+
   <footer>
-    © 2025 EYE AM STUDIOS, LLC | VisionPrints Division
+    <p>© 2025 EYE AM STUDIOS, LLC | Enhanced Digital Imaging Solutions</p>
   </footer>
 
 </body>
