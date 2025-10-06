@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EAS | Digital Solutions</title>
+  <style>
+    /* === Base Reset === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--jet-black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === Header === */
+    header {
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--electric-cyan);
+      letter-spacing: 1px;
+    }
+
+    nav {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid transparent;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      border-color: var(--electric-cyan);
+      color: var(--electric-cyan);
+    }
+
+    /* === Hero Section === */
+    .hero {
+      background: linear-gradient(135deg, var(--midnight-blue), #001a33);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      color: var(--electric-cyan);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* === Content Sections === */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h3 {
+      color: var(--electric-cyan);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--white);
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: rgba(13, 27, 42, 0.7);
+      border: 1px solid rgba(0, 191, 255, 0.2);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--electric-cyan);
+    }
+
+    .service-card h4 {
+      color: var(--electric-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* === Footer === */
+    footer {
+      background: var(--midnight-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0,191,255,0.2);
+    }
+
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2rem; }
+      nav a { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EYE AM STUDIOS | EAS Divisions</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="eais.html">Enhanced Aerial Imaging</a>
+      <a href="egis.html">Enhanced Ground Imaging</a>
+      <a href="events.html">Events</a>
+      <a href="digitalsolutions.html" class="active">Digital Solutions</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>EAS | Digital Solutions</h2>
+    <p>Enhanced Digital Infrastructure for Modern Businesses and Communities.  
+    We deliver professional-grade digital solutions that integrate technology, clarity, and compassion across industries — connecting people, preserving legacy, and ensuring precision through digital innovation.</p>
+  </section>
+
+  <section>
+    <h3>Our Core Sub-Services</h3>
+    <div class="service-list">
+      <div class="service-card">
+        <h4>EAS | Digital Memorial</h4>
+        <p>Compassionate online tributes that preserve memories and legacies.  
+        Each memorial includes custom galleries, guest submissions, and interactive tribute pages.</p>
+        <p><strong>Packages:</strong> Essential – $495 | Complete – $695 | Forever – $995</p>
+      </div>
+
+      <div class="service-card">
+        <h4>EAS | Builder’s Digital Warranty Archive</h4>
+        <p>Residential handover and warranty documentation captured through high-resolution imaging and 3D digital records.  
+        Designed for builders, homeowners, and warranty validation.</p>
+      </div>
+
+      <div class="service-card">
+        <h4>EAS | Digital Compliance Reports</h4>
+        <p>Visualized inspection and documentation systems integrating photo evidence, digital reporting, and interactive data visualization for businesses and municipalities.</p>
+      </div>
+
+      <div class="service-card">
+        <h4>EAS | VisionPrints</h4>
+        <p>Professional large-format visual deliverables — from posters and wall prints to engineering displays and project maps — powered by imagery from our EDIS & EAS divisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>How EAS | Digital Solutions Integrates</h3>
+    <p>Our Digital Solutions division works in harmony with our aerial and ground imaging systems, enabling seamless conversion of visual data into interactive deliverables. Whether it’s documenting industrial compliance, preserving a memorial, or presenting construction milestones, we provide complete visual clarity across every platform.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 EYE AM STUDIOS, LLC | Your Future. Our Focus.  
+      <br><a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
+  </footer>
+</body>
+</html>
