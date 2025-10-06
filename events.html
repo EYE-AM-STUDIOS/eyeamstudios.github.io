@@ -1,257 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Services | Live Experiences & Digital Media</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EAS | EVENTS</title>
+
+  <!-- Brand Colors -->
   <style>
-    /* Global Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      line-height: 1.6;
-      color: #ffffff;
-      background: linear-gradient(135deg, #000000 0%, #0D1B2A 50%, #1a365d 100%);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Color Variables */
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
-      --neon-cyan: #00ffff;
       --white: #FFFFFF;
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --glass-bg: rgba(255, 255, 255, 0.1);
     }
 
-    /* Navigation */
-    nav {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--jet-black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      padding: 20px;
+      text-align: center;
       position: sticky;
       top: 0;
-      z-index: 100;
-      transition: all 0.3s ease;
+      z-index: 1000;
     }
 
-    nav:hover {
-      background: rgba(0, 0, 0, 0.9);
-    }
-
-    nav h1 {
+    header h1 {
       font-size: 1.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-      animation: glow 2s ease-in-out infinite alternate;
+      letter-spacing: 2px;
+      color: var(--electric-cyan);
     }
 
-    @keyframes glow {
-      from { filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); }
-      to { filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8)); }
-    }
-
-    nav ul {
-      list-style: none;
+    nav {
       display: flex;
-      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
     }
 
-    nav ul li a {
+    nav a {
       color: var(--white);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      position: relative;
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      transition: all 0.3s ease;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: 0.3s;
     }
 
-    nav ul li a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      border-radius: 25px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
-
-    nav ul li a:hover {
+    nav a:hover, nav a.active {
+      background-color: var(--electric-cyan);
       color: var(--jet-black);
-      transform: translateY(-2px);
     }
 
-    nav ul li a:hover::before {
-      opacity: 1;
-    }
-
-    /* Hero Section */
-    header {
-      background: linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(0, 0, 0, 0.8));
-      color: var(--white);
+    /* ===== HERO ===== */
+    .hero {
       text-align: center;
-      padding: 6rem 2rem;
-      position: relative;
-      overflow: hidden;
+      padding: 100px 20px 60px;
+      background: linear-gradient(135deg, var(--midnight-blue), #1a365d);
     }
 
-    header h2 {
-      font-size: 3.2rem;
-      font-weight: 900;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--white), var(--electric-cyan), var(--neon-cyan));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 50px rgba(0, 191, 255, 0.3);
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      color: var(--electric-cyan);
+      text-transform: uppercase;
     }
 
-    header p {
+    .hero p {
       font-size: 1.3rem;
+      color: var(--white);
       opacity: 0.9;
-      max-width: 900px;
-      margin: 0 auto;
-      line-height: 1.7;
     }
 
-    /* CTA Button */
-    .btn-primary {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(135deg, var(--electric-cyan), var(--neon-cyan));
-      color: var(--jet-black);
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.4);
-    }
-
-    /* Section Styling */
+    /* ===== SECTIONS ===== */
     section {
-      padding: 5rem 2rem;
-      text-align: center;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
+      padding: 80px 20px;
     }
 
-    .event-types {
+    section h3 {
+      color: var(--electric-cyan);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      border-left: 4px solid var(--electric-cyan);
+      padding-left: 10px;
+    }
+
+    section p {
+      font-size: 1.05rem;
+      color: var(--white);
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background-color: var(--electric-cyan);
+      color: var(--jet-black);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 12px 30px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background-color: #00a3d9;
+    }
+
+    /* ===== GALLERY (LightGallery.js) ===== */
+    #lightgallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      gap: 15px;
     }
 
-    .event-type {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: left;
-      transition: all 0.4s ease;
+    #lightgallery a img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--midnight-blue);
+      transition: transform 0.3s ease;
     }
 
-    .event-type h4 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--electric-cyan);
-      margin-bottom: 1rem;
+    #lightgallery a img:hover {
+      transform: scale(1.05);
+      border-color: var(--electric-cyan);
     }
 
-    .event-type:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(0, 191, 255, 0.2);
-      border-color: rgba(0, 191, 255, 0.3);
-    }
-
-    /* Footer */
+    /* ===== FOOTER ===== */
     footer {
-      background: rgba(0, 0, 0, 0.9);
-      color: var(--white);
+      background-color: var(--midnight-blue);
       text-align: center;
-      padding: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid var(--glass-border);
+      padding: 40px 20px;
+      color: var(--white);
+      font-size: 0.95rem;
+      border-top: 2px solid var(--electric-cyan);
     }
 
-    footer a {
-      color: var(--electric-cyan);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--neon-cyan);
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 2rem; }
+      section { padding: 60px 15px; }
     }
   </style>
+
+  <!-- LightGallery CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
 </head>
+
 <body>
-
-  <!-- Navigation -->
-  <nav>
-    <h1>EYE AM STUDIOS</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="edis.html">EDIS</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="tools.html">Tools</a></li>
-      <li><a href="VisionPrints.html">VisionPrints</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero -->
   <header>
-    <h2>Event Services & Digital Media</h2>
-    <p>Capturing, documenting, and amplifying your most important moments with cinematic storytelling, immersive coverage, and professional excellence that preserves memories and elevates experiences.</p>
-    <a href="#services" class="btn-primary">Explore Our Services</a>
+    <h1>EYE AM STUDIOS</h1>
+    <nav>
+      <a href="index.html">EAS | Enhanced Aerial Imaging Solutions</a>
+      <a href="#">EAS | Enhanced Ground Imaging Solutions</a>
+      <a href="#" class="active">EAS | Events</a>
+      <a href="#">EAS | Digital Solutions</a>
+    </nav>
   </header>
 
-  <!-- Event Types -->
-  <section id="services">
-    <h2 style="font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--white), var(--electric-cyan)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 3rem;">Events We Cover</h2>
-    <div class="event-types">
-      <div class="event-type"><h4>Corporate Events</h4><p>Professional coverage for business gatherings, conferences, and corporate milestones.</p></div>
-      <div class="event-type"><h4>Private Celebrations</h4><p>Intimate coverage for life’s special milestones.</p></div>
-      <div class="event-type"><h4>Family Reunions</h4><p>Heartfelt documentation of connections and traditions.</p></div>
-      <div class="event-type"><h4>Community Events</h4><p>Vibrant coverage of gatherings, festivals, and local celebrations.</p></div>
-    </div>
+  <!-- HERO -->
+  <section class="hero">
+    <h2>EAS | EVENTS</h2>
+    <p>Capturing Experiences. Preserving Moments. Elevating Stories.</p>
   </section>
 
-  <!-- Footer -->
+  <!-- OVERVIEW -->
+  <section id="overview">
+    <h3>Our Approach</h3>
+    <p>
+      At EYE AM STUDIOS, every event is more than a moment—it's a story waiting to be preserved. 
+      We specialize in documenting professional gatherings, private celebrations, and special occasions 
+      with precision, creativity, and authenticity. From preparation to production, our event imaging 
+      process ensures every visual captures the energy, emotion, and excellence of your experience.
+    </p>
+  </section>
+
+  <!-- CORPORATE / PRIVATE / SPECIAL EVENTS -->
+  <section id="events">
+    <h3>Corporate / Private / Special Events</h3>
+    <p>
+      Whether it’s a corporate summit, private ceremony, or milestone celebration, 
+      our team delivers high-quality visual storytelling tailored to your event. 
+      From executive sessions to gala nights, we ensure that each frame reflects 
+      the essence of your occasion and the impact of your brand or story.
+    </p>
+
+    <div id="lightgallery">
+      <a href="images/event1.jpg"><img src="images/thumb1.jpg" alt="Event 1"></a>
+      <a href="images/event2.jpg"><img src="images/thumb2.jpg" alt="Event 2"></a>
+      <a href="images/event3.jpg"><img src="images/thumb3.jpg" alt="Event 3"></a>
+      <a href="images/event4.jpg"><img src="images/thumb4.jpg" alt="Event 4"></a>
+    </div>
+
+    <br />
+    <a class="cta-btn" href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/669ac08030fb0400193f107e" target="_blank">
+      Book Event Coverage
+    </a>
+  </section>
+
+  <!-- BEHIND THE SCENES -->
+  <section id="bts">
+    <h3>Behind-the-Scenes / Highlight Reels</h3>
+    <p>
+      Our Behind-the-Scenes and Highlight Reels showcase the craft, coordination, and creativity 
+      that bring each production to life. From setup to spotlight, our visual storytelling captures 
+      authentic interactions, team synergy, and every intricate detail that defines your event’s journey.
+    </p>
+
+    <a class="cta-btn" href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/669ac08030fb0400193f107e" target="_blank">
+      Request Highlight Reel
+    </a>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="contact">
+    <h3>Book Your Event Experience Today</h3>
+    <p>
+      Ready to elevate your event visuals? Partner with EYE AM STUDIOS for exceptional coverage, 
+      artistic direction, and professional-grade imaging that ensures your story is seen and remembered.
+    </p>
+    <a class="cta-btn" href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/669ac08030fb0400193f107e" target="_blank">
+      Schedule Consultation
+    </a>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p><strong>EYE AM STUDIOS, LLC</strong> | Your Future. Our Focus.</p>
-    <p>✉️ <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | Instagram: <a href="https://instagram.com/eyeamstudios" target="_blank">@eyeamstudios</a></p>
+    <p>© 2025 EYE AM STUDIOS, LLC | All Rights Reserved</p>
   </footer>
 
+  <script>
+    lightGallery(document.getElementById('lightgallery'), {
+      plugins: [lgZoom, lgThumbnail],
+      speed: 400,
+    });
+  </script>
 </body>
 </html>
