@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EAS | ENHANCED GROUND IMAGING SOLUTIONS</title>
+  <style>
+    /* === RESET === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* === COLOR VARIABLES === */
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--jet-black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* === HEADER === */
+    header {
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      padding: 20px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      color: var(--electric-cyan);
+      letter-spacing: 1px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--electric-cyan);
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+        url('https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+      text-align: center;
+      padding: 140px 20px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      color: var(--white);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      color: var(--electric-cyan);
+      margin-bottom: 25px;
+    }
+
+    .hero a {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .hero a:hover {
+      background: var(--white);
+    }
+
+    /* === ABOUT SECTION === */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.6s; }
+    section:nth-of-type(4) { animation-delay: 0.9s; }
+
+    h3.section-title {
+      font-size: 2em;
+      color: var(--electric-cyan);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p.section-desc {
+      color: #ddd;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    /* === SERVICES GRID === */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: var(--midnight-blue);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .service-card h4 {
+      color: var(--electric-cyan);
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+
+    .service-card p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 0.95em;
+    }
+
+    /* === INTERACTIVE DELIVERABLES === */
+    .interactive {
+      background: linear-gradient(135deg, var(--midnight-blue), #00111f);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .interactive h4 {
+      font-size: 1.5em;
+      color: var(--electric-cyan);
+      margin-bottom: 15px;
+    }
+
+    .interactive p {
+      color: #ddd;
+      margin-bottom: 25px;
+    }
+
+    .interactive img {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 12px;
+      border: 2px solid var(--electric-cyan);
+    }
+
+    /* === CTA SECTION === */
+    .cta {
+      text-align: center;
+      padding: 80px 20px;
+      background: var(--jet-black);
+      border-top: 1px solid var(--electric-cyan);
+    }
+
+    .cta h3 {
+      color: var(--electric-cyan);
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .cta a {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .cta a:hover {
+      background: var(--white);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--midnight-blue);
+      text-align: center;
+      padding: 30px;
+      color: #bbb;
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2em; }
+      .hero p { font-size: 1em; }
+      header h1 { font-size: 1.3em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>EYE AM STUDIOS | EAS DIVISION</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="eais.htm">Aerial Imaging</a>
+      <a href="egis.htm" style="color: var(--electric-cyan);">Ground Imaging</a>
+      <a href="event.html">Events</a>
+      <a href="digital.html">Digital Solutions</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>ENHANCED GROUND IMAGING SOLUTIONS</h2>
+    <p>Professional Imaging. Precision Documentation. Powerful Impact.</p>
+    <a href="#services">Explore Ground Imaging Services</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <h3 class="section-title">Clarity from the Ground Up</h3>
+    <p class="section-desc">
+      Our ground-based imaging solutions deliver unmatched accuracy and detail for industrial, commercial, and professional applications. 
+      From high-definition site documentation to immersive 360° visual walkthroughs, EAS | EGIS ensures every project is seen, understood, and presented with absolute clarity.
+    </p>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h3 class="section-title">Professional Ground Imaging Services</h3>
+    <div class="services">
+      <div class="service-card">
+        <h4>HD & HDR Imaging</h4>
+        <p>Capture technical detail and environmental accuracy for inspections, reports, and visual records with professional-grade HDR photography.</p>
+      </div>
+      <div class="service-card">
+        <h4>Commercial Portraits</h4>
+        <p>Professional on-site portraits and action shots for industrial, construction, and manufacturing professionals.</p>
+      </div>
+      <div class="service-card">
+        <h4>360° Documentation</h4>
+        <p>Create immersive, navigable documentation for compliance, marketing, and training through 360° ground imaging.</p>
+      </div>
+      <div class="service-card">
+        <h4>Visual Reporting</h4>
+        <p>Deliver precision-built PDF or web-based reports, complete with annotations, labels, and branded visuals for clients and inspectors.</p>
+      </div>
+      <div class="service-card">
+        <h4>EDIS + Aerial Integration</h4>
+        <p>Combine aerial and ground-based imaging for comprehensive digital documentation and enhanced project insight.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE DELIVERABLES -->
+  <section>
+    <div class="interactive">
+      <h4>Interactive Deliverables</h4>
+      <p>All imaging data seamlessly integrates with Pix4D, QGIS, and our custom EAS digital reporting tools — creating dynamic, client-accessible deliverables.</p>
+      <img src="https://images.unsplash.com/photo-1576267423429-56992463a5b9?auto=format&fit=crop&w=1600&q=80" alt="Ground Imaging Dashboard Preview">
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h3>Request a Ground Imaging Quote</h3>
+    <a href="https://www.eyeamstudios.com/contact">Get Started</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 EYE AM STUDIOS, LLC — All Rights Reserved.</p>
+    <p>
+      <a href="index.html">Home</a> |
+      <a href="eais.htm">Aerial</a> |
+      <a href="egis.htm">Ground</a> |
+      <a href="event.html">Events</a> |
+      <a href="digital.html">Digital Solutions</a>
+    </p>
+  </footer>
+
+</body>
+</html>
