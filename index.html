@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EYE AM STUDIOS | Interactive Deliverables</title>
   <style>
+    /* === Base Reset === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       --jet-black: #000000;
       --midnight-blue: #0D1B2A;
@@ -14,53 +17,111 @@
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
       background-color: var(--white);
       color: var(--jet-black);
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
+    /* === NAV BAR === */
     header {
-      background: var(--jet-black);
-      color: var(--white);
-      padding: 20px 40px;
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      padding: 15px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
 
-    header h1 {
-      font-size: 1.5em;
-      margin: 0;
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
       color: var(--electric-cyan);
+      letter-spacing: 1px;
     }
 
-    nav ul {
+    ul.menu {
       list-style: none;
       display: flex;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
+      gap: 30px;
     }
 
-    nav ul li {
-      display: inline;
+    ul.menu > li {
+      position: relative;
     }
 
-    nav ul li a {
-      text-decoration: none;
+    ul.menu > li > a {
       color: var(--white);
+      text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      padding: 8px;
+      transition: color 0.3s ease;
     }
 
-    nav ul li a:hover {
+    ul.menu > li > a:hover {
       color: var(--electric-cyan);
     }
 
+    /* === DROPDOWN MENUS === */
+    ul.submenu {
+      display: none;
+      position: absolute;
+      top: 38px;
+      left: 0;
+      background-color: var(--midnight-blue);
+      min-width: 250px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      flex-direction: column;
+    }
+
+    ul.submenu li {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    ul.submenu li:last-child { border-bottom: none; }
+
+    ul.submenu li a {
+      display: block;
+      padding: 10px 15px;
+      color: var(--white);
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    ul.submenu li a:hover {
+      background-color: rgba(0,191,255,0.15);
+      color: var(--electric-cyan);
+    }
+
+    ul.menu > li:hover > ul.submenu {
+      display: flex;
+    }
+
+    /* === BUTTON === */
+    .cta {
+      background-color: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta:hover {
+      background-color: var(--white);
+      color: var(--midnight-blue);
+    }
+
+    /* === PAGE CONTENT === */
     h1, h2, h3 {
       color: var(--midnight-blue);
       margin-bottom: 0.5em;
@@ -72,16 +133,15 @@
       margin: auto;
     }
 
-    /* Simplified Hero */
     .hero {
       text-align: center;
       padding: 80px 20px 60px 20px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e8f5ff 100%);
     }
 
     .hero h1 {
       font-size: 2.8em;
       margin-bottom: 20px;
-      color: var(--midnight-blue);
       font-weight: 700;
     }
 
@@ -104,7 +164,7 @@
       text-decoration: none;
       display: inline-block;
       margin-top: 20px;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .cta-btn:hover {
@@ -173,21 +233,67 @@
       margin-bottom: 20px;
       color: var(--electric-cyan);
     }
+
+    footer .cta-btn {
+      margin: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header with Updated Navigation -->
   <header>
-    <h1>EYE AM STUDIOS</h1>
     <nav>
-      <ul>
+      <div class="logo">EYE AM STUDIOS</div>
+      <ul class="menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="edis.html">EDIS</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="tools.html">Tools</a></li>
-        <li><a href="VisionPrints.html">VisionPrints</a></li>
         <li><a href="about.html">About</a></li>
+
+        <li>
+          <a href="#">Divisions ▾</a>
+          <ul class="submenu">
+            <li><a href="eas-aerial.html">EAS | Enhanced Aerial Imaging Solutions</a></li>
+            <li><a href="edis.html">EDIS | Enhanced Digital Imaging Solutions</a></li>
+            <li><a href="digital-solutions.html">EAS | Digital Solutions</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="events.html">Events ▾</a>
+          <ul class="submenu">
+            <li><a href="signature-events.html">Signature Event Services</a></li>
+            <li><a href="virtual-tours.html">360° Imaging & Virtual Tours</a></li>
+            <li><a href="conferences.html">Conferences & Exhibitions</a></li>
+            <li><a href="event-archives.html">Event Archives</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="solutions.html">Solutions ▾</a>
+          <ul class="submenu">
+            <li><a href="solutions-construction.html">For Construction Firms</a></li>
+            <li><a href="solutions-engineering.html">For Engineering Companies</a></li>
+            <li><a href="solutions-insurance.html">For Insurance & Adjusters</a></li>
+            <li><a href="solutions-industrial.html">For Industrial & Manufacturing</a></li>
+            <li><a href="solutions-memorial.html">For Memorial & Archival</a></li>
+            <li><a href="solutions-events.html">For Events & Exhibitions</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="portfolio.html">Portfolio ▾</a>
+          <ul class="submenu">
+            <li><a href="portfolio-aerial.html">Aerial Imaging & Mapping</a></li>
+            <li><a href="portfolio-ground.html">Ground-Based Imaging</a></li>
+            <li><a href="portfolio-360.html">360° Tours & Virtual Experiences</a></li>
+            <li><a href="portfolio-events.html">Events & Live Coverage</a></li>
+            <li><a href="portfolio-memorial.html">Memorial & Archival</a></li>
+            <li><a href="portfolio-prints.html">VisionPrints & Deliverables</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="book.html" class="cta">Book a Service</a></li>
       </ul>
     </nav>
   </header>
@@ -195,7 +301,7 @@
   <!-- Hero -->
   <section class="hero">
     <h1>We don’t just deliver images — we deliver interactive digital solutions.</h1>
-    <p>At <strong>EYE AM STUDIOS</strong>, we transform the way you see, plan, and act. From ground and aerial imaging to immersive models, our deliverables are designed to empower clarity, reduce risk, and accelerate decisions.</p>
+    <p>At <strong>EYE AM STUDIOS</strong>, we transform the way you see, plan, and act. From ground and aerial imaging to immersive models, our deliverables empower clarity, reduce risk, and accelerate decisions.</p>
     <a href="#deliverables" class="cta-btn">👉 Explore Deliverables</a>
   </section>
 
@@ -269,7 +375,7 @@
     </div>
   </section>
 
-  <!-- Footer CTA -->
+  <!-- Footer -->
   <footer id="contact">
     <h2>Your Future. Our Focus.</h2>
     <a href="#contact" class="cta-btn">Request a Demo</a>
