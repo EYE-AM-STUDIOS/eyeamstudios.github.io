@@ -1,1 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EAS | Enhanced Aerial Imaging Solutions</title>
+  <style>
+    /* === RESET === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --jet-black: #000000;
+      --midnight-blue: #0D1B2A;
+      --electric-cyan: #00BFFF;
+      --white: #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
+      padding: 20px 40px;
+      text-align: center;
+      border-bottom: 2px solid var(--electric-cyan);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: var(--electric-cyan);
+    }
+    nav {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--electric-cyan);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: radial-gradient(circle at center, rgba(0,191,255,0.15), transparent 70%);
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      font-size: 1.1rem;
+      color: #d0d0d0;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #00a7e0;
+    }
+
+    /* SERVICES */
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    section h3 {
+      font-size: 2rem;
+      color: var(--electric-cyan);
+      margin-bottom: 30px;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 30px 20px;
+      transition: transform 0.3s, border 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--electric-cyan);
+    }
+    .card h4 {
+      color: var(--white);
+      margin-bottom: 15px;
+    }
+    .card p {
+      color: #cfcfcf;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* PROJECT OVERVIEW */
+    .overview {
+      background: rgba(13,27,42,0.8);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .overview h3 {
+      color: var(--electric-cyan);
+      font-size: 2rem;
+      margin-bottom: 25px;
+    }
+    .overview p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: #d8d8d8;
+    }
+    .service-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .service-options label {
+      background: rgba(255,255,255,0.05);
+      padding: 10px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s, border 0.3s;
+      font-size: 0.95rem;
+    }
+    .service-options label:hover {
+      background: rgba(0,191,255,0.15);
+      border-color: var(--electric-cyan);
+    }
+
+    /* INDUSTRIES */
+    .industries {
+      background: rgba(0,0,0,0.4);
+    }
+    .industries ul {
+      list-style: none;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      color: #d0d0d0;
+    }
+    .industries li {
+      margin: 10px 0;
+      padding-left: 25px;
+      position: relative;
+    }
+    .industries li::before {
+      content: "•";
+      color: var(--electric-cyan);
+      position: absolute;
+      left: 5px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--jet-black);
+      color: #aaa;
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 2px solid var(--electric-cyan);
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: var(--electric-cyan);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 1.9rem; }
+      section h3 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EYE AM STUDIOS</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="eais.html" style="color:var(--electric-cyan)">Aerial Imaging</a>
+      <a href="egis.html">Ground Imaging</a>
+      <a href="events.html">Events</a>
+      <a href="digitalsolutions.html">Digital Solutions</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>EAS | Enhanced Aerial Imaging Solutions</h2>
+    <p>Professional-grade aerial mapping, inspection, and 3D modeling solutions engineered for precision, clarity, and actionable insight. Empowering construction, engineering, and industrial teams to visualize, measure, and plan with confidence.</p>
+    <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" class="btn" target="_blank">Submit Project Overview</a>
+  </section>
+
+  <section>
+    <h3>Core Mapping Packages</h3>
+    <div class="services">
+      <div class="card">
+        <h4>Aerial Mapping Essentials – $2,500</h4>
+        <p>High-resolution 2D orthomosaic mapping for visual documentation, planning, and inspection. Ideal for small to mid-size commercial or construction sites.</p>
+      </div>
+      <div class="card">
+        <h4>Aerial Mapping Advanced – $3,500</h4>
+        <p>RTK-enabled mapping with precision DSM deliverables. Designed for clients requiring elevation models and enhanced spatial accuracy.</p>
+      </div>
+      <div class="card">
+        <h4>Aerial Mapping Precision+ – $5,000</h4>
+        <p>RTK + GCP workflow with survey-grade accuracy, DSM, contours, and topographic deliverables. The premium solution for engineering and infrastructure projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="overview">
+    <h3>Project Overview Form</h3>
+    <p>Select your desired imaging focus below, then click “Submit Project Overview” to begin your consultation via HoneyBook.</p>
+
+    <div class="service-options">
+      <label>2D Mapping / Orthomosaic</label>
+      <label>Aerial Inspection</label>
+      <label>3D Modeling / Photogrammetry</label>
+      <label>Roof Survey / Damage Report</label>
+      <label>Progress Tracking</label>
+      <label>Other (please describe)</label>
+    </div>
+
+    <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" class="btn" target="_blank">Submit Project Overview</a>
+  </section>
+
+  <section class="industries">
+    <h3>Industries We Serve</h3>
+    <ul>
+      <li>Construction Firms & Engineering Companies</li>
+      <li>Insurance & Risk Assessment Providers</li>
+      <li>Industrial Manufacturing & Warehousing</li>
+      <li>Real Estate & Development Groups</li>
+      <li>Infrastructure & Energy Sectors</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2025 EYE AM STUDIOS, LLC – All Rights Reserved.</p>
+    <p>Your Future. Our Focus. | <a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a> | (813) 420-6581</p>
+  </footer>
+
+</body>
+</html>
 
