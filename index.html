@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EYE AM STUDIOS | Interactive Deliverables</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EYE AM STUDIOS | Your Future. Our Focus.</title>
   <style>
-    /* === Base Reset === */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -13,10 +12,10 @@
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
       --white: #FFFFFF;
+      --light-gray: #f8f9fa;
     }
 
     body {
-      margin: 0;
       font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
       background-color: var(--white);
       color: var(--jet-black);
@@ -24,7 +23,7 @@
       scroll-behavior: smooth;
     }
 
-    /* === NAV BAR === */
+    /* === HEADER === */
     header {
       background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
       padding: 15px 5%;
@@ -47,30 +46,28 @@
       letter-spacing: 1px;
     }
 
-    ul.menu {
+    .menu {
       list-style: none;
       display: flex;
       gap: 30px;
+      transition: all 0.3s ease;
     }
 
-    ul.menu > li {
-      position: relative;
-    }
+    .menu li { position: relative; }
 
-    ul.menu > li > a {
+    .menu a {
       color: var(--white);
       text-decoration: none;
       font-weight: 500;
       padding: 8px;
       transition: color 0.3s ease;
+      display: block;
     }
 
-    ul.menu > li > a:hover {
-      color: var(--electric-cyan);
-    }
+    .menu a:hover { color: var(--electric-cyan); }
 
-    /* === DROPDOWN MENUS === */
-    ul.submenu {
+    /* DROPDOWN */
+    .submenu {
       display: none;
       position: absolute;
       top: 38px;
@@ -80,34 +77,17 @@
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       flex-direction: column;
+      z-index: 1000;
     }
 
-    ul.submenu li {
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
+    .submenu li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .submenu li:last-child { border-bottom: none; }
+    .submenu li a:hover { background: rgba(0,191,255,0.15); color: var(--electric-cyan); }
+    .menu > li:hover > .submenu { display: flex; }
 
-    ul.submenu li:last-child { border-bottom: none; }
-
-    ul.submenu li a {
-      display: block;
-      padding: 10px 15px;
-      color: var(--white);
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    ul.submenu li a:hover {
-      background-color: rgba(0,191,255,0.15);
-      color: var(--electric-cyan);
-    }
-
-    ul.menu > li:hover > ul.submenu {
-      display: flex;
-    }
-
-    /* === BUTTON === */
+    /* CTA */
     .cta {
-      background-color: var(--electric-cyan);
+      background: var(--electric-cyan);
       color: var(--jet-black);
       padding: 8px 16px;
       border-radius: 20px;
@@ -115,60 +95,90 @@
       text-decoration: none;
       transition: all 0.3s ease;
     }
+    .cta:hover { background: var(--white); color: var(--midnight-blue); }
 
-    .cta:hover {
-      background-color: var(--white);
-      color: var(--midnight-blue);
+    /* === HAMBURGER === */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 25px; height: 3px;
+      background: var(--white);
+      transition: all 0.3s ease;
     }
 
-    /* === PAGE CONTENT === */
-    h1, h2, h3 {
-      color: var(--midnight-blue);
-      margin-bottom: 0.5em;
+    /* MOBILE MENU */
+    @media (max-width: 950px) {
+      .hamburger { display: flex; }
+      .menu {
+        position: absolute;
+        top: 65px; right: 0;
+        background: var(--midnight-blue);
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        gap: 0;
+      }
+      .menu.active { max-height: 1000px; }
+      .menu li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .submenu {
+        position: relative; top: 0; box-shadow: none; min-width: 100%;
+      }
+      .menu > li:hover > .submenu { display: none; }
+      .menu .submenu-toggle::after {
+        content: " ▾";
+        font-size: 0.8em;
+      }
+      .submenu-toggle.active + .submenu { display: flex; }
     }
 
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
+    /* === HERO === */
     .hero {
       text-align: center;
-      padding: 80px 20px 60px 20px;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e8f5ff 100%);
+      background: linear-gradient(135deg, #e8f5ff, #ffffff);
+      padding: 120px 20px 100px 20px;
     }
-
     .hero h1 {
+      color: var(--midnight-blue);
       font-size: 2.8em;
+      font-weight: 800;
       margin-bottom: 20px;
-      font-weight: 700;
     }
-
     .hero p {
-      color: var(--jet-black);
-      font-size: 1.15em;
-      max-width: 850px;
-      margin: 0 auto 25px auto;
-      line-height: 1.7;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2em;
+      color: #333;
+      line-height: 1.8;
     }
-
     .cta-btn {
       background: var(--electric-cyan);
       color: var(--white);
       padding: 15px 30px;
-      border: none;
       border-radius: 8px;
       font-size: 1.1em;
-      cursor: pointer;
       text-decoration: none;
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 30px;
       transition: all 0.3s ease;
     }
+    .cta-btn:hover { background: #0090cc; }
 
-    .cta-btn:hover {
-      background: #0090cc;
+    /* === SECTIONS === */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section h2 {
+      text-align: center;
+      color: var(--midnight-blue);
+      font-size: 2em;
+      margin-bottom: 40px;
     }
 
     .grid {
@@ -178,98 +188,54 @@
     }
 
     .card {
-      background: #f8f9fa;
+      background: var(--light-gray);
       border-radius: 10px;
-      padding: 25px;
+      padding: 30px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      transition: transform 0.2s ease;
     }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { color: var(--midnight-blue); margin-bottom: 10px; }
+    .card p { color: #333; }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .visionprints {
-      background: var(--midnight-blue);
-      color: var(--white);
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .visionprints h2 {
-      color: var(--electric-cyan);
-    }
-
-    .process-steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .step {
-      flex: 1;
-      min-width: 200px;
-      background: #f0f4f8;
-      padding: 20px;
-      border-left: 5px solid var(--electric-cyan);
-      border-radius: 6px;
-    }
-
-    .faq {
-      background: #f9fbfd;
-      padding: 40px;
-      border-radius: 10px;
-    }
-
+    /* === FOOTER === */
     footer {
       background: var(--jet-black);
       color: var(--white);
       text-align: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
-
-    footer h2 {
-      margin-bottom: 20px;
-      color: var(--electric-cyan);
-    }
-
-    footer .cta-btn {
-      margin: 10px;
-    }
+    footer h2 { color: var(--electric-cyan); margin-bottom: 15px; }
+    footer p { max-width: 600px; margin: 10px auto 25px auto; line-height: 1.6; }
+    footer .cta-btn { margin: 10px; }
   </style>
 </head>
+
 <body>
 
-  <!-- Header with Updated Navigation -->
+  <!-- HEADER -->
   <header>
     <nav>
       <div class="logo">EYE AM STUDIOS</div>
-      <ul class="menu">
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <ul class="menu" id="menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
 
+        <!-- Divisions -->
         <li>
-          <a href="#">Divisions ▾</a>
+          <a href="#" class="submenu-toggle">Divisions</a>
           <ul class="submenu">
             <li><a href="eas-aerial.html">EAS | Enhanced Aerial Imaging Solutions</a></li>
-            <li><a href="edis.html">EDIS | Enhanced Digital Imaging Solutions</a></li>
+            <li><a href="eas-ground.html">EAS | Enhanced Ground Imaging Solutions</a></li>
+            <li><a href="events.html">EAS | Events</a></li>
             <li><a href="digital-solutions.html">EAS | Digital Solutions</a></li>
           </ul>
         </li>
 
+        <!-- Solutions -->
         <li>
-          <a href="events.html">Events ▾</a>
-          <ul class="submenu">
-            <li><a href="signature-events.html">Signature Event Services</a></li>
-            <li><a href="virtual-tours.html">360° Imaging & Virtual Tours</a></li>
-            <li><a href="conferences.html">Conferences & Exhibitions</a></li>
-            <li><a href="event-archives.html">Event Archives</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <a href="solutions.html">Solutions ▾</a>
+          <a href="#" class="submenu-toggle">Solutions</a>
           <ul class="submenu">
             <li><a href="solutions-construction.html">For Construction Firms</a></li>
             <li><a href="solutions-engineering.html">For Engineering Companies</a></li>
@@ -280,8 +246,9 @@
           </ul>
         </li>
 
+        <!-- Portfolio -->
         <li>
-          <a href="portfolio.html">Portfolio ▾</a>
+          <a href="#" class="submenu-toggle">Portfolio</a>
           <ul class="submenu">
             <li><a href="portfolio-aerial.html">Aerial Imaging & Mapping</a></li>
             <li><a href="portfolio-ground.html">Ground-Based Imaging</a></li>
@@ -298,89 +265,90 @@
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
-    <h1>We don’t just deliver images — we deliver interactive digital solutions.</h1>
-    <p>At <strong>EYE AM STUDIOS</strong>, we transform the way you see, plan, and act. From ground and aerial imaging to immersive models, our deliverables empower clarity, reduce risk, and accelerate decisions.</p>
-    <a href="#deliverables" class="cta-btn">👉 Explore Deliverables</a>
+    <h1>Perception Shapes Identity</h1>
+    <p>EYE AM STUDIOS delivers enhanced digital imaging and creative solutions that help industries, professionals, and communities see clearly, plan precisely, and move forward with confidence.</p>
+    <a href="#divisions" class="cta-btn">Explore Divisions</a>
   </section>
 
-  <!-- Deliverables -->
-  <section id="deliverables">
-    <h2>Core Interactive Deliverables</h2>
+  <!-- DIVISIONS OVERVIEW -->
+  <section id="divisions">
+    <h2>Core Divisions</h2>
     <div class="grid">
-      <div class="card"><h3>📷 HD & UHD Imaging</h3><p>High-definition visuals that capture every detail with professional clarity.</p></div>
-      <div class="card"><h3>📑 Interactive Reports</h3><p>Dynamic reports with annotations, clickable layers, and AI-assisted notes.</p></div>
-      <div class="card"><h3>🌐 360° Imaging</h3><p>Immersive imaging for projects, facilities, or events — view anytime, from anywhere.</p></div>
-      <div class="card"><h3>🗺️ 3D Models & Point Clouds</h3><p>Fully measurable, explorable environments for precision and compliance.</p></div>
-      <div class="card"><h3>🔒 Client Portals</h3><p>Secure hubs for collaboration, progress tracking, and deliverable access.</p></div>
+      <div class="card">
+        <h3>🚁 EAS | Enhanced Aerial Imaging Solutions</h3>
+        <p>Enterprise-grade aerial imaging, mapping, and inspection for commercial, construction, and industrial clients. Deliverables include orthomosaics, DSMs, and 3D ground models.</p>
+      </div>
+      <div class="card">
+        <h3>📸 EAS | Enhanced Ground Imaging Solutions</h3>
+        <p>Professional-grade ground-based imaging services for industrial documentation, inspection, and portrait production — all captured in high-definition clarity.</p>
+      </div>
+      <div class="card">
+        <h3>🎥 EAS | Events</h3>
+        <p>Immersive event coverage, 360° imaging, and digital experiences designed to extend impact and preserve live moments through interactive replay and archival solutions.</p>
+      </div>
+      <div class="card">
+        <h3>💡 EAS | Digital Solutions</h3>
+        <p>Innovative digital infrastructure and memorialization tools that combine technology, clarity, and compassion — including VisionPrints, Digital Memorials, and Compliance Archives.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services">
-    <h2>Solutions & Services That Power Them</h2>
+  <!-- SOLUTIONS -->
+  <section id="solutions">
+    <h2>Industry Solutions</h2>
     <div class="grid">
-      <div class="card"><h3>🚁 Aerial Imaging & Mapping</h3><p>Orthomosaics, DSMs, and inspections captured with enterprise-grade drone tech.</p></div>
-      <div class="card"><h3>📸 Ground-Based Imaging</h3><p>Professional portraits, site documentation, and HD records with precision.</p></div>
-      <div class="card"><h3>🎥 Event Experiences</h3><p>Interactive coverage and replays that extend the impact of your event.</p></div>
-      <div class="card"><h3>📊 Digital Empowerment Tools</h3><p>Custom dashboards, PAS financial tools, and training resources.</p></div>
+      <div class="card"><h3>🏗️ Construction & Engineering</h3><p>Site mapping, 3D models, and safety documentation with RTK precision.</p></div>
+      <div class="card"><h3>🛡️ Insurance & Compliance</h3><p>Forensic-level imagery and pre/post loss documentation for claims and audits.</p></div>
+      <div class="card"><h3>⚙️ Industrial & Manufacturing</h3><p>Asset monitoring, maintenance visualization, and equipment inspection imaging.</p></div>
+      <div class="card"><h3>🎤 Events & Exhibitions</h3><p>Dynamic 360° visuals and interactive event archives for branding and replay.</p></div>
     </div>
   </section>
 
-  <!-- VisionPrints -->
-  <section id="visionprints" class="visionprints">
-    <h2>EAS | VisionPrints</h2>
-    <p><em>“Showcasing Vision. Printing Precision.”</em></p>
-    <p>VisionPrints is the Large Format Printing Solutions division of EYE AM STUDIOS, delivering professional-grade prints that bring clarity, identity, and impact to every space.</p>
+  <!-- PORTFOLIO PREVIEW -->
+  <section id="portfolio">
+    <h2>Explore Our Work</h2>
     <div class="grid">
-      <div class="card"><h3>👥 Workforce Showcases</h3><p>Large-scale portraits and team banners for industrial and corporate environments.</p></div>
-      <div class="card"><h3>📌 Project Displays</h3><p>Aerial imagery and progress visuals turned into impactful displays.</p></div>
-      <div class="card"><h3>🌆 Environmental Graphics</h3><p>Branded wall prints, lobby visuals, and workplace identity installations.</p></div>
-      <div class="card"><h3>🎤 Exhibition & Event Prints</h3><p>Posters, signage, and boards for trade shows and presentations.</p></div>
+      <div class="card"><h3>🗺️ Mapping & Modeling</h3><p>See how our aerial imaging transforms spatial data into measurable clarity.</p></div>
+      <div class="card"><h3>📷 Industrial Portraits</h3><p>Professional visuals for skilled trades and industrial professionals.</p></div>
+      <div class="card"><h3>🌐 360° Virtual Tours</h3><p>Experience environments interactively from any device.</p></div>
+      <div class="card"><h3>🖼️ VisionPrints</h3><p>High-impact large-format visuals and branded wall graphics.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="portfolio.html" class="cta-btn">View Full Portfolio</a>
     </div>
   </section>
 
-  <!-- Process -->
-  <section id="process">
-    <h2>How It Works</h2>
-    <div class="process-steps">
-      <div class="step"><strong>1️⃣ Capture</strong> – Aerial & ground-based imaging collected with precision.</div>
-      <div class="step"><strong>2️⃣ Process</strong> – Data refined into actionable reports and models.</div>
-      <div class="step"><strong>3️⃣ Deliver</strong> – Interactive solutions provided via secure client portal.</div>
-      <div class="step"><strong>4️⃣ Empower</strong> – Teams make informed, risk-reduced decisions.</div>
-    </div>
-  </section>
-
-  <!-- Use Cases -->
-  <section id="usecases">
-    <h2>Industry-Specific Use Cases</h2>
-    <div class="grid">
-      <div class="card"><h3>🏗️ Construction</h3><p>Monitor site progress with measurable imaging.</p></div>
-      <div class="card"><h3>🛡️ Insurance</h3><p>Accelerate claims with forensic-level documentation.</p></div>
-      <div class="card"><h3>⚙️ Industrial</h3><p>Reduce downtime with precise equipment documentation.</p></div>
-      <div class="card"><h3>🎥 Events</h3><p>Extend impact with immersive replays and 360° coverage.</p></div>
-      <div class="card"><h3>🖼️ VisionPrints</h3><p>Showcase people, projects, and environments with bold prints.</p></div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>FAQ</h2>
-    <div class="faq">
-      <p><strong>How accurate is the imaging?</strong> Our aerial mapping uses RTK/GCP workflows for survey-grade precision.</p>
-      <p><strong>What’s your turnaround time?</strong> Most projects are delivered within 3–5 business days.</p>
-      <p><strong>How secure are client deliverables?</strong> Every client portal is encrypted with secure access controls.</p>
-      <p><strong>Do you offer scalable packages?</strong> Yes — from single inspections to enterprise-wide documentation.</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact">
+  <!-- FOOTER -->
+  <footer>
     <h2>Your Future. Our Focus.</h2>
-    <a href="#contact" class="cta-btn">Request a Demo</a>
-    <a href="#samples" class="cta-btn">See Interactive Samples</a>
+    <p>EYE AM STUDIOS is an Enhanced Digital Solutions company built on the principle that perception shapes identity. We merge technology, creativity, and precision to help you see clearly and act decisively.</p>
+    <a href="contact.html" class="cta-btn">Get in Touch</a>
+    <a href="book.html" class="cta-btn">Book a Service</a>
   </footer>
 
+  <!-- JS -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    const submenuToggles = document.querySelectorAll('.submenu-toggle');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      hamburger.classList.toggle('open');
+    });
+
+    submenuToggles.forEach(toggle => {
+      toggle.addEventListener('click', e => {
+        if (window.innerWidth <= 950) {
+          e.preventDefault();
+          toggle.classList.toggle('active');
+          const submenu = toggle.nextElementSibling;
+          submenu.classList.toggle('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
