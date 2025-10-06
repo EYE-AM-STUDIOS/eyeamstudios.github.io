@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EAS | Enhanced Aerial Imaging Solutions</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin: 0; color: #000; background-color: #fff; }
+    header, footer { background: linear-gradient(135deg,#000,#0D1B2A); color: #fff; }
+    .logo { color: #00BFFF; font-weight: 700; font-size: 1.3em; padding: 20px; text-align: center; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 120px 20px;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.45;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero h1 { font-size: 2.8em; margin-bottom: 15px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+    .hero p { font-size: 1.2em; line-height: 1.7; margin-bottom: 35px; color: #f1f1f1; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+
+    .cta-btn {
+      background: #00BFFF;
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 15px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover { background: #009dd0; }
+
+    /* Content Sections */
+    section { max-width: 1100px; margin: auto; padding: 70px 20px; }
+    h2 { color: #0D1B2A; text-align: center; margin-bottom: 40px; font-size: 2em; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card h3 { color: #0D1B2A; margin-bottom: 10px; }
+    .card p { font-size: 1em; line-height: 1.6; color: #333; }
+
+    /* Project Overview Section */
+    .overview {
+      background: linear-gradient(135deg, #e8f5ff, #ffffff);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .overview h2 { color: #0D1B2A; margin-bottom: 20px; }
+    .overview p { max-width: 700px; margin: 0 auto 40px; font-size: 1.1em; color: #333; }
+    .service-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .service-options label {
+      background: #f0f8ff;
+      border: 1px solid #00BFFF;
+      color: #0D1B2A;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .service-options label:hover {
+      background: #00BFFF;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer { text-align: center; padding: 60px 20px; }
+    footer h2 { color: #00BFFF; margin-bottom: 10px; }
+    footer p { color: #d0d0d0; max-width: 700px; margin: 0 auto 25px; line-height: 1.6; }
+    footer .cta-btn { background: #00BFFF; color: #fff; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      h2 { font-size: 1.6em; }
+      .cta-btn { padding: 12px 24px; font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">EYE AM STUDIOS</div>
+  </header>
+
+  <!-- Hero Section with Video -->
+  <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="aerial-footage.mp4" type="video/mp4">
+      <!-- Add your aerial footage video here -->
+    </video>
+    <div class="hero-content">
+      <h1>EAS | Enhanced Aerial Imaging Solutions</h1>
+      <p>Delivering precision aerial mapping, inspections, and documentation for commercial, construction, and industrial clients using enterprise-grade drone technology.</p>
+      <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" target="_blank" class="cta-btn">Submit Project Overview</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section>
+    <h2>Core Aerial Services</h2>
+    <div class="grid">
+      <div class="card"><h3>📍 Orthomosaic Mapping</h3><p>High-resolution georeferenced imagery for planning and monitoring.</p></div>
+      <div class="card"><h3>🌄 3D Modeling & DSM</h3><p>Generate detailed elevation and surface data for analysis.</p></div>
+      <div class="card"><h3>🔎 Aerial Inspections</h3><p>Capture structural and asset visuals safely and efficiently.</p></div>
+      <div class="card"><h3>🛰️ RTK Precision</h3><p>Survey-grade accuracy using RTK and GCP workflows.</p></div>
+    </div>
+    <div style="text-align:center;">
+      <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" target="_blank" class="cta-btn">Book an Aerial Mission</a>
+    </div>
+  </section>
+
+  <!-- Project Overview -->
+  <section class="overview">
+    <h2>Project Overview Form</h2>
+    <p>Select your desired imaging focus below, then click “Submit Project Overview” to begin your consultation via HoneyBook.</p>
+
+    <div class="service-options">
+      <label>2D Mapping / Orthomosaic</label>
+      <label>Aerial Inspection</label>
+      <label>3D Modeling / Photogrammetry</label>
+      <label>Roof Survey / Damage Report</label>
+      <label>Progress Tracking</label>
+      <label>Other (please describe)</label>
+    </div>
+
+    <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" target="_blank" class="cta-btn">Submit Project Overview</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h2>Your Future. Our Focus.</h2>
+    <p>Enhancing clarity from above with precision aerial imaging and analysis.</p>
+    <a href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/6772a2fae5b113002d96b03a" target="_blank" class="cta-btn">Contact Us</a>
+    <p style="margin-top:25px;font-size:0.9em;">© 2025 EYE AM STUDIOS, LLC | FAA-Certified Drone Pilot | kbyb@eyeamstudios.com | (813) 420-6581</p>
+  </footer>
+
+</body>
+</html>
