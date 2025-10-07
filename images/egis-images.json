@@ -1,0 +1,8 @@
+[
+  { "medium": "images/egisimage0.jpg", "thumb": "images/egisimage0.jpg", "title": "Ground Imaging 0", "caption": "Inspection context imagery", "alt": "Ground imaging sample 0" },
+  { "medium": "images/egisimage1.jpg", "thumb": "images/egisimage1.jpg", "title": "Ground Imaging 1", "caption": "Equipment detail capture", "alt": "Ground imaging sample 1" },
+  { "medium": "images/egisimage2.jpg", "thumb": "images/egisimage2.jpg", "title": "Ground Imaging 2", "caption": "Site documentation frame", "alt": "Ground imaging sample 2" },
+  { "medium": "images/egisimage3.jpg", "thumb": "images/egisimage3.jpg", "title": "Ground Imaging 3", "caption": "Compliance documentation", "alt": "Ground imaging sample 3" },
+  { "medium": "images/egisimage4.jpg", "thumb": "images/egisimage4.jpg", "title": "Ground Imaging 4", "caption": "Process visualization", "alt": "Ground imaging sample 4" },
+  { "medium": "images/egisimage5.jpg", "thumb": "images/egisimage5.jpg", "title": "Ground Imaging 5", "caption": "Operational scene", "alt": "Ground imaging sample 5" }
+]

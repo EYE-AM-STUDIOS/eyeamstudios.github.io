@@ -339,7 +339,35 @@
       .hero p { font-size: 1em; }
       header h1 { font-size: 1.3em; }
     }
+
+    /* === GALLERY GRID (LightGallery) === */
+    .gallery-grid {
+      display: grid;
+      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 10px;
+    }
+    .gallery-grid a { text-decoration: none; color: inherit; display: block; }
+    .gallery-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--midnight-blue);
+      transition: transform .3s ease, border-color .3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); border-color: var(--electric-cyan); }
+    .wm { position: relative; }
+    .wm::after { content: "EYE AM STUDIOS"; position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255,255,255,0.15); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 24px; pointer-events: none; mix-blend-mode: lighten; }
+    .lg-download { display: none !important; }
   </style>
+  <!-- LightGallery CSS/JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js" defer></script>
 </head>
 <body>
 
@@ -419,6 +447,14 @@
     </div>
   </section>
 
+  <!-- GROUND PROJECT GALLERY -->
+  <section>
+    <h3 class="section-title">Ground Project Gallery</h3>
+    <p class="section-desc" style="color:#ddd">A selection of ground-based imaging frames for inspections, documentation, and compliance.</p>
+    <div id="lg-egis" class="gallery-grid" aria-live="polite"></div>
+    <p style="text-align:center; color:#aaa; font-size:0.9rem; margin-top:10px;">© EYE AM STUDIOS, LLC — Viewing only. Reproduction and download prohibited.</p>
+  </section>
+
   <!-- CTA -->
   <section class="cta">
     <h3>Request a Ground Imaging Quote</h3>
@@ -457,6 +493,51 @@
           submenu.classList.toggle('active');
         }
       });
+    });
+  </script>
+  <script>
+    // Build EGIS gallery from JSON and initialize LightGallery
+    window.addEventListener('DOMContentLoaded', function () {
+      const el = document.getElementById('lg-egis');
+      if (!el) return;
+      fetch('images/egis-images.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(items => {
+          if (!Array.isArray(items)) return;
+          const frag = document.createDocumentFragment();
+          items.forEach(item => {
+            if (!item) return;
+            const medium = item.medium;
+            const thumb = item.thumb || medium;
+            if (!medium) return;
+            const a = document.createElement('a');
+            a.href = encodeURI(medium);
+            const title = item.title || '';
+            const caption = item.caption || '';
+            const terms = '<small style="opacity:.85">Viewing only — © EYE AM STUDIOS, LLC. Reproduction or download prohibited.</small>';
+            a.setAttribute('data-sub-html', `<div>${title ? `<h4>${title}</h4>` : ''}${caption ? `<p>${caption}</p>` : ''}${terms}</div>`);
+            const img = document.createElement('img');
+            img.src = encodeURI(thumb);
+            img.alt = item.alt || title || 'Ground imaging';
+            img.loading = 'lazy';
+            img.setAttribute('draggable', 'false');
+            img.classList.add('wm');
+            a.appendChild(img);
+            frag.appendChild(a);
+          });
+          el.appendChild(frag);
+          if (typeof lightGallery === 'function') {
+            lightGallery(el, { plugins: window.lgZoom && window.lgThumbnail ? [lgZoom, lgThumbnail] : [], speed: 400, selector: 'a', thumbnail: true, zoom: true, download: false });
+          }
+        })
+        .catch(() => {});
+
+      // Disable right-click on gallery and lightbox
+      document.addEventListener('contextmenu', function (e) {
+        if (e.target && (e.target.closest && (e.target.closest('#lg-egis') || e.target.closest('.lg-outer')))) {
+          e.preventDefault();
+        }
+      }, { capture: true });
     });
   </script>
 </body>
