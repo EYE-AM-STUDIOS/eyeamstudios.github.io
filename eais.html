@@ -253,6 +253,8 @@
       user-select: none;
       -webkit-user-drag: none;
     }
+    /* Ensure anchors don't show default link styling if an img fails */
+    .gallery-grid a { text-decoration: none; color: inherit; display: block; }
     /* Watermark overlay on thumbs */
     .wm { position: relative; }
     .wm::after {
@@ -309,7 +311,7 @@
   <!-- Hero Section with Video -->
   <section class="hero">
     <!-- Temporarily using a static hero background to ensure readability until video asset is added -->
-  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('images/edis-aerial.jpg') center/cover no-repeat;"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('images/aerialhero.jpg') center/cover no-repeat;"></div>
     <div class="hero-content">
       <h1>EAS | Enhanced Aerial Imaging Solutions</h1>
       <p>Delivering precision aerial mapping, inspections, and documentation for commercial, construction, and industrial clients using enterprise-grade drone technology.</p>
@@ -401,18 +403,26 @@
           items.forEach(item => {
             if (!item || !item.src || !/aerial/i.test(item.src)) return;
             const a = document.createElement('a');
-            // Use medium-sized public image in lightbox; keep full src private/offline
-            a.href = item.medium || item.src;
+            // Use medium-sized public image in lightbox; fallback to placeholder if provided
+            const medium = item.medium || item.placeholderMedium || item.src;
+            const thumb = item.thumb || item.placeholderThumb || medium;
+            a.href = encodeURI(medium);
             const title = item.title ? String(item.title) : '';
             const caption = item.caption ? String(item.caption) : '';
             const terms = '<small style="opacity:.85">Viewing only — © EYE AM STUDIOS, LLC. Reproduction or download prohibited.</small>';
             a.setAttribute('data-sub-html', `<div>${title ? `<h4>${title}</h4>` : ''}${caption ? `<p>${caption}</p>` : ''}${terms}</div>`);
             const img = document.createElement('img');
             img.loading = 'lazy';
-            img.src = item.thumb || item.src;
+            img.src = encodeURI(thumb);
             img.alt = item.alt || title || 'Aerial image';
             img.setAttribute('draggable', 'false');
             img.classList.add('wm');
+            // Fallback on error
+            img.addEventListener('error', function () {
+              if (item.placeholderThumb && img.src !== item.placeholderThumb) {
+                img.src = item.placeholderThumb;
+              }
+            });
             a.appendChild(img);
             frag.appendChild(a);
           });

@@ -1,10 +1,36 @@
 [
   {
-    "src": "images/edis-aerial.jpg",
-    "medium": "images/edis-aerial.jpg",
-    "thumb": "images/edis-aerial.jpg",
-    "title": "Orthomosaic Overview",
-    "caption": "High-resolution aerial site mapping",
-    "alt": "Orthomosaic aerial mapping overview"
+    "src": "images/aerialhero.jpg",
+    "medium": "images/aerialhero.jpg",
+    "thumb": "images/aerialhero.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=400&q=60",
+    "title": "Aerial Hero Frame",
+    "caption": "High-altitude overview",
+    "alt": "Aerial hero frame"
+  },
+  {
+    "src": "images/aerialortholmage1.jpg",
+    "medium": "images/aerialortholmage1.jpg",
+    "thumb": "images/aerialortholmage1.jpg",
+    "title": "Orthomosaic Image 1",
+    "caption": "Site orthomosaic capture",
+    "alt": "Orthomosaic aerial image 1"
+  },
+  {
+    "src": "images/aerialortholmage2.jpg",
+    "medium": "images/aerialortholmage2.jpg",
+    "thumb": "images/aerialortholmage2.jpg",
+    "title": "Orthomosaic Image 2",
+    "caption": "Elevation and surface detail",
+    "alt": "Orthomosaic aerial image 2"
+  },
+  {
+    "src": "images/aerialortholmage3.jpg",
+    "medium": "images/aerialortholmage3.jpg",
+    "thumb": "images/aerialortholmage3.jpg",
+    "title": "Orthomosaic Image 3",
+    "caption": "Photogrammetry set",
+    "alt": "Orthomosaic aerial image 3"
   }
 ]
