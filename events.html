@@ -224,12 +224,31 @@
       border-radius: 8px;
       border: 2px solid var(--midnight-blue);
       transition: transform 0.3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     #lightgallery a img:hover {
       transform: scale(1.05);
       border-color: var(--electric-cyan);
     }
+
+    /* Watermark overlay */
+    .wm { position: relative; }
+    .wm::after {
+      content: "EYE AM STUDIOS";
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      color: rgba(255,255,255,0.15);
+      font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 24px;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+    }
+
+    /* Hide download button in LG toolbar */
+    .lg-download { display: none !important; }
 
     /* ===== FOOTER ===== */
     footer {
@@ -308,12 +327,7 @@
       the essence of your occasion and the impact of your brand or story.
     </p>
 
-    <div id="lightgallery">
-      <a href="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=400&q=60" alt="Event audience"></a>
-      <a href="https://images.unsplash.com/photo-1515165562835-c3b8b0e0b995?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1515165562835-c3b8b0e0b995?auto=format&fit=crop&w=400&q=60" alt="Live performance"></a>
-      <a href="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=400&q=60" alt="Conference hall"></a>
-      <a href="https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=1600&q=80"><img src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=400&q=60" alt="DJ event lighting"></a>
-    </div>
+    <div id="lightgallery" aria-live="polite"></div>
 
     <br />
     <a class="cta-btn" href="https://www.honeybook.com/widget/eyeamstudios_146045/cf_id/669ac08030fb0400193f107e" target="_blank">
@@ -353,10 +367,44 @@
   </footer>
 
   <script>
-    lightGallery(document.getElementById('lightgallery'), {
-      plugins: [lgZoom, lgThumbnail],
-      speed: 400,
-    });
+    const evEl = document.getElementById('lightgallery');
+    if (evEl) {
+      // Build from JSON manifest so filenames can reflect page usage
+      fetch('images/events-images.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(items => {
+          if (!Array.isArray(items)) return;
+          const frag = document.createDocumentFragment();
+          items.forEach(item => {
+            if (!item) return;
+            const a = document.createElement('a');
+            const medium = item.medium || item.placeholderMedium;
+            const thumb = item.thumb || item.placeholderThumb || medium;
+            if (!medium) return;
+            a.href = medium; // public viewing size
+            const title = item.title ? String(item.title) : '';
+            const caption = item.caption ? String(item.caption) : '';
+            const terms = '<small style="opacity:.85">Viewing only — © EYE AM STUDIOS, LLC. Reproduction or download prohibited.</small>';
+            a.setAttribute('data-sub-html', `<div>${title ? `<h4>${title}</h4>` : ''}${caption ? `<p>${caption}</p>` : ''}${terms}</div>`);
+            const img = document.createElement('img');
+            img.src = thumb;
+            img.alt = item.alt || title || 'Event image';
+            img.loading = 'lazy';
+            img.setAttribute('draggable', 'false');
+            img.classList.add('wm');
+            a.appendChild(img);
+            frag.appendChild(a);
+          });
+          evEl.appendChild(frag);
+          lightGallery(evEl, {
+            plugins: [lgZoom, lgThumbnail],
+            speed: 400,
+            download: false,
+            selector: 'a'
+          });
+        })
+        .catch(() => {/* silent */});
+    }
   </script>
 
   <!-- JS -->
@@ -380,6 +428,14 @@
         }
       });
     });
+
+    // Add watermark class to thumbnails and block context menu
+    // Watermark class added during JSON build above
+    document.addEventListener('contextmenu', function (e) {
+      if (e.target && (e.target.closest && (e.target.closest('#lightgallery') || e.target.closest('.lg-outer')))) {
+        e.preventDefault();
+      }
+    }, { capture: true });
   </script>
 </body>
 </html>

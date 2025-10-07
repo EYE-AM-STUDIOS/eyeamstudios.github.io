@@ -250,6 +250,21 @@
       border-radius: 8px;
       border: 2px solid var(--midnight-blue);
       transition: transform .3s ease, border-color .3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    /* Watermark overlay on thumbs */
+    .wm { position: relative; }
+    .wm::after {
+      content: "EYE AM STUDIOS";
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      color: rgba(255,255,255,0.15);
+      font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 24px;
+      pointer-events: none;
+      mix-blend-mode: lighten;
     }
     .gallery-grid img:hover { transform: scale(1.03); border-color: var(--electric-cyan); }
     /* LightGallery overlay tweaks */
@@ -257,6 +272,8 @@
     .lg-toolbar .lg-icon, .lg-next, .lg-prev { color: var(--electric-cyan); }
     .lg-counter { color: #e6f5ff; }
     .lg-sub-html { color: #e6f5ff; background: linear-gradient(180deg, rgba(13,27,42,0.75), rgba(0,0,0,0.75)); }
+    /* Hide download control explicitly */
+    .lg-download { display: none !important; }
   </style>
   <!-- LightGallery CSS/JS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
@@ -292,7 +309,7 @@
   <!-- Hero Section with Video -->
   <section class="hero">
     <!-- Temporarily using a static hero background to ensure readability until video asset is added -->
-    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;"></div>
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)), url('images/edis-aerial.jpg') center/cover no-repeat;"></div>
     <div class="hero-content">
       <h1>EAS | Enhanced Aerial Imaging Solutions</h1>
       <p>Delivering precision aerial mapping, inspections, and documentation for commercial, construction, and industrial clients using enterprise-grade drone technology.</p>
@@ -318,20 +335,8 @@
   <section>
     <h2>Aerial Project Gallery</h2>
     <p style="text-align:center; max-width:800px; margin:0 auto 16px; color:#333;">A selection of recent aerial imaging deliverables, including orthomosaics, inspections, and safety documentation.</p>
-    <div id="lg-aerial" class="gallery-grid">
-      <a href="images/edis-aerial.jpg" data-sub-html="<h4>Orthomosaic Overview</h4><p>High-resolution site mapping</p>">
-        <img src="images/edis-aerial.jpg" alt="Orthomosaic aerial mapping overview" loading="lazy" />
-      </a>
-      <a href="images/edis-ground.jpg" data-sub-html="<h4>Inspection Context</h4><p>Ground-integrated aerial visuals</p>">
-        <img src="images/edis-ground.jpg" alt="Ground-level context integrated with aerial imaging" loading="lazy" />
-      </a>
-      <a href="images/edis-portraits.jpg" data-sub-html="<h4>Team & Operations</h4><p>Operational documentation</p>">
-        <img src="images/edis-portraits.jpg" alt="Team portraits and operational documentation" loading="lazy" />
-      </a>
-      <a href="images/edis-safety.jpeg" data-sub-html="<h4>Safety Documentation</h4><p>Compliance & safety visuals</p>">
-        <img src="images/edis-safety.jpeg" alt="Safety documentation imagery for compliance" loading="lazy" />
-      </a>
-    </div>
+    <div id="lg-aerial" class="gallery-grid" aria-live="polite"></div>
+    <p style="text-align:center; color:#666; font-size:0.9rem; margin-top:10px;">© EYE AM STUDIOS, LLC — Viewing only. Reproduction and download prohibited.</p>
   </section>
 
   <!-- Project Overview -->
@@ -385,15 +390,53 @@
     // Initialize LightGallery once DOM and deferred scripts are ready
     window.addEventListener('DOMContentLoaded', function () {
       const el = document.getElementById('lg-aerial');
-      if (el && typeof lightGallery === 'function') {
-        lightGallery(el, {
-          plugins: window.lgZoom && window.lgThumbnail ? [lgZoom, lgThumbnail] : [],
-          speed: 400,
-          selector: 'a',
-          thumbnail: true,
-          zoom: true
-        });
-      }
+      if (!el) return;
+
+      // Build gallery from JSON manifest (only aerial files listed)
+      fetch('images/aerial-images.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(items => {
+          if (!Array.isArray(items)) return;
+          const frag = document.createDocumentFragment();
+          items.forEach(item => {
+            if (!item || !item.src || !/aerial/i.test(item.src)) return;
+            const a = document.createElement('a');
+            // Use medium-sized public image in lightbox; keep full src private/offline
+            a.href = item.medium || item.src;
+            const title = item.title ? String(item.title) : '';
+            const caption = item.caption ? String(item.caption) : '';
+            const terms = '<small style="opacity:.85">Viewing only — © EYE AM STUDIOS, LLC. Reproduction or download prohibited.</small>';
+            a.setAttribute('data-sub-html', `<div>${title ? `<h4>${title}</h4>` : ''}${caption ? `<p>${caption}</p>` : ''}${terms}</div>`);
+            const img = document.createElement('img');
+            img.loading = 'lazy';
+            img.src = item.thumb || item.src;
+            img.alt = item.alt || title || 'Aerial image';
+            img.setAttribute('draggable', 'false');
+            img.classList.add('wm');
+            a.appendChild(img);
+            frag.appendChild(a);
+          });
+          el.appendChild(frag);
+
+          if (typeof lightGallery === 'function') {
+            lightGallery(el, {
+              plugins: window.lgZoom && window.lgThumbnail ? [lgZoom, lgThumbnail] : [],
+              speed: 400,
+              selector: 'a',
+              thumbnail: true,
+              zoom: true,
+              download: false
+            });
+          }
+        })
+        .catch(() => {/* silent fail */});
+
+      // Block right-click/context menu on gallery and lightbox overlay
+      document.addEventListener('contextmenu', function (e) {
+        if (e.target && (e.target.closest && (e.target.closest('#lg-aerial') || e.target.closest('.lg-outer')))) {
+          e.preventDefault();
+        }
+      }, { capture: true });
     });
   </script>
 </body>
