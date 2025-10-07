@@ -235,7 +235,34 @@
       h2 { font-size: 1.6em; }
       .cta-btn { padding: 12px 24px; font-size: 0.95em; }
     }
+
+    /* === GALLERY GRID (LightGallery) === */
+    .gallery-grid {
+      display: grid;
+      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      margin-top: 10px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid var(--midnight-blue);
+      transition: transform .3s ease, border-color .3s ease;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); border-color: var(--electric-cyan); }
+    /* LightGallery overlay tweaks */
+    .lg-backdrop { background: rgba(0,0,0,0.95); }
+    .lg-toolbar .lg-icon, .lg-next, .lg-prev { color: var(--electric-cyan); }
+    .lg-counter { color: #e6f5ff; }
+    .lg-sub-html { color: #e6f5ff; background: linear-gradient(180deg, rgba(13,27,42,0.75), rgba(0,0,0,0.75)); }
   </style>
+  <!-- LightGallery CSS/JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js" defer></script>
 </head>
 <body>
 
@@ -287,6 +314,26 @@
     </div>
   </section>
 
+  <!-- AERIAL PROJECT GALLERY -->
+  <section>
+    <h2>Aerial Project Gallery</h2>
+    <p style="text-align:center; max-width:800px; margin:0 auto 16px; color:#333;">A selection of recent aerial imaging deliverables, including orthomosaics, inspections, and safety documentation.</p>
+    <div id="lg-aerial" class="gallery-grid">
+      <a href="images/edis-aerial.jpg" data-sub-html="<h4>Orthomosaic Overview</h4><p>High-resolution site mapping</p>">
+        <img src="images/edis-aerial.jpg" alt="Orthomosaic aerial mapping overview" loading="lazy" />
+      </a>
+      <a href="images/edis-ground.jpg" data-sub-html="<h4>Inspection Context</h4><p>Ground-integrated aerial visuals</p>">
+        <img src="images/edis-ground.jpg" alt="Ground-level context integrated with aerial imaging" loading="lazy" />
+      </a>
+      <a href="images/edis-portraits.jpg" data-sub-html="<h4>Team & Operations</h4><p>Operational documentation</p>">
+        <img src="images/edis-portraits.jpg" alt="Team portraits and operational documentation" loading="lazy" />
+      </a>
+      <a href="images/edis-safety.jpeg" data-sub-html="<h4>Safety Documentation</h4><p>Compliance & safety visuals</p>">
+        <img src="images/edis-safety.jpeg" alt="Safety documentation imagery for compliance" loading="lazy" />
+      </a>
+    </div>
+  </section>
+
   <!-- Project Overview -->
   <section class="overview">
     <h2>Project Overview Form</h2>
@@ -332,6 +379,21 @@
           submenu.classList.toggle('active');
         }
       });
+    });
+  </script>
+  <script>
+    // Initialize LightGallery once DOM and deferred scripts are ready
+    window.addEventListener('DOMContentLoaded', function () {
+      const el = document.getElementById('lg-aerial');
+      if (el && typeof lightGallery === 'function') {
+        lightGallery(el, {
+          plugins: window.lgZoom && window.lgThumbnail ? [lgZoom, lgThumbnail] : [],
+          speed: 400,
+          selector: 'a',
+          thumbnail: true,
+          zoom: true
+        });
+      }
     });
   </script>
 </body>
