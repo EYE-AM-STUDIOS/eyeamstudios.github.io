@@ -25,5 +25,77 @@
     "title": "Conference Hall",
     "caption": "Breakout session and networking",
     "alt": "Conference hall with attendees"
+  },
+  {
+    "medium": "images/events-01.jpg",
+    "thumb": "images/events-01-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 01",
+    "caption": "Production lighting and crowd energy",
+    "alt": "Event scene 01"
+  },
+  {
+    "medium": "images/events-03.jpg",
+    "thumb": "images/events-03-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 03",
+    "caption": "Backstage coordination",
+    "alt": "Event scene 03"
+  },
+  {
+    "medium": "images/events-06.jpg",
+    "thumb": "images/events-06-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 06",
+    "caption": "Stage presentation",
+    "alt": "Event scene 06"
+  },
+  {
+    "medium": "images/events-09.jpg",
+    "thumb": "images/events-09-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1462804993656-fac4ff489837?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1462804993656-fac4ff489837?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 09",
+    "caption": "Networking and branding moments",
+    "alt": "Event scene 09"
+  },
+  {
+    "medium": "images/events-10.jpg",
+    "thumb": "images/events-10-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 10",
+    "caption": "Keynote highlight",
+    "alt": "Event scene 10"
+  },
+  {
+    "medium": "images/events-12.jpg",
+    "thumb": "images/events-12-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 12",
+    "caption": "Reception and social moments",
+    "alt": "Event scene 12"
+  },
+  {
+    "medium": "images/events-14.jpg",
+    "thumb": "images/events-14-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1483354483454-4cd359948304?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1483354483454-4cd359948304?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 14",
+    "caption": "Exhibition hall",
+    "alt": "Event scene 14"
+  },
+  {
+    "medium": "images/events-16.jpg",
+    "thumb": "images/events-16-thumb.jpg",
+    "placeholderMedium": "https://images.unsplash.com/photo-1483354483454-4cd359948304?auto=format&fit=crop&w=1600&q=80",
+    "placeholderThumb": "https://images.unsplash.com/photo-1483354483454-4cd359948304?auto=format&fit=crop&w=400&q=60",
+    "title": "Event 16",
+    "caption": "Stage close-up",
+    "alt": "Event scene 16"
   }
 ]
