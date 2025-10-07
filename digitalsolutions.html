@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EAS | Digital Solutions</title>
   <style>
-    /* === Base Reset === */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
@@ -13,24 +12,135 @@
       --midnight-blue: #0D1B2A;
       --electric-cyan: #00BFFF;
       --white: #FFFFFF;
+      --light-gray: #f8f9fa;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--jet-black);
-      color: var(--white);
+      font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+      background-color: var(--white);
+      color: var(--jet-black);
       line-height: 1.6;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
-    /* === Header === */
+    /* === HEADER === */
     header {
       background: linear-gradient(135deg, var(--jet-black), var(--midnight-blue));
-      padding: 1.5rem 2rem;
-      text-align: center;
+      padding: 15px 5%;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--electric-cyan);
+      letter-spacing: 1px;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .menu li { position: relative; }
+
+    .menu a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px;
+      transition: color 0.3s ease;
+      display: block;
+    }
+
+    .menu a:hover { color: var(--electric-cyan); }
+
+    /* DROPDOWN */
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 38px;
+      left: 0;
+      background-color: var(--midnight-blue);
+      min-width: 250px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .submenu li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .submenu li:last-child { border-bottom: none; }
+    .submenu li a:hover { background: rgba(0,191,255,0.15); color: var(--electric-cyan); }
+    .menu > li:hover > .submenu { display: flex; }
+
+    /* CTA */
+    .cta {
+      background: var(--electric-cyan);
+      color: var(--jet-black);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .cta:hover { background: var(--white); color: var(--midnight-blue); }
+
+    /* === HAMBURGER === */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 25px; height: 3px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    /* MOBILE MENU */
+    @media (max-width: 950px) {
+      .hamburger { display: flex; }
+      .menu {
+        position: absolute;
+        top: 65px; right: 0;
+        background: var(--midnight-blue);
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        gap: 0;
+      }
+      .menu.active { max-height: 1000px; }
+      .menu li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .submenu {
+        position: relative; top: 0; box-shadow: none; min-width: 100%;
+      }
+      .menu > li:hover > .submenu { display: none; }
+      .menu .submenu-toggle::after {
+        content: " ▾";
+        font-size: 0.8em;
+      }
+      .submenu-toggle.active + .submenu { display: flex; }
+    }
+
+    /* Page Specific Styles */
+    .hero {
+      background: linear-gradient(135deg, #e8f5ff, #ffffff);
+      text-align: center;
+      padding: 80px 20px;
     }
 
     header h1 {
@@ -155,14 +265,55 @@
   </style>
 </head>
 <body>
+  <!-- HEADER -->
   <header>
-    <h1>EYE AM STUDIOS | EAS Divisions</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="eais.html">Enhanced Aerial Imaging</a>
-      <a href="egis.html">Enhanced Ground Imaging</a>
-      <a href="events.html">Events</a>
-      <a href="digitalsolutions.html" class="active">Digital Solutions</a>
+      <div class="logo">EYE AM STUDIOS</div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <ul class="menu" id="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+
+        <!-- Divisions -->
+        <li>
+          <a href="#" class="submenu-toggle">Divisions</a>
+          <ul class="submenu">
+            <li><a href="eas-aerial.html">EAS | Enhanced Aerial Imaging Solutions</a></li>
+            <li><a href="eas-ground.html">EAS | Enhanced Ground Imaging Solutions</a></li>
+            <li><a href="events.html">EAS | Events</a></li>
+            <li><a href="digital-solutions.html">EAS | Digital Solutions</a></li>
+          </ul>
+        </li>
+
+        <!-- Solutions -->
+        <li>
+          <a href="#" class="submenu-toggle">Solutions</a>
+          <ul class="submenu">
+            <li><a href="solutions-construction.html">For Construction Firms</a></li>
+            <li><a href="solutions-engineering.html">For Engineering Companies</a></li>
+            <li><a href="solutions-insurance.html">For Insurance & Adjusters</a></li>
+            <li><a href="solutions-industrial.html">For Industrial & Manufacturing</a></li>
+            <li><a href="solutions-memorial.html">For Memorial & Archival</a></li>
+            <li><a href="solutions-events.html">For Events & Exhibitions</a></li>
+          </ul>
+        </li>
+
+        <!-- Portfolio -->
+        <li>
+          <a href="#" class="submenu-toggle">Portfolio</a>
+          <ul class="submenu">
+            <li><a href="portfolio-aerial.html">Aerial Imaging & Mapping</a></li>
+            <li><a href="portfolio-ground.html">Ground-Based Imaging</a></li>
+            <li><a href="portfolio-360.html">360° Tours & Virtual Experiences</a></li>
+            <li><a href="portfolio-events.html">Events & Live Coverage</a></li>
+            <li><a href="portfolio-memorial.html">Memorial & Archival</a></li>
+            <li><a href="portfolio-prints.html">VisionPrints & Deliverables</a></li>
+          </ul>
+        </li>
+
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="book.html" class="cta">Book a Service</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -209,5 +360,28 @@
     <p>© 2025 EYE AM STUDIOS, LLC | Your Future. Our Focus.  
       <br><a href="mailto:kbyb@eyeamstudios.com">kbyb@eyeamstudios.com</a></p>
   </footer>
+
+  <!-- JS -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    const submenuToggles = document.querySelectorAll('.submenu-toggle');
+
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('active');
+      hamburger.classList.toggle('open');
+    });
+
+    submenuToggles.forEach(toggle => {
+      toggle.addEventListener('click', e => {
+        if (window.innerWidth <= 950) {
+          e.preventDefault();
+          toggle.classList.toggle('active');
+          const submenu = toggle.nextElementSibling;
+          submenu.classList.toggle('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
